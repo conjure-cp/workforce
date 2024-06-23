@@ -4,15 +4,17 @@
 
   let isExpanded: boolean = false;
   let position: SidebarPosition;
-  let expandedWidth: string = "250px";
-  let collapsedWidth: string = "68px";
+  let expandedWidth: string = "64";
+  let collapsedWidth: string = "16";
 
   export { isExpanded, position, expandedWidth, collapsedWidth };
 </script>
 
-<nav class:expanded={isExpanded} class={position} style="width: {isExpanded ? expandedWidth : collapsedWidth}">
-  <div class="sidebar-top">
-    <button on:click={() => isExpanded = !isExpanded} class="sidebar-toggle">
+<nav
+  class={`flex flex-col justify-between transition-all ease-out duration-200 overflow-hidden bg-gray-300 h-full w-${isExpanded ? expandedWidth : collapsedWidth} ${isExpanded ? 'w-64' : 'w-16'}`}>
+  <div
+    class={`flex justify-start items-start p-3 ${position === SidebarPosition.left ? "flex-row-reverse" : "flex-row"}`}>
+    <button on:click={() => isExpanded = !isExpanded} class="p-1 rounded hover:bg-gray-200 focus:outline-none">
       {#if position === SidebarPosition.right}
         {#if isExpanded}
           <Icon icon="tabler:layout-sidebar-left-expand-filled" width="32px" height="32px" />
@@ -39,7 +41,7 @@
     {/if}
   </div>
 
-  <div class="sidebar-main">
+  <div class="flex flex-col items-start justify-start p-3">
     {#if isExpanded}
       {#if $$slots.expanded_main}
         <slot name="expanded_main" />
@@ -51,7 +53,8 @@
     {/if}
   </div>
 
-  <div class="sidebar-bottom">
+  <div
+    class={`flex justify-start items-start p-3 ${position === SidebarPosition.left ? "flex-row-reverse" : "flex-row"}`}>
     {#if isExpanded}
       {#if $$slots.expanded_bottom}
         <slot name="expanded_bottom" />
@@ -63,57 +66,3 @@
     {/if}
   </div>
 </nav>
-
-<style>
-  nav {
-    height: 100%;
-    transition: ease-out 200ms;
-    width: 72px;
-    overflow: hidden;
-    background: #E0E0E0;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: space-between;
-  }
-
-  .expanded {
-    width: 250px;
-  }
-
-  button {
-    border: none;
-    cursor: pointer;
-    padding: 4px 4px 2px 4px;
-    border-radius: 8px;
-    background-color: transparent;
-  }
-
-  button:hover {
-    background-color: rgba(0, 0, 0, 0.15);
-  }
-
-  .sidebar-top, .sidebar-main, .sidebar-bottom {
-    display: flex;
-    padding: 16px;
-  }
-
-  .sidebar-top, .sidebar-bottom {
-    flex-direction: row-reverse;
-    align-items: start;
-  }
-
-  .sidebar-right > .sidebar-top, .sidebar-right > .sidebar-bottom {
-    flex-direction: row;
-  }
-
-  .sidebar-main {
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-  }
-
-  .sidebar-top {
-    height: 64px;
-  }
-</style>
