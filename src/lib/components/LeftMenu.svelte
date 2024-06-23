@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Icon from "@iconify/svelte";
+
   import Sidebar from "$lib/components/Sidebar/Sidebar.svelte";
   import { SidebarPosition } from "$lib/components/Sidebar/types.ts";
   import type { Link } from "$lib/types.ts";
@@ -8,7 +10,7 @@
   export { links };
 </script>
 
-<Sidebar position={SidebarPosition.left}>
+<Sidebar position={SidebarPosition.left} expandedWidth="280px">
   <div slot="expanded_top">
     <h1>Workforce Planning</h1>
   </div>
@@ -17,8 +19,15 @@
     {#each links as link}
       <li>
         <a href={link.href}>
-          <i class="{link.icon}" />
-          {link.text}
+          {#if link.icon !== undefined}
+            <span class="link-icon">
+              <Icon icon={link.icon} />
+            </span>
+          {/if}
+
+          <span class="link-text">
+            {link.text}
+          </span>
         </a>
       </li>
     {/each}
@@ -28,19 +37,30 @@
     {#each links as link}
       <li>
         <a href={link.href}>
-          <i class="{link.icon}" />
+          {#if link.icon !== undefined}
+            <span class="link-icon">
+              <Icon icon={link.icon} />
+            </span>
+          {/if}
         </a>
       </li>
     {/each}
   </ul>
 
-  <a slot="collapsed_bottom" href="#" class="settings">
-    <i class="fa-solid fa-cog" />
+  <a slot="collapsed_bottom" href="/" class="settings">
+    <span class="link-icon">
+      <Icon icon="mdi:settings" />
+    </span>
   </a>
 
-  <a slot="expanded_bottom" href="#" class="settings">
-    <i class="fa-solid fa-cog" />
-    Settings
+  <a slot="expanded_bottom" href="/" class="settings">
+    <span class="link-icon">
+      <Icon icon="mdi:settings" />
+    </span>
+
+    <span class="link-text">
+      Settings
+    </span>
   </a>
 </Sidebar>
 
@@ -53,15 +73,15 @@
 
   h1 {
     font-family: "Atkinson Hyperlegible", sans-serif;
-    font-size: 16px;
+    font-size: 28px;
     font-weight: bold;
     margin: 0;
-    padding: 2px 0 0;
+    padding: 4px 0 0;
   }
 
   li {
     margin: 0;
-    padding: 8px 0;
+    padding: 12px 0;
   }
 
   a {
@@ -70,19 +90,21 @@
     display: flex;
     align-items: center;
     font-family: "Atkinson Hyperlegible", sans-serif;
-    font-size: 16px;
+    font-size: 28px;
     font-weight: normal;
+    height: 32px;
   }
 
   a:hover {
     color: blue;
   }
 
-  i {
-    margin-right: 10px;
-  }
-
   .settings {
     width: 100%;
+  }
+
+  .link-icon {
+    display: flex;
+    margin-right: 16px;
   }
 </style>

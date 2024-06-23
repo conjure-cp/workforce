@@ -1,6 +1,4 @@
 <script lang="ts">
-  import "@fortawesome/fontawesome-free/css/all.min.css";
-
   import Sidebar from "$lib/components/Sidebar/Sidebar.svelte";
   import LeftMenu from "$lib/components/LeftMenu.svelte";
 
@@ -8,11 +6,12 @@
   import type { Link } from "$lib/types.ts";
 
   let links: Link[] = [
-    { href: "#", icon: "fa-regular fa-calendar", text: "Shifts" },
-    { href: "#", icon: "fa-solid fa-user", text: "Employees" },
-    { href: "#", icon: "fa-solid fa-list-check", text: "Tasks" },
-    { href: "#", icon: "fa-solid fa-briefcase", text: "Skills" },
-    { href: "#", icon: "fa-solid fa-chart-line", text: "Dashboard" }
+    { text: "Shfts", href: "/shifts", icon: "mdi:calendar" },
+    { text: "Employees", href: "/employees", icon: "mdi:account" },
+    { text: "Tasks", href: "/tasks", icon: "mdi:clipboard-list" },
+    { text: "Locations", href: "/locations", icon: "mdi:map-marker" },
+    { text: "Skills", href: "/skills", icon: "mdi:briefcase" },
+    { text: "Dashboard", href: "/dashboard", icon: "mdi:view-dashboard" }
   ];
 </script>
 

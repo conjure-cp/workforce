@@ -1,21 +1,30 @@
 <script lang="ts">
+  import Icon from "@iconify/svelte";
   import { SidebarPosition } from "$lib/components/Sidebar/types";
-  import DockRight from "$lib/icons/DockRight.svelte";
-  import DockLeft from "$lib/icons/DockLeft.svelte";
 
   let isExpanded: boolean = false;
   let position: SidebarPosition;
+  let expandedWidth: string = "250px";
+  let collapsedWidth: string = "68px";
 
-  export { isExpanded, position };
+  export { isExpanded, position, expandedWidth, collapsedWidth };
 </script>
 
-<nav class:expanded={isExpanded} class={position}>
+<nav class:expanded={isExpanded} class={position} style="width: {isExpanded ? expandedWidth : collapsedWidth}">
   <div class="sidebar-top">
     <button on:click={() => isExpanded = !isExpanded} class="sidebar-toggle">
       {#if position === SidebarPosition.right}
-        <DockRight />
+        {#if isExpanded}
+          <Icon icon="tabler:layout-sidebar-left-expand-filled" width="32px" height="32px" />
+        {:else}
+          <Icon icon="tabler:layout-sidebar-left-collapse-filled" width="32px" height="32px" />
+        {/if}
       {:else}
-        <DockLeft />
+        {#if isExpanded}
+          <Icon icon="tabler:layout-sidebar-right-expand-filled" width="32px" height="32px" />
+        {:else}
+          <Icon icon="tabler:layout-sidebar-right-collapse-filled" width="32px" height="32px" />
+        {/if}
       {/if}
     </button>
 
@@ -59,7 +68,7 @@
   nav {
     height: 100%;
     transition: ease-out 200ms;
-    width: 56px;
+    width: 72px;
     overflow: hidden;
     background: #E0E0E0;
     display: flex;
@@ -69,18 +78,18 @@
   }
 
   .expanded {
-    width: 180px;
+    width: 250px;
   }
 
-  .sidebar-toggle {
-    background: none;
+  button {
     border: none;
     cursor: pointer;
     padding: 4px 4px 2px 4px;
-    border-radius: 4px;
+    border-radius: 8px;
+    background-color: transparent;
   }
 
-  .expanded .sidebar-toggle {
+  button:hover {
     background-color: rgba(0, 0, 0, 0.15);
   }
 
@@ -102,5 +111,9 @@
     flex-direction: column;
     align-items: start;
     justify-content: start;
+  }
+
+  .sidebar-top {
+    height: 64px;
   }
 </style>
