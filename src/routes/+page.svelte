@@ -9,6 +9,6 @@
   ];
 </script>
 
-<div class="w-full h-12 flex justify-between bg-gray-300">
+<div class="w-full flex justify-between items-center bg-gray-200 p-4">
   <Combobox items={values} />
 </div>
