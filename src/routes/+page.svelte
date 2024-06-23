@@ -1,14 +1,14 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import type { ComboboxItem } from "$lib/components/Combobox/types.ts";
+  import Combobox from "$lib/components/Combobox/Combobox.svelte";
 
-<div class="top-bar">
+  let values: ComboboxItem[] = [
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
+    { label: "Cherry", value: "cherry" }
+  ];
+</script>
+
+<div class="w-full h-12 flex justify-between bg-gray-300">
+  <Combobox items={values} />
 </div>
-
-<style>
-  .top-bar {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-</style>

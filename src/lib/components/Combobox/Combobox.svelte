@@ -1,55 +1,39 @@
 <script lang="ts">
-  // noinspection ES6UnusedImports
   import { Combobox } from "bits-ui";
   import Icon from "@iconify/svelte";
+  import type { ComboboxItem } from "$lib/components/Combobox/types.ts";
 
-  const fruits = [
-    { value: "mango", label: "Mango" },
-    { value: "watermelon", label: "Watermelon" },
-    { value: "apple", label: "Apple" },
-    { value: "pineapple", label: "Pineapple" },
-    { value: "orange", label: "Orange" }
-  ];
-
+  let items: ComboboxItem[];
   let inputValue = "";
   let touchedInput = false;
+  let placeholder = "Search";
 
-  $: filteredFruits =
+  $: filteredItems =
     inputValue && touchedInput
-      ? fruits.filter((fruit) => fruit.value.includes(inputValue.toLowerCase()))
-      : fruits;
+      ? items.filter((fruit) => fruit.value.includes(inputValue.toLowerCase()))
+      : items;
+
+  export { items, placeholder };
 </script>
 
-<Combobox.Root items={filteredFruits} bind:inputValue bind:touchedInput>
-  <div class="relative">
-    <Combobox.Input
-      class="inline-flex h-input w-[296px] truncate rounded-9px border border-border-input bg-background px-11 text-sm transition-colors placeholder:text-foreground-alt/50 focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
-      placeholder="Search a fruit"
-      aria-label="Search a fruit"
-    />
-    <Icon class="absolute top-1/2 left-3 transform -translate-y-1/2 text-muted-foreground" icon="tabler:selector" />
+<Combobox.Root items={filteredItems} bind:inputValue bind:touchedInput>
+  <div class="flex items-center rounded-md bg-white p-2 h-8 shadow">
+    <Combobox.Input placeholder={placeholder} aria-label={placeholder} class="flex-grow outline-none" />
+    <Icon icon="tabler:selector" class="text-gray-500" />
   </div>
 
-  <Combobox.Content
-    class="w-full rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none"
-    sideOffset={8}
-  >
-    {#each filteredFruits as fruit (fruit.value)}
-      <Combobox.Item
-        class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm capitalize outline-none transition-all duration-75 data-[highlighted]:bg-muted"
-        value={fruit.value}
-        label={fruit.label}
-      >
-        {fruit.label}
-        <Combobox.ItemIndicator class="ml-auto" asChild={false}>
+  <Combobox.Content sideOffset={8} class="shadow rounded-md overflow-clip">
+    {#each filteredItems as item (item.value)}
+      <Combobox.Item value={item.value} label={item.label}
+                     class="py-2 px-4 hover:bg-gray-100 cursor-pointer bg-white">
+        {item.label}
+        <Combobox.ItemIndicator asChild={false} class="text-green-500">
           <Icon icon="mdi:check" />
         </Combobox.ItemIndicator>
       </Combobox.Item>
     {:else}
-      <span class="block px-5 py-2 text-sm text-muted-foreground">
-        No results found
-      </span>
+      <span class="py-2 px-4 bg-white text-gray-500 shadow rounded-md">No results found</span>
     {/each}
   </Combobox.Content>
-  <Combobox.HiddenInput name="favoriteFruit" />
+  <Combobox.HiddenInput name="selectedValue" />
 </Combobox.Root>
