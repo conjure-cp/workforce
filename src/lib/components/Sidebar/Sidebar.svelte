@@ -4,28 +4,29 @@
 
   let isExpanded: boolean = false;
   let position: SidebarPosition;
-  let expandedWidth: string = "64";
-  let collapsedWidth: string = "16";
+  let expandedWidth: string = "250px";
+  let collapsedWidth: string = "72px";
 
   export { isExpanded, position, expandedWidth, collapsedWidth };
 </script>
 
 <nav
-  class={`flex flex-col justify-between transition-all ease-out duration-200 overflow-hidden bg-gray-300 h-full w-${isExpanded ? expandedWidth : collapsedWidth} ${isExpanded ? 'w-64' : 'w-16'}`}>
+  class={`flex flex-col justify-between transition-all ease-out duration-200 overflow-hidden bg-gray-300 h-full`}
+  style="{isExpanded ? `width: ${expandedWidth}` : `width: ${collapsedWidth}`}">
   <div
     class={`flex justify-start items-start p-3 ${position === SidebarPosition.left ? "flex-row-reverse" : "flex-row"} h-16`}>
     <button on:click={() => isExpanded = !isExpanded} class="p-1 rounded hover:bg-gray-200 focus:outline-none">
       {#if position === SidebarPosition.right}
         {#if isExpanded}
-          <Icon icon="tabler:layout-sidebar-left-expand-filled" width="32px" height="32px" />
+          <Icon icon="tabler:layout-sidebar-right-collapse-filled" width="32px" height="32px" />
         {:else}
-          <Icon icon="tabler:layout-sidebar-left-collapse-filled" width="32px" height="32px" />
+          <Icon icon="tabler:layout-sidebar-right-expand-filled" width="32px" height="32px" />
         {/if}
       {:else}
         {#if isExpanded}
-          <Icon icon="tabler:layout-sidebar-right-expand-filled" width="32px" height="32px" />
+          <Icon icon="tabler:layout-sidebar-left-collapse-filled" width="32px" height="32px" />
         {:else}
-          <Icon icon="tabler:layout-sidebar-right-collapse-filled" width="32px" height="32px" />
+          <Icon icon="tabler:layout-sidebar-left-expand-filled" width="32px" height="32px" />
         {/if}
       {/if}
     </button>
