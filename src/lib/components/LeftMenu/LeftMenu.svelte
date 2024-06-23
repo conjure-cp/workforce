@@ -47,13 +47,13 @@
     {/each}
   </ul>
 
-  <a slot="collapsed_bottom" href="/" class="settings">
+  <a slot="collapsed_bottom" href="/static" class="settings">
     <span class="link-icon">
       <Icon icon="mdi:settings" />
     </span>
   </a>
 
-  <a slot="expanded_bottom" href="/" class="settings">
+  <a slot="expanded_bottom" href="/static" class="settings">
     <span class="link-icon">
       <Icon icon="mdi:settings" />
     </span>
