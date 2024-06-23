@@ -1,4 +1,5 @@
 <script lang="ts">
+  // noinspection ES6UnusedImports
   import { Combobox } from "bits-ui";
   import Icon from "@iconify/svelte";
   import type { ComboboxItem } from "$lib/components/Combobox/types.ts";
