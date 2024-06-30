@@ -7,11 +7,15 @@
   import type { Link } from "$lib/types.ts";
 
   let links: Link[];
+  let position: SidebarPosition = SidebarPosition.left;
+  let collapsedWidth: string = "72px";
+  let expandedWidth: string = "280px";
+  let isExpanded: boolean = true;
 
-  export { links };
+  export { links, position, isExpanded };
 </script>
 
-<Sidebar position={SidebarPosition.left} expandedWidth="280px">
+<Sidebar position={position} collapsedWidth={collapsedWidth} expandedWidth={expandedWidth} isExpanded={isExpanded}>
   <div slot="expanded_top" class="font-bold py-1 text-3xl">
     <h1>Workforce Planning</h1>
   </div>

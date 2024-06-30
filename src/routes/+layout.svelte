@@ -2,7 +2,7 @@
   import "../app.css";
 
   import Sidebar from "$lib/components/Sidebar/Sidebar.svelte";
-  import LeftMenu from "$lib/components/LeftMenu/LeftMenu.svelte";
+  import LeftMenu from "$lib/components/NavigationMenu/NavigationMenu.svelte";
 
   import { SidebarPosition } from "$lib/components/Sidebar/types.ts";
   import type { Link } from "$lib/types.ts";
