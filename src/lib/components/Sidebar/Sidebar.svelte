@@ -15,7 +15,8 @@
   style="{isExpanded ? `width: ${expandedWidth}` : `width: ${collapsedWidth}`}">
   <div
     class={`flex justify-start items-start p-3 ${position === SidebarPosition.left ? "flex-row-reverse" : "flex-row"} h-16`}>
-    <button on:click={() => isExpanded = !isExpanded} class="p-1 rounded hover:bg-gray-200 focus:outline-none">
+    <button on:click={() => isExpanded = !isExpanded}
+            class="p-1 rounded-md hover:bg-gray-200 outline-none transition-all duration-200">
       {#if position === SidebarPosition.right}
         {#if isExpanded}
           <Icon icon="tabler:layout-sidebar-right-collapse-filled" width="32px" height="32px" />

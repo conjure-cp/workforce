@@ -4,5 +4,9 @@ export default {
   theme: {
     extend: {}
   },
-  plugins: []
+  plugins: [],
+  variants: {
+    backgroundColor: ["responsive", "hover", "focus", "active"],
+    textColor: ["responsive", "hover", "focus", "active"]
+  }
 };
