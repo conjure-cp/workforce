@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Icon from "@iconify/svelte";
+  import Button from "$lib/components/Button/Button.svelte";
   import { page } from "$app/stores";
 
   import Sidebar from "$lib/components/Sidebar/Sidebar.svelte";
@@ -16,50 +16,43 @@
     <h1>Workforce Planning</h1>
   </div>
 
-  <ul slot="expanded_main" class="list-none p-0 m-0">
+  <ul slot="expanded_main" class="list-none p-0 m-0 w-full">
     {#each links as link}
       <li class="m-0 py-1">
-        <a href={link.href}
-           class:active={$page.url.pathname === link.href}
-           class="text-decoration-none text-black flex items-center font-normal text-2xl px-2 py-1 rounded-md h-fit hover:bg-gray-400 transition-all duration-200">
-          {#if link.icon !== undefined}
-            <Icon icon={link.icon} class="mr-4" />
-          {/if}
-
-          {link.text}
-        </a>
+        <Button
+          action={link.href}
+          active={$page.url.pathname === link.href}
+          text={link.text}
+          icon={link.icon}
+        />
       </li>
     {/each}
   </ul>
 
-  <ul slot="collapsed_main" class="list-none p-0 m-0">
+  <ul slot="collapsed_main" class="list-none p-0 m-0 w-full">
     {#each links as link}
       <li class="m-0 py-1">
-        <a href={link.href}
-           class:active={$page.url.pathname === link.href}
-           class="text-decoration-none text-black flex items-center font-normal text-2xl p-2 rounded-md h-fit hover:bg-gray-400 transition-all duration-200">
-          {#if link.icon !== undefined}
-            <Icon icon={link.icon} />
-          {/if}
-        </a>
+        <Button
+          action={link.href}
+          active={$page.url.pathname === link.href}
+          icon={link.icon}
+        />
       </li>
     {/each}
   </ul>
 
-  <a slot="collapsed_bottom" href="/"
-     class="text-decoration-none text-black flex items-center font-normal text-2xl w-full p-2 rounded-md h-fit hover:bg-gray-400 transition-all duration-200">
-    <Icon icon="mdi:settings" />
-  </a>
+  <div slot="collapsed_bottom" class="flex w-full">
+    <Button
+      action="/"
+      icon="mdi:settings"
+    />
+  </div>
 
-  <a slot="expanded_bottom" href="/"
-     class="text-decoration-none text-black flex items-center font-normal text-2xl w-full p-2 rounded-md h-fit hover:bg-gray-400 transition-all duration-200">
-    <Icon icon="mdi:settings" class="mr-4" />
-    Settings
-  </a>
+  <div slot="expanded_bottom" class="flex w-full">
+    <Button
+      action="/"
+      icon="mdi:settings"
+      text="Settings"
+    />
+  </div>
 </Sidebar>
-
-<style>
-  .active {
-    @apply bg-black text-white;
-  }
-</style>
