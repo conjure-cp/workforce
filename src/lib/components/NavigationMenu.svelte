@@ -22,7 +22,7 @@
 
   <ul slot="expanded_main" class="list-none p-0 m-0 w-full">
     {#each links as link}
-      <li class="m-0 py-1">
+      <li class="m-0 py-1 h-12">
         <Button
           action={link.href}
           active={$page.url.pathname === link.href}
@@ -35,7 +35,7 @@
 
   <ul slot="collapsed_main" class="list-none p-0 m-0 w-full">
     {#each links as link}
-      <li class="m-0 py-1">
+      <li class="m-0 py-1 h-12">
         <Button
           action={link.href}
           active={$page.url.pathname === link.href}
