@@ -17,38 +17,16 @@
   ];
 </script>
 
-<div class="content">
+<div class="h-screen w-screen flex flex-row">
   <LeftMenu links={links} />
 
-  <main>
+  <main class="bg-white w-full h-full overflow-y-scroll">
     <slot />
   </main>
 
   <Sidebar position={SidebarPosition.right} />
 </div>
 
-<footer>
-  <h1>My footer</h1>
+<footer class="text-center">
+  <h1 class="text-xl">My footer</h1>
 </footer>
-
-<style>
-  :global(body) {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  .content {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    width: 100vw;
-  }
-
-  main {
-    background: #FFFFFF;
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-  }
-</style>
