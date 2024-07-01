@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Button from "$lib/components/Button/Button.svelte";
+  import Button from "$lib/components/Button.svelte";
   import { page } from "$app/stores";
 
   import Sidebar from "$lib/components/Sidebar/Sidebar.svelte";

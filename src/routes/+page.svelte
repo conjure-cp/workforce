@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { ComboboxItem } from "$lib/components/Combobox/types.ts";
   import Combobox from "$lib/components/Combobox/Combobox.svelte";
-  import Button from "$lib/components/Button/Button.svelte";
-  import Search from "$lib/components/Search/Search.svelte";
+  import Button from "$lib/components/Button.svelte";
+  import Search from "$lib/components/Search.svelte";
 
   let values: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
