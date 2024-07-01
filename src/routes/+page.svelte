@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ComboboxItem } from "$lib/components/Combobox/types.ts";
+  import type { ComboboxItem } from "$lib/components/Combobox/lib/types.ts";
   import Combobox from "$lib/components/Combobox/Combobox.svelte";
   import Button from "$lib/components/Button.svelte";
   import Search from "$lib/components/Search.svelte";

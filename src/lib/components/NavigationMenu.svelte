@@ -3,7 +3,7 @@
   import { page } from "$app/stores";
 
   import Sidebar from "$lib/components/Sidebar/Sidebar.svelte";
-  import { SidebarPosition } from "$lib/components/Sidebar/types.ts";
+  import { SidebarPosition } from "$lib/components/Sidebar/lib/types.ts";
   import type { Link } from "$lib/types.ts";
 
   let links: Link[];

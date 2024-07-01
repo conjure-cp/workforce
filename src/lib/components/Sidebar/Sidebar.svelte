@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SidebarPosition } from "$lib/components/Sidebar/types";
+  import { SidebarPosition } from "$lib/components/Sidebar/lib/types.ts";
   import Button from "$lib/components/Button.svelte";
 
   let isExpanded: boolean = false;

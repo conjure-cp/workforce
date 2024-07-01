@@ -2,7 +2,7 @@
   // noinspection ES6UnusedImports
   import { Combobox } from "bits-ui";
   import Icon, { type IconifyIcon } from "@iconify/svelte";
-  import type { ComboboxItem } from "$lib/components/Combobox/types.ts";
+  import type { ComboboxItem } from "$lib/components/Combobox/lib/types.ts";
 
   let items: ComboboxItem[];
   let inputValue = "";
