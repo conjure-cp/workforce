@@ -24,22 +24,22 @@
     {#if icon !== undefined}
       <Icon
         icon={icon}
-        class="absolute start-3 top-1/2 -translate-y-1/2 text-2xl {open ? 'text-accent' : 'text-primary'} transition-colors duration-200"
+        class="absolute start-3 top-1/2 -translate-y-1/2 text-2xl {open ? 'text-accent-foreground' : 'text-secondary-foreground'} transition-colors duration-200"
       />
     {/if}
     <Combobox.Input
-      class="inline-flex truncate h-10 {icon ? 'pl-12' : 'pl-4'} rounded-md border bg-white transition-colors duration-200 shadow"
+      class="inline-flex truncate h-10 {icon ? 'pl-12' : 'pl-4'} rounded-md border bg-background transition-colors duration-200 shadow"
       placeholder={placeholder}
       aria-label={placeholder}
     />
     <Icon
       icon="mdi:chevron-up-down"
-      class="absolute end-3 top-1/2 -translate-y-1/2 text-2xl {open ? 'text-black' : 'text-gray-500'} transition-colors duration-200"
+      class="absolute end-3 top-1/2 -translate-y-1/2 text-2xl {open ? 'text-accent-foreground' : 'text-secondary-foreground'} transition-colors duration-200"
     />
   </div>
 
   <Combobox.Content
-    class="w-full rounded-xl border border-muted bg-background shadow-popover outline-none bg-white overflow-clip"
+    class="w-full rounded-xl border border-muted bg-background shadow-popover outline-none overflow-clip"
     sideOffset={8}
   >
     {#each filteredItems as item (item.value)}
