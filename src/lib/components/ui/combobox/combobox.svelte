@@ -2,7 +2,7 @@
   // noinspection ES6UnusedImports
   import { Combobox } from "bits-ui";
   import Icon, { type IconifyIcon } from "@iconify/svelte";
-  import type { ComboboxItem } from "$lib/components/Combobox/lib/types.ts";
+  import type { ComboboxItem } from "$lib/components/ui/combobox/index.ts";
 
   let items: ComboboxItem[];
   let inputValue = "";
@@ -24,7 +24,7 @@
     {#if icon !== undefined}
       <Icon
         icon={icon}
-        class="absolute start-3 top-1/2 -translate-y-1/2 text-2xl {open ? 'text-black' : 'text-gray-500'} transition-colors duration-200"
+        class="absolute start-3 top-1/2 -translate-y-1/2 text-2xl {open ? 'text-accent' : 'text-primary'} transition-colors duration-200"
       />
     {/if}
     <Combobox.Input

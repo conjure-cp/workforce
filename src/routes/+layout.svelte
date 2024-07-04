@@ -1,10 +1,9 @@
 <script lang="ts">
   import "../app.css";
 
-  import Sidebar from "$lib/components/Sidebar/Sidebar.svelte";
-  import LeftMenu from "$lib/components/NavigationMenu.svelte";
-
-  import { SidebarPosition } from "$lib/components/Sidebar/lib/types.ts";
+  import Sidebar from "$lib/components/ui/sidebar/sidebar.svelte";
+  import LeftMenu from "$lib/components/elements/navigation-menu.svelte";
+  import { SidebarPosition } from "$lib/components/ui/sidebar";
   import type { Link } from "$lib/types.ts";
 
   let links: Link[] = [
