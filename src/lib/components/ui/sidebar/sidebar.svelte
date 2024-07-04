@@ -12,7 +12,7 @@
 </script>
 
 <nav
-  class={`flex flex-col justify-between transition-all ease-out duration-200 overflow-hidden bg-gray-300 h-full`}
+  class="flex flex-col justify-between transition-all ease-out duration-200 overflow-hidden bg-gray-300 h-full"
   style="{isExpanded ? `width: ${expandedWidth}` : `width: ${collapsedWidth}`}">
   <div
     class={`flex justify-start items-start p-3 ${position === SidebarPosition.left ? "flex-row-reverse" : "flex-row"} h-16`}>
@@ -22,13 +22,13 @@
           <Icon icon="tabler:layout-sidebar-left-collapse-filled" />
         {:else }
           <Icon icon="tabler:layout-sidebar-left-expand-filled" />
-        {/if      }
+        {/if         }
       {:else }
         {#if isExpanded}
           <Icon icon="tabler:layout-sidebar-right-collapse-filled" />
         {:else }
           <Icon icon="tabler:layout-sidebar-right-expand-filled" />
-        {/if      }
+        {/if         }
       {/if}
     </Button>
 

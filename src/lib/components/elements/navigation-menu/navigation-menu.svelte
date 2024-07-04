@@ -5,7 +5,7 @@
   import { SidebarPosition } from "$lib/components/ui/sidebar";
   import type { Link } from "$lib/types.ts";
   import Icon from "@iconify/svelte";
-  import { CogIcon, SettingsIcon } from "lucide-svelte";
+  import { SettingsIcon } from "lucide-svelte";
 
   let links: Link[];
   let position: SidebarPosition = SidebarPosition.left;

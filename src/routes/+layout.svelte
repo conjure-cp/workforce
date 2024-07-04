@@ -2,7 +2,7 @@
   import "../app.css";
 
   import Sidebar from "$lib/components/ui/sidebar/sidebar.svelte";
-  import LeftMenu from "$lib/components/elements/navigation-menu.svelte";
+  import NavigationMenu from "$lib/components/elements/navigation-menu/navigation-menu.svelte";
   import { SidebarPosition } from "$lib/components/ui/sidebar";
   import type { Link } from "$lib/types.ts";
 
@@ -17,11 +17,11 @@
 </script>
 
 <div class="h-screen w-screen flex flex-row">
-  <LeftMenu links={links} />
+  <NavigationMenu links={links} />
 
-  <main class="bg-white w-full h-full overflow-y-scroll">
+  <div class="bg-white w-full overflow-y-scroll">
     <slot />
-  </main>
+  </div>
 
   <Sidebar position={SidebarPosition.right} />
 </div>
