@@ -3,9 +3,9 @@
   import { Button } from "$lib/components/ui/button";
   import Sidebar from "$lib/components/ui/sidebar/sidebar.svelte";
   import { SidebarPosition } from "$lib/components/ui/sidebar";
-  import type { Link } from "$lib/types.ts";
   import Icon from "@iconify/svelte";
   import { SettingsIcon } from "lucide-svelte";
+  import type { Link } from "$lib/types/ui.ts";
 
   let links: Link[];
   let position: SidebarPosition = SidebarPosition.left;

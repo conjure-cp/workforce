@@ -4,7 +4,7 @@
   import Sidebar from "$lib/components/ui/sidebar/sidebar.svelte";
   import NavigationMenu from "$lib/components/elements/navigation-menu/navigation-menu.svelte";
   import { SidebarPosition } from "$lib/components/ui/sidebar";
-  import type { Link } from "$lib/types.ts";
+  import type { Link } from "$lib/types/ui.ts";
 
   let links: Link[] = [
     { text: "Shifts", href: "/", icon: "mdi:calendar" },
