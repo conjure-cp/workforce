@@ -1,10 +1,12 @@
-import type { Location, Person } from "$lib/types/core.ts";
+import type { Location } from "$lib/types/core.ts";
 import type { Task } from "vitest";
+
+// ToDo: Each constraint must contain an ical type to reflect the time when it applies
+// ToDo: Discuss with Oz & add more constraints
 
 export enum ConstraintType {
   no_locations,
-  no_tasks,
-  no_persons
+  no_tasks
 }
 
 export type NoLocationConstraint = {
@@ -17,9 +19,13 @@ export type NoTasksConstraint = {
   tasks: Task[];
 };
 
-export type NoPersonsConstraint = {
-  type: ConstraintType.no_persons;
-  persons: Person[];
-};
+// Constraints that apply to Locations
+export type LocationConstraint = NoTasksConstraint;
 
-export type Constraint = NoLocationConstraint | NoTasksConstraint | NoPersonsConstraint;
+// Constraints that apply to People
+export type PersonConstraint = NoLocationConstraint | NoTasksConstraint;
+
+// Constraints that apply to Tasks
+export type TaskConstraint = NoLocationConstraint;
+
+export type Constraint = LocationConstraint | PersonConstraint | TaskConstraint;
