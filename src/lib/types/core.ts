@@ -16,6 +16,7 @@ export interface Task {
   max_people: number;
   required_skills: Skill[];
   constraints: TaskConstraint[];
+  people: Person[];
 }
 
 export interface Location {
@@ -23,13 +24,37 @@ export interface Location {
   constraints: LocationConstraint[];
 }
 
-export interface Shift {
+export class Shift {
   name: string;
   description: string;
   start_date_time: ZonedDateTime;
   end_date_time: ZonedDateTime;
   location: Location;
   tasks: Task[];
+
+  public constructor(
+    name: string,
+    description: string,
+    start_date_time: ZonedDateTime,
+    end_date_time: ZonedDateTime,
+    location: Location,
+    tasks: Task[]
+  ) {
+    this.name = name;
+    this.description = description;
+    this.start_date_time = start_date_time;
+    this.end_date_time = end_date_time;
+    this.location = location;
+    this.tasks = tasks;
+  }
+
+  public get start_time_fmt(): string {
+    return this.start_date_time.toDate().toLocaleTimeString();
+  }
+
+  public get end_time_fmt(): string {
+    return this.end_date_time.toDate().toLocaleTimeString();
+  }
 }
 
 export class Person {

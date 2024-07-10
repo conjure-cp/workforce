@@ -5,11 +5,42 @@
   import Search from "$lib/components/ui/search/search.svelte";
   import { FilterIcon } from "lucide-svelte";
   import { Button } from "$lib/components/ui/button";
+  import ShiftCard from "$lib/components/elements/shift-card/shift-card.svelte";
   import * as Resizable from "$lib/components/ui/resizable";
+  import { Shift } from "$lib/types/core.ts";
+  import { ZonedDateTime, now, getLocalTimeZone } from "@internationalized/date";
 
-  let values: ComboboxItem[] = [
+  let schedules: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
     { label: "Schedule 2", value: "schedule2" }
+  ];
+
+  let shifts: Shift[] = [
+    new Shift("Shift 1", "Loren ipsum dolor sit amet", now(getLocalTimeZone()), now(getLocalTimeZone()), {
+        name: "Location 1",
+        constraints: []
+      },
+      [
+        {
+          name: "Task 1",
+          description: "Loren ipsum dolor sit amet",
+          min_people: 1,
+          max_people: 2,
+          people: [],
+          required_skills: [],
+          constraints: []
+        },
+        {
+          name: "Task 2",
+          description: "Loren ipsum dolor sit amet",
+          min_people: 1,
+          max_people: 2,
+          people: [],
+          required_skills: [],
+          constraints: []
+        }
+      ]
+    )
   ];
 </script>
 
@@ -17,7 +48,7 @@
 <main class="w-full h-full flex flex-col items-start justify-start overflow-y-scroll">
   <TopBar sticky={true}>
     <svelte:fragment slot="start">
-      <Combobox items={values} placeholder="Select schedule" icon="mdi:calendar" />
+      <Combobox items={schedules} placeholder="Select schedule" icon="mdi:calendar" />
     </svelte:fragment>
 
     <svelte:fragment slot="end">
@@ -29,7 +60,10 @@
   </TopBar>
 
   <Resizable.PaneGroup direction="horizontal" style="overflow-y: scroll">
-    <Resizable.Pane class="h-[500px] flex flex-col bg-green-200">
+    <Resizable.Pane class="flex flex-col bg-green-200">
+      {#each shifts as shift}
+        <ShiftCard shift={shift} />
+      {/each}
     </Resizable.Pane>
 
     <Resizable.Handle />
