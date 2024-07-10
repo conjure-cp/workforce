@@ -12,11 +12,13 @@ export enum ConstraintType {
 export type NoLocationConstraint = {
   type: ConstraintType.no_locations;
   locations: Location[];
+  icon: string;
 };
 
 export type NoTasksConstraint = {
   type: ConstraintType.no_tasks;
   tasks: Task[];
+  icon: string;
 };
 
 // Constraints that apply to Locations

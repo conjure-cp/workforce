@@ -5,7 +5,7 @@
   import Search from "$lib/components/ui/search/search.svelte";
   import { FilterIcon } from "lucide-svelte";
   import { Button } from "$lib/components/ui/button";
-  import { Separator } from "$lib/components/ui/separator";
+  import * as Resizable from "$lib/components/ui/resizable";
 
   let values: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
@@ -28,17 +28,18 @@
     </svelte:fragment>
   </TopBar>
 
-  <div class="w-full flex flex-row items-start justify-around">
-    <div class="w-full h-[500px] flex flex-col bg-green-200">
+  <Resizable.PaneGroup direction="horizontal" style="overflow-y: scroll">
+    <Resizable.Pane class="h-[500px] flex flex-col bg-green-200">
+    </Resizable.Pane>
 
-    </div>
-    <Separator orientation="vertical" />
-    <div class="w-full h-[2000px] flex flex-col bg-yellow-200">
+    <Resizable.Handle />
 
-    </div>
-    <Separator orientation="vertical" />
-    <div class="w-full h-[400px] flex flex-col bg-red-200">
+    <Resizable.Pane class="h-[2000px] flex flex-col bg-yellow-200">
+    </Resizable.Pane>
 
-    </div>
-  </div>
+    <Resizable.Handle />
+
+    <Resizable.Pane class="h-[400px] flex flex-col bg-red-200">
+    </Resizable.Pane>
+  </Resizable.PaneGroup>
 </main>
