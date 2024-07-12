@@ -15,7 +15,7 @@
   let isExpanded: boolean = true;
 
   $: isActive = (href: string) => {
-    if (href === "/") {
+    if (href === `${base}/`) {
       return $page.url.pathname === href;
     }
     return $page.url.pathname.includes(href);
