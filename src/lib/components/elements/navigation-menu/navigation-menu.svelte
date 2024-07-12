@@ -6,12 +6,20 @@
   import Icon from "@iconify/svelte";
   import { SettingsIcon } from "lucide-svelte";
   import type { Link } from "$lib/types/ui.ts";
+  import { base } from "$app/paths";
 
   let links: Link[];
   let position: SidebarPosition = SidebarPosition.left;
   let collapsedWidth: string = "72px";
   let expandedWidth: string = "280px";
   let isExpanded: boolean = true;
+
+  $: isActive = (href: string) => {
+    if (href === "/") {
+      return $page.url.pathname === href;
+    }
+    return $page.url.pathname.includes(href);
+  };
 
   export { links, position, isExpanded };
 </script>
@@ -22,7 +30,7 @@
   <ul slot="expanded_main" class="list-none p-0 m-0 w-full">
     {#each links as link}
       <li class="m-0 py-1 h-12">
-        <Button href={link.href} variant={$page.url.pathname === link.href ? "default" : "ghost"} size="xl"
+        <Button href={link.href} variant={isActive(link.href) ? "default" : "ghost"} size="xl"
                 class="w-full justify-start">
           {#if link.icon !== undefined}
             <Icon icon={link.icon} />
@@ -36,7 +44,7 @@
   <ul slot="collapsed_main" class="list-none p-0 m-0 w-full">
     {#each links as link}
       <li class="m-0 py-1 h-12">
-        <Button href={link.href} variant={$page.url.pathname === link.href ? "default" : "ghost"} size="icon_xl">
+        <Button href={link.href} variant={isActive(link.href) ? "default" : "ghost"} size="icon_xl">
           {#if link.icon !== undefined}
             <Icon icon={link.icon} />
           {:else}
@@ -48,13 +56,13 @@
   </ul>
 
   <div slot="collapsed_bottom" class="flex w-full">
-    <Button href="#" variant={$page.url.pathname === "/settings" ? "default" : "ghost"} size="icon_xl">
+    <Button href="#" variant={isActive(`${base}/settings/`) ? "default" : "ghost"} size="icon_xl">
       <SettingsIcon />
     </Button>
   </div>
 
   <div slot="expanded_bottom" class="flex w-full">
-    <Button href="#" variant={$page.url.pathname === "/settings" ? "default" : "ghost"} size="xl"
+    <Button href="#" variant={isActive(`${base}/settings/`) ? "default" : "ghost"} size="xl"
             class="w-full justify-start">
       <SettingsIcon />
       Settings

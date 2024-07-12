@@ -9,11 +9,11 @@
 
   let links: Link[] = [
     { text: "Shifts", href: `${base}/`, icon: "mdi:calendar" },
-    { text: "Employees", href: `${base}/employees`, icon: "mdi:account" },
-    { text: "Tasks", href: `${base}/tasks`, icon: "mdi:clipboard-list" },
-    { text: "Locations", href: `${base}/locations`, icon: "mdi:map-marker" },
-    { text: "Skills", href: `${base}/skills`, icon: "mdi:briefcase" },
-    { text: "Dashboard", href: `${base}/dashboard`, icon: "mdi:view-dashboard" }
+    { text: "Employees", href: `${base}/employees/`, icon: "mdi:account" },
+    { text: "Tasks", href: `${base}/tasks/`, icon: "mdi:clipboard-list" },
+    { text: "Locations", href: `${base}/locations/`, icon: "mdi:map-marker" },
+    { text: "Skills", href: `${base}/skills/`, icon: "mdi:briefcase" },
+    { text: "Dashboard", href: `${base}/dashboard/`, icon: "mdi:view-dashboard" }
   ];
 </script>
 
