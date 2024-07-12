@@ -16,15 +16,15 @@
   </Card.Header>
 
   <Card.Content class="flex flex-col items-start justify-start gap-3">
-    <div class="flex flex-row items-center justify-start gap-2">
+    <div class="flex flex-row items-center justify-start gap-2 w-full">
       <ClockIcon />
       {shift.start_time_fmt} - {shift.end_time_fmt}
     </div>
-    <div class="flex flex-row items-center justify-start gap-2">
+    <div class="flex flex-row items-center justify-start gap-2 w-full">
       <MapPinIcon />
-      {shift.location}
+      {shift.location.name}
     </div>
-    <div class="flex flex-col items-stretch justify-start gap-3">
+    <div class="flex flex-col items-stretch justify-start gap-3 w-full ">
       {#each shift.tasks as task}
         <Task task={task} />
       {/each}

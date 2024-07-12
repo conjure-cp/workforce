@@ -9,7 +9,7 @@
   export { task };
 </script>
 
-<div class="bg-accent border-0 border-l-4 border-l-accent-foreground">
+<div class="bg-accent border-0 border-l-4 border-l-accent-foreground w-full">
   <h3>{task.name}</h3>
   <div class="flex flex-row items-center justify-start gap-2">
     {#each task.people as person}

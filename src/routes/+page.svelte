@@ -60,7 +60,7 @@
   </TopBar>
 
   <Resizable.PaneGroup direction="horizontal" style="overflow-y: scroll">
-    <Resizable.Pane class="flex flex-col bg-green-200">
+    <Resizable.Pane class="flex flex-col bg-green-200 p-4">
       {#each shifts as shift}
         <ShiftCard shift={shift} />
       {/each}
@@ -68,12 +68,12 @@
 
     <Resizable.Handle />
 
-    <Resizable.Pane class="h-[2000px] flex flex-col bg-yellow-200">
+    <Resizable.Pane class="h-[2000px] flex flex-col bg-yellow-200 p-4">
     </Resizable.Pane>
 
     <Resizable.Handle />
 
-    <Resizable.Pane class="h-[400px] flex flex-col bg-red-200">
+    <Resizable.Pane class="h-[400px] flex flex-col bg-red-200 p-4">
     </Resizable.Pane>
   </Resizable.PaneGroup>
 </main>
