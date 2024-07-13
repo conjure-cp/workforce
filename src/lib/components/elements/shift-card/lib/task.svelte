@@ -15,10 +15,10 @@
     {#each task.people as person}
       <PersonAvatar person={person} />
     {/each}
-    {#each { length: unfilled_slots } as _, i}
+    {#each { length: unfilled_slots } as _}
       <PersonAvatar person={undefined} />
     {/each}
-    {#each { length: optional_slots } as _, i}
+    {#each { length: optional_slots } as _}
       <PersonAvatar person={undefined} />
     {/each}
   </div>

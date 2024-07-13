@@ -6,9 +6,10 @@
   import { FilterIcon } from "lucide-svelte";
   import { Button } from "$lib/components/ui/button";
   import ShiftCard from "$lib/components/elements/shift-card/shift-card.svelte";
+  // noinspection ES6UnusedImports
   import * as Resizable from "$lib/components/ui/resizable";
   import { Shift } from "$lib/types/core.ts";
-  import { ZonedDateTime, now, getLocalTimeZone } from "@internationalized/date";
+  import { now, getLocalTimeZone } from "@internationalized/date";
 
   let schedules: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
