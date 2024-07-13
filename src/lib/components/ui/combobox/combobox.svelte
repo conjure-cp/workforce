@@ -39,7 +39,7 @@
   </div>
 
   <Combobox.Content
-    class="w-full rounded-xl border border-muted bg-background shadow-popover outline-none overflow-clip"
+    class="w-full rounded-xl border border-muted bg-background shadow outline-none overflow-clip"
     sideOffset={8}
   >
     {#each filteredItems as item (item.value)}

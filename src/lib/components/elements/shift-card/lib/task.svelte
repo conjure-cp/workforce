@@ -15,10 +15,10 @@
     {#each task.people as person}
       <PersonAvatar person={person} />
     {/each}
-    {#each { length: unfilled_slots } as _} // ToDo: I can't find a way to disable the warning here
+    {#each { length: unfilled_slots } as _} <!-- eslint-disable-line -->
       <PersonAvatar person={undefined} />
     {/each}
-    {#each { length: optional_slots } as _}
+    {#each { length: optional_slots } as _} <!-- eslint-disable-line -->
       <PersonAvatar person={undefined} />
     {/each}
   </div>
