@@ -10,7 +10,7 @@
   export { shift };
 </script>
 
-<Card.Root class="w-full">
+<Card.Root class="w-full bg-white shadow">
   <Card.Header>
     <Card.Title>{shift.name}</Card.Title>
     <Card.Description>{shift.description}</Card.Description>

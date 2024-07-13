@@ -19,12 +19,7 @@
 
 <div class="h-screen w-screen flex flex-row">
   <NavigationMenu links={links} />
-
-  <div class="bg-white w-full overflow-y-scroll">
-    <slot />
-  </div>
-
-  <Sidebar position={SidebarPosition.right} />
+  <slot />
 </div>
 
 <footer class="text-center">
