@@ -15,7 +15,7 @@
     {#each task.people as person}
       <PersonAvatar person={person} />
     {/each}
-    {#each { length: unfilled_slots } as _}
+    {#each { length: unfilled_slots } as _} // ToDo: I can't find a way to disable the warning here
       <PersonAvatar person={undefined} />
     {/each}
     {#each { length: optional_slots } as _}
