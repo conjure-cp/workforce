@@ -49,11 +49,15 @@ export class Shift {
   }
 
   public get start_time_fmt(): string {
-    return this.start_date_time.toDate().toLocaleTimeString();
+    return this.start_date_time
+      .toDate()
+      .toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   }
 
   public get end_time_fmt(): string {
-    return this.end_date_time.toDate().toLocaleTimeString();
+    return this.end_date_time
+      .toDate()
+      .toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   }
 }
 

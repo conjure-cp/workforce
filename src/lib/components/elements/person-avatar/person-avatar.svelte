@@ -4,25 +4,22 @@
   import * as Tooltip from "$lib/components/ui/tooltip";
   // noinspection ES6UnusedImports
   import * as Avatar from "$lib/components/ui/avatar";
-  import { CakeIcon, UserIcon } from "lucide-svelte";
+  import { CakeIcon, PlusIcon, UserIcon } from "lucide-svelte";
 
   let person: Person | undefined = undefined;
-  let hover: boolean = false;
 
   export { person };
 </script>
 
-<Tooltip.Root on:mouseenter={() => {hover = true}} on:mouseleave={() => {hover = false}}>
-  {#if (person === undefined)}
+<Tooltip.Root>
+  {#if person === undefined}
     <Tooltip.Trigger>
       <Avatar.Root>
-        {#if hover}
-          <Avatar.Fallback>+</Avatar.Fallback>
-        {:else }
-          <Avatar.Fallback>
-            <UserIcon />
-          </Avatar.Fallback>
-        {/if}
+        <Avatar.Fallback>
+          <UserIcon class="w-full h-full p-1" />
+          <PlusIcon
+            class="p-1 w-full h-full bg-accent-foreground opacity-0 hover:opacity-100 hover:bg-opacity-60 text-accent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200" />
+        </Avatar.Fallback>
       </Avatar.Root>
     </Tooltip.Trigger>
     <Tooltip.Content>

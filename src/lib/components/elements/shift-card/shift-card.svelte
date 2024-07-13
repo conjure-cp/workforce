@@ -24,7 +24,7 @@
       <MapPinIcon />
       {shift.location.name}
     </div>
-    <div class="flex flex-col items-stretch justify-start gap-3 w-full ">
+    <div class="flex flex-col items-stretch justify-start gap-3 w-full mt-4">
       {#each shift.tasks as task}
         <Task task={task} />
       {/each}
