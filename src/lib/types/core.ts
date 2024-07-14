@@ -1,11 +1,19 @@
-import { type DateValue, ZonedDateTime } from "@internationalized/date";
+import { ZonedDateTime } from "@internationalized/date";
 import type { Constraint } from "$lib/types/constraints.ts";
 import { constraints } from "$lib/stores";
 import { get } from "svelte/store";
 import { v4 as uuidv4 } from "uuid";
 
-export interface Skill {
+export class Skill {
+  uuid: string;
   name: string;
+  icon: string;
+
+  public constructor(name: string, icon: string) {
+    this.uuid = uuidv4();
+    this.name = name;
+    this.icon = icon;
+  }
 }
 
 export class Task {
@@ -104,14 +112,14 @@ export class Person {
   name: string;
   job_title: string;
   image_url: string;
-  birthday: DateValue;
+  birthday: Date;
   skills: Skill[];
 
   public constructor(
     name: string,
     job_title: string,
     image_url: string,
-    birthday: DateValue,
+    birthday: Date,
     skills: Skill[]
   ) {
     this.uuid = uuidv4();
@@ -131,7 +139,7 @@ export class Person {
 
   public get age(): number {
     const today = new Date();
-    return today.getFullYear() - this.birthday.year;
+    return today.getFullYear() - this.birthday.getFullYear();
   }
 
   public get constraints(): Constraint[] {

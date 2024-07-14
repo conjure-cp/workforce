@@ -20,33 +20,7 @@
     { label: "Schedule 2", value: "schedule2" }
   ];
 
-  let shifts: Shift[] = [
-    new Shift("Shift 1", "Loren ipsum dolor sit amet", now(getLocalTimeZone()), now(getLocalTimeZone()), {
-        name: "Location 1",
-        constraints: []
-      },
-      [
-        {
-          name: "Task 1",
-          description: "Loren ipsum dolor sit amet",
-          min_people: 1,
-          max_people: 2,
-          people: [],
-          required_skills: [],
-          constraints: []
-        },
-        {
-          name: "Task 2",
-          description: "Loren ipsum dolor sit amet",
-          min_people: 1,
-          max_people: 2,
-          people: [],
-          required_skills: [],
-          constraints: []
-        }
-      ]
-    )
-  ];
+  let shifts: Shift[] = [];
 </script>
 
 <div class="bg-gray-50 w-full overflow-y-scroll">
