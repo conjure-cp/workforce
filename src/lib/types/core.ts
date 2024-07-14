@@ -1,30 +1,67 @@
 import { type DateValue, ZonedDateTime } from "@internationalized/date";
-import type {
-  LocationConstraint,
-  PersonConstraint,
-  TaskConstraint
-} from "$lib/types/constraints.ts";
+import type { Constraint } from "$lib/types/constraints.ts";
+import { constraints } from "$lib/stores";
+import { get } from "svelte/store";
+import { v4 as uuidv4 } from "uuid";
 
 export interface Skill {
   name: string;
 }
 
-export interface Task {
+export class Task {
+  uuid: string;
   name: string;
   description: string;
+  icon: string;
   min_people: number;
   max_people: number;
   required_skills: Skill[];
-  constraints: TaskConstraint[];
   people: Person[];
+
+  public constructor(
+    name: string,
+    description: string,
+    icon: string,
+    min_people: number,
+    max_people: number,
+    required_skills: Skill[],
+    people: Person[]
+  ) {
+    this.uuid = uuidv4();
+    this.name = name;
+    this.description = description;
+    this.icon = icon;
+    this.min_people = min_people;
+    this.max_people = max_people;
+    this.required_skills = required_skills;
+    this.people = people;
+  }
+
+  public get constraints(): Constraint[] {
+    const constraints_list = get(constraints);
+    return constraints_list.filter((c) => c.applies_to === this);
+  }
 }
 
-export interface Location {
+export class Location {
+  uuid: string;
   name: string;
-  constraints: LocationConstraint[];
+  image_url: string;
+
+  public constructor(name: string, image_url: string) {
+    this.uuid = uuidv4();
+    this.name = name;
+    this.image_url = image_url;
+  }
+
+  public get constraints(): Constraint[] {
+    const constraints_list = get(constraints);
+    return constraints_list.filter((c) => c.applies_to === this);
+  }
 }
 
 export class Shift {
+  uuid: string;
   name: string;
   description: string;
   start_date_time: ZonedDateTime;
@@ -40,6 +77,7 @@ export class Shift {
     location: Location,
     tasks: Task[]
   ) {
+    this.uuid = uuidv4();
     this.name = name;
     this.description = description;
     this.start_date_time = start_date_time;
@@ -62,27 +100,26 @@ export class Shift {
 }
 
 export class Person {
+  uuid: string;
   name: string;
   job_title: string;
-  avatar_url: string;
+  image_url: string;
   birthday: DateValue;
   skills: Skill[];
-  constraints: PersonConstraint[];
 
   public constructor(
     name: string,
     job_title: string,
-    avatar_url: string,
+    image_url: string,
     birthday: DateValue,
-    skills: Skill[],
-    constraints: PersonConstraint[]
+    skills: Skill[]
   ) {
+    this.uuid = uuidv4();
     this.name = name;
     this.job_title = job_title;
-    this.avatar_url = avatar_url;
+    this.image_url = image_url;
     this.birthday = birthday;
     this.skills = skills;
-    this.constraints = constraints;
   }
 
   public get initials(): string {
@@ -95,5 +132,10 @@ export class Person {
   public get age(): number {
     const today = new Date();
     return today.getFullYear() - this.birthday.year;
+  }
+
+  public get constraints(): Constraint[] {
+    const constraints_list = get(constraints);
+    return constraints_list.filter((c) => c.applies_to === this);
   }
 }

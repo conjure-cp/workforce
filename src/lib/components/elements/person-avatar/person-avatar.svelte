@@ -28,7 +28,7 @@
   {:else}
     <Tooltip.Trigger>
       <Avatar.Root>
-        <Avatar.Image src={person.avatar_url} alt={person.name} />
+        <Avatar.Image src={person.image_url} alt={person.name} />
         <Avatar.Fallback>{person.initials}</Avatar.Fallback>
       </Avatar.Root>
     </Tooltip.Trigger>

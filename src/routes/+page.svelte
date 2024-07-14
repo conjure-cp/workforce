@@ -84,4 +84,6 @@
   </main>
 </div>
 
-<Sidebar position={SidebarPosition.right} />
+<Sidebar position={SidebarPosition.right}>
+
+</Sidebar>
