@@ -43,20 +43,20 @@
     </TopBar>
 
     <Resizable.PaneGroup direction="horizontal" style="overflow-y: scroll">
-      <Resizable.Pane class="flex flex-col gap-4 p-4">
+      <Resizable.Pane class="flex flex-col gap-4 p-4 h-fit">
         {#each shifts_value as shift}
           <ShiftCard shift={shift} />
         {/each}
       </Resizable.Pane>
 
-      <Resizable.Handle />
+      <Resizable.Handle class="h-full" />
 
-      <Resizable.Pane class="h-[2000px] flex flex-col p-4">
+      <Resizable.Pane class="flex flex-col gap-4 p-4 h-fit">
       </Resizable.Pane>
 
-      <Resizable.Handle />
+      <Resizable.Handle class="h-full" />
 
-      <Resizable.Pane class="h-[400px] flex flex-col p-4">
+      <Resizable.Pane class="flex flex-col gap-4 p-4 h-fit">
       </Resizable.Pane>
     </Resizable.PaneGroup>
   </main>

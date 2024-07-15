@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Task } from "$lib/types/core.ts";
   import PersonAvatar from "$lib/components/elements/person-avatar/person-avatar.svelte";
+  import { capitalize } from "$lib/utils.ts";
 
   let task: Task;
   let unfilled_slots: number = Math.max(0, task.min_people - task.people.length);
@@ -10,7 +11,7 @@
 </script>
 
 <div class="bg-accent border-0 border-l-4 border-l-accent-foreground w-full p-2">
-  <h3 class="ml-2 mb-2 font-semibold">{task.name}</h3>
+  <h3 class="ml-2 mb-2 font-semibold">{capitalize(task.name)}</h3>
   <div class="flex flex-row items-center justify-start gap-2">
     {#each task.people as person}
       <PersonAvatar person={person} />

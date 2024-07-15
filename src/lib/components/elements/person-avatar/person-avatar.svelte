@@ -33,13 +33,15 @@
       </Avatar.Root>
     </Tooltip.Trigger>
     <Tooltip.Content>
-      <h3>{person.name}</h3>
-      <div>
-        {person.job_title}
-        <div>
+      <div class="flex flex-row justify-between items-center">
+        <h3 class="font-semibold">{person.name}</h3>
+        <div class="flex flex-row ml-2 gap-1 items-center">
           <CakeIcon />
           {person.age}
         </div>
+      </div>
+      <div>
+        {person.job_title}
       </div>
     </Tooltip.Content>
   {/if}

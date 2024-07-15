@@ -4,6 +4,7 @@
   import type { Shift } from "$lib/types/core.ts";
   import Task from "./lib/task.svelte";
   import { ClockIcon, MapPinIcon } from "lucide-svelte";
+  import { capitalize } from "$lib/utils.ts";
 
   let shift: Shift;
 
@@ -12,7 +13,7 @@
 
 <Card.Root class="w-full bg-white shadow">
   <Card.Header>
-    <Card.Title>{shift.name}</Card.Title>
+    <Card.Title>{capitalize(shift.name)}</Card.Title>
     <Card.Description>{shift.description}</Card.Description>
   </Card.Header>
 

@@ -44,7 +44,7 @@ export function generatePerson(): Person {
   return new Person(
     faker.person.fullName(),
     faker.person.jobTitle(),
-    "https://thispersondoesnotexist.com/",
+    faker.image.avatar(),
     faker.date.birthdate(),
     generateSkills(faker.number.int({ min: 1, max: 5 }))
   );
