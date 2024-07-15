@@ -83,7 +83,7 @@ export function generateShift(): Shift {
     faker.lorem.words(),
     faker.lorem.sentence(),
     fromDate(faker.date.recent(), "UTC"),
-    fromDate(faker.date.future(), "UTC"),
+    fromDate(faker.date.soon(), "UTC"),
     sampleLocation(),
     sampleTasks(faker.number.int({ min: 1, max: 3 }))
   );
