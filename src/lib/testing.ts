@@ -59,8 +59,8 @@ export function generateTask(): Task {
     faker.lorem.words(),
     faker.lorem.sentence(),
     generateIcon(),
-    faker.number.int({ min: 1, max: 5 }),
-    faker.number.int({ min: 5, max: 10 }),
+    faker.number.int({ min: 1, max: 3 }),
+    faker.number.int({ min: 3, max: 5 }),
     sampleSkills(faker.number.int({ min: 0, max: 3 })),
     samplePeople(faker.number.int({ min: 0, max: 3 }))
   );

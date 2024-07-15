@@ -56,13 +56,13 @@
   </ul>
 
   <div slot="collapsed_bottom" class="flex w-full">
-    <Button href="#" variant={isActive(`${base}/settings/`) ? "default" : "ghost"} size="icon_xl">
+    <Button href="{base}/settings/" variant={isActive(`${base}/settings/`) ? "default" : "ghost"} size="icon_xl">
       <SettingsIcon />
     </Button>
   </div>
 
   <div slot="expanded_bottom" class="flex w-full">
-    <Button href="#" variant={isActive(`${base}/settings/`) ? "default" : "ghost"} size="xl"
+    <Button href="{base}/settings/" variant={isActive(`${base}/settings/`) ? "default" : "ghost"} size="xl"
             class="w-full justify-start">
       <SettingsIcon />
       Settings

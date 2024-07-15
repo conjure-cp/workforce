@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { now, getLocalTimeZone } from "@internationalized/date";
-
   // noinspection ES6UnusedImports
   import * as Resizable from "$lib/components/ui/resizable";
   import TopBar from "$lib/components/elements/top-bar/top_bar.svelte";
@@ -15,12 +13,18 @@
   import { SidebarPosition } from "$lib/components/ui/sidebar/index.ts";
   import { Shift } from "$lib/types/core.ts";
 
+  import { shifts } from "$lib/stores.ts";
+
   let schedules: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
     { label: "Schedule 2", value: "schedule2" }
   ];
 
-  let shifts: Shift[] = [];
+  let shifts_value: Shift[];
+
+  shifts.subscribe(value => {
+    shifts_value = value;
+  });
 </script>
 
 <div class="bg-gray-50 w-full overflow-y-scroll">
@@ -40,7 +44,7 @@
 
     <Resizable.PaneGroup direction="horizontal" style="overflow-y: scroll">
       <Resizable.Pane class="flex flex-col p-4">
-        {#each shifts as shift}
+        {#each shifts_value as shift}
           <ShiftCard shift={shift} />
         {/each}
       </Resizable.Pane>
