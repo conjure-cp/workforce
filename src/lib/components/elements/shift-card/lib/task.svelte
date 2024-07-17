@@ -12,7 +12,7 @@
 
 <div class="bg-accent border-0 border-l-4 border-l-accent-foreground w-full p-2">
   <h3 class="ml-2 mb-2 font-semibold">{capitalize(task.name)}</h3>
-  <div class="flex flex-row items-center justify-start gap-2">
+  <div class="flex flex-row items-center justify-start gap-2 flex-wrap">
     {#each task.people as person}
       <PersonAvatar person={person} />
     {/each}

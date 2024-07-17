@@ -27,8 +27,8 @@
   });
 </script>
 
-<div class="bg-gray-50 w-full overflow-y-scroll">
-  <main class="w-full h-full flex flex-col items-start justify-start overflow-y-scroll">
+<div class="bg-gray-50 w-full">
+  <main class="w-full h-dvh flex flex-col items-start justify-start overflow-y-scroll">
     <TopBar sticky={true}>
       <svelte:fragment slot="start">
         <Combobox items={schedules} placeholder="Select schedule" icon="mdi:calendar" />
@@ -42,19 +42,19 @@
       </svelte:fragment>
     </TopBar>
 
-    <Resizable.PaneGroup direction="horizontal" style="overflow-y: scroll">
+    <Resizable.PaneGroup direction="horizontal" style="overflow: unset !important; height: fit-content !important;">
       <Resizable.Pane class="flex flex-col gap-4 p-4 h-fit">
         {#each shifts_value as shift}
           <ShiftCard shift={shift} />
         {/each}
       </Resizable.Pane>
 
-      <Resizable.Handle class="h-full" />
+      <Resizable.Handle />
 
       <Resizable.Pane class="flex flex-col gap-4 p-4 h-fit">
       </Resizable.Pane>
 
-      <Resizable.Handle class="h-full" />
+      <Resizable.Handle />
 
       <Resizable.Pane class="flex flex-col gap-4 p-4 h-fit">
       </Resizable.Pane>
