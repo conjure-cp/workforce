@@ -105,6 +105,10 @@ export class Shift {
       .toDate()
       .toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   }
+
+  public get people(): Person[] {
+    return [...new Set(this.tasks.flatMap((t) => t.people))];
+  }
 }
 
 export class Person {

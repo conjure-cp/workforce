@@ -1,65 +1,77 @@
+<!--suppress ES6UnusedImports -->
 <script lang="ts">
-  // noinspection ES6UnusedImports
-  import { Combobox } from "bits-ui";
-  import Icon, { type IconifyIcon } from "@iconify/svelte";
+  import Check from "lucide-svelte/icons/check";
+  import ChevronsUpDown from "lucide-svelte/icons/chevrons-up-down";
+  import * as Command from "$lib/components/ui/command/index.js";
+  import * as Popover from "$lib/components/ui/popover/index.js";
+  import { Button } from "$lib/components/ui/button/index.js";
+  import { cn } from "$lib/utils.js";
+  import { tick } from "svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox/index.ts";
+  import Icon, { type IconifyIcon } from "@iconify/svelte";
 
-  let items: ComboboxItem[];
-  let inputValue = "";
-  let touchedInput = false;
-  let placeholder = "Search";
+  let options: ComboboxItem[] = [];
+  let open = false;
+  let value = "";
   let icon: string | IconifyIcon | undefined = undefined;
-  let open: boolean = false;
+  let placeholder = "Select a value";
 
-  $: filteredItems =
-    inputValue && touchedInput
-      ? items.filter((fruit) => fruit.value.includes(inputValue.toLowerCase()))
-      : items;
+  $: selectedValue =
+    options.find((f) => f.value === value)?.label ??
+    placeholder;
 
-  export { items, placeholder, icon };
+  // We want to refocus the trigger button when the user selects
+  // an item from the list so users can continue navigating the
+  // rest of the form with the keyboard.
+  function closeAndFocusTrigger(triggerId: string) {
+    open = false;
+    tick().then(() => {
+      document.getElementById(triggerId)?.focus();
+    });
+  }
+
+  export { placeholder, options, icon };
 </script>
 
-<Combobox.Root items={filteredItems} open={open} onOpenChange={() => {open = !open}} bind:inputValue bind:touchedInput>
-  <div class="relative">
-    {#if icon !== undefined}
-      <Icon
-        icon={icon}
-        class="absolute start-3 top-1/2 -translate-y-1/2 text-2xl {open ? 'text-accent-foreground' : 'text-secondary-foreground'} transition-colors duration-200"
-      />
-    {/if}
-    <Combobox.Input
-      class="inline-flex truncate h-10 {icon ? 'pl-12' : 'pl-4'} rounded-md border bg-background transition-colors duration-200 shadow"
-      placeholder={placeholder}
-      aria-label={placeholder}
-    />
-    <Icon
-      icon="mdi:chevron-up-down"
-      class="absolute end-3 top-1/2 -translate-y-1/2 text-2xl {open ? 'text-accent-foreground' : 'text-secondary-foreground'} transition-colors duration-200"
-    />
-  </div>
-
-  <Combobox.Content
-    class="w-full rounded-xl border border-muted bg-background shadow outline-none overflow-clip"
-    sideOffset={8}
-  >
-    {#each filteredItems as item (item.value)}
-      <Combobox.Item
-        class="flex h-10 w-full select-none items-center hover:bg-gray-300 py-3 pl-5 pr-1.5 capitalize outline-none transition-all"
-        value={item.value}
-        label={item.label}
-      >
-        {item.label}
-        <Combobox.ItemIndicator class="ml-auto" asChild={false}>
-          <Icon
-            icon="mdi:check"
-          />
-        </Combobox.ItemIndicator>
-      </Combobox.Item>
-    {:else}
-      <span class="block px-5 py-2 text-sm text-muted-foreground">
-        No results found
-      </span>
-    {/each}
-  </Combobox.Content>
-  <Combobox.HiddenInput name="selectedItem" />
-</Combobox.Root>
+<Popover.Root bind:open let:ids>
+  <Popover.Trigger asChild let:builder>
+    <Button
+      builders={[builder]}
+      variant="outline"
+      role="combobox"
+      aria-expanded={open}
+      class="w-[250] justify-start"
+    >
+      {#if icon}
+        <Icon icon={icon} class="h-full w-auto opacity-50 mr-2" />
+      {/if}
+      {selectedValue}
+      <ChevronsUpDown class="ml-3 h-5 w-5 shrink-0 opacity-50" />
+    </Button>
+  </Popover.Trigger>
+  <Popover.Content class="w-[250] p-0">
+    <Command.Root>
+      <Command.Input placeholder="Search" />
+      <Command.Empty>No options found</Command.Empty>
+      <Command.Group>
+        {#each options as option}
+          <Command.Item
+            value={option.value}
+            onSelect={(currentValue) => {
+              value = currentValue;
+              closeAndFocusTrigger(ids.trigger);
+            }}
+          >
+            <Check
+              class={cn(
+                "mr-2 h-6 w-6",
+                value !== option.value && "text-transparent"
+              )}
+            />
+            {option.label}
+          </Command.Item>
+        {/each}
+      </Command.Group>
+    </Command.Root>
+  </Popover.Content>
+</Popover.Root>
