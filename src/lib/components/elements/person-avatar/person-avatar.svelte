@@ -4,7 +4,7 @@
   import * as Tooltip from "$lib/components/ui/tooltip";
   // noinspection ES6UnusedImports
   import * as Avatar from "$lib/components/ui/avatar";
-  import { CakeIcon, PlusIcon, UserIcon } from "lucide-svelte";
+  import { CakeIcon, UserIcon } from "lucide-svelte";
 
   let person: Person | undefined = undefined;
 
