@@ -3,7 +3,6 @@
   import Check from "lucide-svelte/icons/check";
   import * as Command from "$lib/components/ui/command/index.js";
   import * as Popover from "$lib/components/ui/popover/index.js";
-  import * as Avatar from "$lib/components/ui/avatar";
   import { Button } from "$lib/components/ui/button/index.js";
   import PersonAvatar from "$lib/components/elements/person-avatar/person-avatar.svelte";
   import { cn } from "$lib/utils.js";

@@ -1,8 +1,7 @@
+<!--suppress ES6UnusedImports -->
 <script lang="ts">
   import type { Person } from "$lib/types/core.ts";
-  // noinspection ES6UnusedImports
   import * as Tooltip from "$lib/components/ui/tooltip";
-  // noinspection ES6UnusedImports
   import * as Avatar from "$lib/components/ui/avatar";
   import { CakeIcon, PlusIcon, UserIcon } from "lucide-svelte";
 
@@ -11,6 +10,7 @@
   let placeholder: string = "Unassigned";
   let className: string = "";
 
+  // noinspection ReservedWordAsName
   export { person, placeholder, popoverEnabled, className as class };
 </script>
 
