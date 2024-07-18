@@ -4,43 +4,50 @@
   import * as Tooltip from "$lib/components/ui/tooltip";
   // noinspection ES6UnusedImports
   import * as Avatar from "$lib/components/ui/avatar";
-  import { CakeIcon, UserIcon } from "lucide-svelte";
+  import { CakeIcon, PlusIcon, UserIcon } from "lucide-svelte";
 
   let person: Person | undefined = undefined;
+  let popoverEnabled: boolean = true;
+  let placeholder: string = "Unassigned";
+  let className: string = "";
 
-  export { person };
+  export { person, placeholder, popoverEnabled, className as class };
 </script>
 
 <Tooltip.Root>
   {#if person === undefined}
-    <Tooltip.Trigger>
-      <Avatar.Root>
-        <Avatar.Fallback>
-          <UserIcon class="w-full h-full p-1" />
-        </Avatar.Fallback>
-      </Avatar.Root>
+    <Tooltip.Trigger class={className}>
+      <div
+        class="group relative h-10 w-10 overflow-hidden rounded-full outline-none hover:outline-accent-foreground transition-all">
+        <UserIcon class="absolute top-1 left-1 h-8 w-8 opacity-100 group-hover:opacity-0 transition-all" />
+        <PlusIcon class="absolute top-1 left-1 h-8 w-8 opacity-0 group-hover:opacity-100 transition-all" />
+      </div>
     </Tooltip.Trigger>
-    <Tooltip.Content>
-      No person assigned
-    </Tooltip.Content>
+    {#if popoverEnabled}
+      <Tooltip.Content>
+        {placeholder}
+      </Tooltip.Content>
+    {/if}
   {:else}
-    <Tooltip.Trigger>
+    <Tooltip.Trigger class={className}>
       <Avatar.Root>
         <Avatar.Image src={person.image_url} alt={person.name} />
         <Avatar.Fallback>{person.initials}</Avatar.Fallback>
       </Avatar.Root>
     </Tooltip.Trigger>
-    <Tooltip.Content>
-      <div class="flex flex-row justify-between items-center">
-        <h3 class="font-semibold">{person.name}</h3>
-        <div class="flex flex-row ml-2 gap-1 items-center">
-          <CakeIcon />
-          {person.age}
+    {#if popoverEnabled}
+      <Tooltip.Content>
+        <div class="flex flex-row justify-between items-center">
+          <h3 class="font-semibold">{person.name}</h3>
+          <div class="flex flex-row ml-2 gap-1 items-center">
+            <CakeIcon />
+            {person.age}
+          </div>
         </div>
-      </div>
-      <div>
-        {person.job_title}
-      </div>
-    </Tooltip.Content>
+        <div>
+          {person.job_title}
+        </div>
+      </Tooltip.Content>
+    {/if}
   {/if}
 </Tooltip.Root>

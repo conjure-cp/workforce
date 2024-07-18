@@ -10,7 +10,6 @@
   import { tick } from "svelte";
   import { employees } from "$lib/stores.ts";
   import { Person } from "$lib/types/core.ts";
-  import { PlusIcon, UserIcon } from "lucide-svelte";
 
   let open = false;
   let person: Person | undefined = undefined;
@@ -37,19 +36,7 @@
       aria-expanded={open}
       class="h-10 w-10 justify-start relative rounded-full overflow-visible"
     >
-      {#if person === undefined}
-        <div
-          class="group absolute top-0 left-0 h-10 w-10 shrink-0 overflow-hidden rounded-full outline-none hover:outline-accent-foreground transition-all">
-          <UserIcon class="absolute top-1 left-1 h-8 w-8 opacity-100 group-hover:opacity-0 transition-all" />
-          <PlusIcon class="absolute top-1 left-1 h-8 w-8 opacity-0 group-hover:opacity-100 transition-all" />
-        </div>
-      {:else}
-        <Avatar.Root
-          class="absolute top-0 left-0 outline-none hover:opacity-50 hover:outline-accent-foreground transition-all">
-          <Avatar.Image src={person.image_url} alt={person.name} />
-          <Avatar.Fallback>{person.initials}</Avatar.Fallback>
-        </Avatar.Root>
-      {/if}
+      <PersonAvatar person={person} placeholder="Assign person" class="absolute top-0 left-0" />
     </Button>
   </Popover.Trigger>
   <Popover.Content class="w-[200] p-0">
@@ -85,7 +72,7 @@
             }}
           class="flex flex-row items-center justify-start gap-2"
         >
-          <PersonAvatar person={undefined} />
+          <PersonAvatar person={undefined} popoverEnabled={false} />
           Unassigned
           <Check
             class={cn(
