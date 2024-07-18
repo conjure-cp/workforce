@@ -30,7 +30,7 @@
     });
   }
 
-  export { placeholder, options, icon };
+  export { placeholder, options, icon, value };
 </script>
 
 <Popover.Root bind:open let:ids>

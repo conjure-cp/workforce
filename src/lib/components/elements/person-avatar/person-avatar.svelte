@@ -17,13 +17,11 @@
       <Avatar.Root>
         <Avatar.Fallback>
           <UserIcon class="w-full h-full p-1" />
-          <PlusIcon
-            class="p-1 w-full h-full bg-accent-foreground opacity-0 hover:opacity-100 hover:bg-opacity-60 text-accent absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200" />
         </Avatar.Fallback>
       </Avatar.Root>
     </Tooltip.Trigger>
     <Tooltip.Content>
-      Assign person
+      No person assigned
     </Tooltip.Content>
   {:else}
     <Tooltip.Trigger>

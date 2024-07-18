@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Task } from "$lib/types/core.ts";
-  import PersonAvatar from "$lib/components/elements/person-avatar/person-avatar.svelte";
+  import PersonSelector from "$lib/components/elements/person-selector/person-selector.svelte";
   import { capitalize } from "$lib/utils.ts";
 
   let task: Task;
@@ -14,13 +14,13 @@
   <h3 class="ml-2 mb-2 font-semibold">{capitalize(task.name)}</h3>
   <div class="flex flex-row items-center justify-start gap-2 flex-wrap">
     {#each task.people as person}
-      <PersonAvatar person={person} />
+      <PersonSelector person={person} />
     {/each}
     {#each { length: unfilled_slots } as _} <!-- eslint-disable-line -->
-      <PersonAvatar person={undefined} />
+      <PersonSelector person={undefined} />
     {/each}
     {#each { length: optional_slots } as _} <!-- eslint-disable-line -->
-      <PersonAvatar person={undefined} />
+      <PersonSelector person={undefined} />
     {/each}
   </div>
 </div>
