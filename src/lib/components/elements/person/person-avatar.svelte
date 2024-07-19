@@ -19,7 +19,7 @@
   {#if person === undefined}
     <Tooltip.Trigger class={className}>
       <div
-        class="group/avatar relative h-10 w-10 overflow-hidden rounded-full outline-none outline-offset-0 transition-all bg-opacity-10 {variant === 'destructive' ? 'text-destructive hover:outline-destructive bg-destructive' : 'hover:outline-accent-foreground bg-accent-foreground'}">
+        class="group/avatar relative h-10 w-10 overflow-hidden rounded-full outline-none outline-offset-0 transition-all {variant === 'destructive' ? 'text-destructive hover:outline-destructive bg-red-100' : 'text-muted-foreground hover:outline-accent-foreground bg-muted'}">
         <UserIcon class="absolute top-1 left-1 h-8 w-8 opacity-100 group-hover/avatar:opacity-0 transition-all" />
         <PlusIcon class="absolute top-1 left-1 h-8 w-8 opacity-0 group-hover/avatar:opacity-100 transition-all" />
       </div>

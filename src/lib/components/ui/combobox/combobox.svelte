@@ -40,7 +40,7 @@
       variant="outline"
       role="combobox"
       aria-expanded={open}
-      class="w-[250] justify-start"
+      class="w-[250px] justify-start"
     >
       {#if icon}
         <Icon icon={icon} class="h-full w-auto opacity-50 mr-2" />
@@ -49,7 +49,7 @@
       <ChevronsUpDown class="ml-3 h-5 w-5 shrink-0 opacity-50" />
     </Button>
   </Popover.Trigger>
-  <Popover.Content class="w-[250] p-0">
+  <Popover.Content class="w-[250px] p-0">
     <Command.Root>
       <Command.Input placeholder="Search" />
       <Command.Empty>No options found</Command.Empty>
