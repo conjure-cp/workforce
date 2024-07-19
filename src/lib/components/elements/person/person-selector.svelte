@@ -12,6 +12,8 @@
 
   let open = false;
   let person: Person | undefined = undefined;
+  let className: string = "";
+  let variant: "default" | "destructive" = "default";
 
   // We want to refocus the trigger button when the user selects
   // an item from the list so users can continue navigating the
@@ -23,19 +25,19 @@
     });
   }
 
-  export { person };
+  export { person, variant, className as class };
 </script>
 
 <Popover.Root bind:open let:ids>
-  <Popover.Trigger asChild let:builder>
+  <Popover.Trigger asChild let:builder class={className}>
     <Button
       builders={[builder]}
       variant="ghost"
       role="combobox"
       aria-expanded={open}
-      class="h-10 w-10 justify-start relative rounded-full overflow-visible"
+      class="w-10 h-10 rounded-full overflow-visible"
     >
-      <PersonAvatar person={person} placeholder="Assign person" class="absolute top-0 left-0" />
+      <PersonAvatar person={person} variant={variant} placeholder="Assign person" />
     </Button>
   </Popover.Trigger>
   <Popover.Content class="w-[200] p-0">

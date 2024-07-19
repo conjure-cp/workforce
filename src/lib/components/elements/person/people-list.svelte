@@ -12,7 +12,7 @@
 </script>
 
 {#if compact}
-  <div class="group relative flex flex-row items-center justify-start flex-wrap">
+  <div class="group flex flex-row items-center justify-start flex-wrap">
     {#each people_list as person}
       <div class="relative transition-all w-4 h-10 hover:z-20 hover:w-5 group-hover:opacity-55 hover:!opacity-100">
         <PersonAvatar person={person}
