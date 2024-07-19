@@ -30,7 +30,7 @@
     {/if}
   {:else}
     <Tooltip.Trigger class={className}>
-      <Avatar.Root>
+      <Avatar.Root class="outline-none hover:outline-accent-foreground transition-all">
         <Avatar.Image src={person.image_url} alt={person.name} />
         <Avatar.Fallback>{person.initials}</Avatar.Fallback>
       </Avatar.Root>

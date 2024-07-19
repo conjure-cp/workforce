@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Task } from "$lib/types/core.ts";
-  import PersonSelector from "$lib/components/elements/person-selector/person-selector.svelte";
+  import PersonSelector from "$lib/components/elements/person/person-selector.svelte";
   import { capitalize } from "$lib/utils.ts";
 
   let task: Task;

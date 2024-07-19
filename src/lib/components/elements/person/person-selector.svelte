@@ -1,10 +1,10 @@
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
   import Check from "lucide-svelte/icons/check";
-  import * as Command from "$lib/components/ui/command/index.js";
-  import * as Popover from "$lib/components/ui/popover/index.js";
-  import { Button } from "$lib/components/ui/button/index.js";
-  import PersonAvatar from "$lib/components/elements/person-avatar/person-avatar.svelte";
+  import * as Command from "$lib/components/ui/command";
+  import * as Popover from "$lib/components/ui/popover";
+  import { Button } from "$lib/components/ui/button";
+  import PersonAvatar from "$lib/components/elements/person/person-avatar.svelte";
   import { cn } from "$lib/utils.js";
   import { tick } from "svelte";
   import { employees } from "$lib/stores.ts";

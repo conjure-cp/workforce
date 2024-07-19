@@ -5,7 +5,7 @@
   import Combobox from "$lib/components/ui/combobox/combobox.svelte";
   import Search from "$lib/components/ui/search/search.svelte";
   import Sidebar from "$lib/components/ui/sidebar/sidebar.svelte";
-  import ShiftCard from "$lib/components/elements/shift-card/shift-card.svelte";
+  import ShiftCard from "$lib/components/elements/shift/shift-card.svelte";
   import { Button } from "$lib/components/ui/button";
   import { FilterIcon } from "lucide-svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";

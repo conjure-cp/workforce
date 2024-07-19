@@ -1,6 +1,8 @@
 <script lang="ts">
   import Combobox from "$lib/components/ui/combobox/combobox.svelte";
+  import PeopleList from "$lib/components/elements/person/people-list.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
+  import { employees } from "$lib/stores.ts";
 
   const schedules: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
@@ -16,7 +18,10 @@
       <Combobox options={schedules} placeholder="Select schedule..." icon="mdi:calendar" />
     </section>
     <section>
-
+      <PeopleList people={$employees} compact={true} />
+      <PeopleList people={$employees} compact={true} max={3} />
+      <PeopleList people={$employees} compact={false} />
+      <PeopleList people={$employees} compact={false} max={3} />
     </section>
   </main>
 </div>
