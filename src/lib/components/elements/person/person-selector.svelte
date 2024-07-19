@@ -29,7 +29,8 @@
     });
   }
 
-  export { person, variant, onChange, filter, className as class };
+  // noinspection ReservedWordAsName
+  export { person, variant, filter, className as class };
 </script>
 
 <Popover.Root bind:open let:ids>
