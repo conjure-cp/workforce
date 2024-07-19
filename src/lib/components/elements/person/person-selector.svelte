@@ -12,8 +12,12 @@
 
   let open = false;
   let person: Person | undefined = undefined;
+  let options: Person[] = $employees;
+  let filter: (p: Person | undefined) => boolean = () => true;
   let className: string = "";
   let variant: "default" | "destructive" = "default";
+
+  $: filtered_options = options.filter(filter);
 
   // We want to refocus the trigger button when the user selects
   // an item from the list so users can continue navigating the
@@ -25,7 +29,7 @@
     });
   }
 
-  export { person, variant, className as class };
+  export { person, variant, onChange, filter, className as class };
 </script>
 
 <Popover.Root bind:open let:ids>
@@ -45,7 +49,7 @@
       <Command.Input placeholder="Search" />
       <Command.Empty>No people found</Command.Empty>
       <Command.Group>
-        {#each $employees as option}
+        {#each filtered_options as option}
           <Command.Item
             value="{option.uuid};{option.name}"
             onSelect={(val) => {
