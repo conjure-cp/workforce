@@ -1,7 +1,7 @@
 <script lang="ts">
   import SkillSelector from "$lib/components/elements/skill/skill-selector.svelte";
   import { skills as skillsStore } from "$lib/stores";
-  import type { Person, Skill } from "$lib/types/core.ts";
+  import type { Skill } from "$lib/types/core.ts";
   import { pad } from "$lib/utils.ts";
 
   let options: Skill[] = $skillsStore;

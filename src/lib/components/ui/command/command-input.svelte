@@ -3,11 +3,14 @@
   import Search from "lucide-svelte/icons/search";
   import { cn } from "$lib/utils.js";
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type $$Props = CommandPrimitive.InputProps;
 
+  let value: string = "";
   let className: string | undefined | null = undefined;
-  export { className as class };
-  export let value: string = "";
+
+  // noinspection ReservedWordAsName
+  export { value, className as class };
 </script>
 
 <div class="flex items-center border-b px-2" data-cmdk-input-wrapper="">

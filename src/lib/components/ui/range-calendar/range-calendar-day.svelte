@@ -1,22 +1,25 @@
 <script lang="ts">
-	import { RangeCalendar as RangeCalendarPrimitive } from "bits-ui";
-	import { buttonVariants } from "$lib/components/ui/button/index.js";
-	import { cn } from "$lib/utils.js";
+  import { RangeCalendar as RangeCalendarPrimitive } from "bits-ui";
+  import { buttonVariants } from "$lib/components/ui/button/index.js";
+  import { cn } from "$lib/utils.js";
 
-	type $$Props = RangeCalendarPrimitive.DayProps;
-	type $$Events = RangeCalendarPrimitive.DayEvents;
+  type $$Props = RangeCalendarPrimitive.DayProps;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  type $$Events = RangeCalendarPrimitive.DayEvents;
 
-	export let date: $$Props["date"];
-	export let month: $$Props["month"];
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+  let date: $$Props["date"];
+  let month: $$Props["month"];
+  let className: $$Props["class"] = undefined;
+
+  // noinspection ReservedWordAsName
+  export { date, month, className as class };
 </script>
 
 <RangeCalendarPrimitive.Day
-	on:click
-	{date}
-	{month}
-	class={cn(
+  on:click
+  {date}
+  {month}
+  class={cn(
 		buttonVariants({ variant: "ghost" }),
 		"h-9 w-9 p-0 font-normal data-[selected]:opacity-100",
 		"[&[data-today]:not([data-selected])]:bg-accent [&[data-today]:not([data-selected])]:text-accent-foreground",
@@ -32,12 +35,12 @@
 		"data-[unavailable]:text-destructive-foreground data-[unavailable]:line-through",
 		className
 	)}
-	{...$$restProps}
-	let:disabled
-	let:unavailable
-	let:builder
+  {...$$restProps}
+  let:disabled
+  let:unavailable
+  let:builder
 >
-	<slot {disabled} {unavailable} {builder}>
-		{date.day}
-	</slot>
+  <slot {disabled} {unavailable} {builder}>
+    {date.day}
+  </slot>
 </RangeCalendarPrimitive.Day>
