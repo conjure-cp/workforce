@@ -4,21 +4,21 @@
   import * as Command from "$lib/components/ui/command";
   import * as Popover from "$lib/components/ui/popover";
   import { Button } from "$lib/components/ui/button";
-  import PersonAvatar from "$lib/components/elements/person/person-avatar.svelte";
+  import SkillBadge from "$lib/components/elements/skill/skill.svelte";
   import { cn } from "$lib/utils.js";
   import { tick } from "svelte";
-  import { employees } from "$lib/stores.ts";
-  import { Person } from "$lib/types/core.ts";
+  import { skills } from "$lib/stores.ts";
+  import { Skill } from "$lib/types/core.ts";
 
-  type Filter = (s: Person | undefined) => boolean;
-  type OnChange = (old_value: Person | undefined, new_value: Person | undefined) => Person | undefined;
+  type Filter = (s: Skill | undefined) => boolean;
+  type OnChange = (old_value: Skill | undefined, new_value: Skill | undefined) => Skill | undefined;
 
   let open = false;
-  let person: Person | undefined = undefined;
-  let options: Person[] = $employees;
+  let skill: Skill | undefined = undefined;
+  let options: Skill[] = $skills;
   let variant: "default" | "destructive" = "default";
   let icon_variant: "default" | "placeholder" | "plus" = "default";
-  let placeholder: string = "Assign person";
+  let placeholder: string = "Choose a skill";
   let className: string = "";
   let filter: Filter = () => true;
   let onChange: OnChange = (_, new_value) => new_value;
@@ -36,7 +36,7 @@
   }
 
   // noinspection ReservedWordAsName
-  export { person, options, variant, icon_variant, placeholder, onChange, filter, className as class };
+  export { skill, variant, icon_variant, placeholder, options, filter, onChange, className as class };
 </script>
 
 <Popover.Root bind:open let:ids>
@@ -46,32 +46,31 @@
       variant="ghost"
       role="combobox"
       aria-expanded={open}
-      class="w-10 h-10 rounded-full overflow-visible"
+      class="w-6 h-6 rounded-full overflow-visible"
     >
-      <PersonAvatar person={person} variant={variant} icon_variant={icon_variant} placeholder={placeholder} />
+      <SkillBadge skill={skill} variant={variant} icon_variant={icon_variant} placeholder={placeholder} />
     </Button>
   </Popover.Trigger>
-  <Popover.Content class="w-[200] p-0">
+  <Popover.Content class="w-[150] p-0">
     <Command.Root>
       <Command.Input placeholder="Search" />
-      <Command.Empty>No people found</Command.Empty>
+      <Command.Empty>No skills found</Command.Empty>
       <Command.Group>
         {#each filtered_options as option}
           <Command.Item
-            value="{option.name};{option.job_title};{option.uuid}"
+            value="{option.name};{option.uuid}"
             onSelect={() => {
-              onChange(person, option);
-              person = option;
+              skill = onChange(skill, option);
               closeAndFocusTrigger(ids.trigger);
             }}
             class="flex flex-row items-center justify-start gap-2"
           >
-            <PersonAvatar person={option} />
+            <SkillBadge skill={option} />
             {option.name}
             <Check
               class={cn(
                 "ml-auto h-6 w-6",
-                person !== option && "text-transparent"
+                skill !== option && "text-transparent"
               )}
             />
           </Command.Item>
@@ -79,18 +78,17 @@
         <Command.Item
           value="unassigned"
           onSelect={() => {
-              onChange(person, undefined);
-              person = undefined;
+              skill = onChange(skill, undefined);
               closeAndFocusTrigger(ids.trigger);
             }}
           class="flex flex-row items-center justify-start gap-2"
         >
-          <PersonAvatar person={undefined} popoverEnabled={false} />
+          <SkillBadge skill={undefined} popoverEnabled={false} />
           Unassigned
           <Check
             class={cn(
                 "ml-auto h-6 w-6",
-                person !== undefined && "text-transparent"
+                skill !== undefined && "text-transparent"
               )}
           />
         </Command.Item>

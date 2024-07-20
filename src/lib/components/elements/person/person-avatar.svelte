@@ -8,8 +8,9 @@
   let person: Person | undefined = undefined;
   let popoverEnabled: boolean = true;
   let placeholder: string = "Unassigned";
-  let className: string = "";
   let variant: "default" | "destructive" = "default";
+  let icon_variant: "default" | "placeholder" | "plus" = "default";
+  let className: string = "";
 
   // noinspection ReservedWordAsName
   export { person, placeholder, popoverEnabled, variant, className as class };
@@ -19,9 +20,15 @@
   {#if person === undefined}
     <Tooltip.Trigger class={className}>
       <div
-        class="group/avatar relative h-10 w-10 overflow-hidden rounded-full outline-none outline-offset-0 transition-all {variant === 'destructive' ? 'text-destructive hover:outline-destructive bg-red-100' : 'text-muted-foreground hover:outline-accent-foreground bg-muted'}">
-        <UserIcon class="absolute top-1 left-1 h-8 w-8 opacity-100 group-hover/avatar:opacity-0 transition-all" />
-        <PlusIcon class="absolute top-1 left-1 h-8 w-8 opacity-0 group-hover/avatar:opacity-100 transition-all" />
+        class="group/avatar relative h-10 w-10 overflow-hidden rounded-full outline-none outline-offset-0 transition-all {variant === 'destructive' ? 'text-destructive hover:outline-destructive bg-red-100' : 'text-muted-foreground hover:text-accent-foreground hover:outline-accent-foreground bg-muted'}">
+        {#if icon_variant === "default"}
+          <UserIcon class="absolute top-1 left-1 h-8 w-8 opacity-100 group-hover/avatar:opacity-0 transition-all" />
+          <PlusIcon class="absolute top-1 left-1 h-8 w-8 opacity-0 group-hover/avatar:opacity-100 transition-all" />
+        {:else if icon_variant === "placeholder"}
+          <UserIcon class="absolute top-1 left-1 h-8 w-8 opacity-100 transition-all" />
+        {:else if icon_variant === "plus"}
+          <PlusIcon class="absolute top-1 left-1 h-8 w-8 opacity-100 transition-all" />
+        {/if}
       </div>
     </Tooltip.Trigger>
     {#if popoverEnabled}

@@ -8,12 +8,13 @@
   import { cn } from "$lib/utils.js";
   import { tick } from "svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox/index.ts";
-  import Icon, { type IconifyIcon } from "@iconify/svelte";
+  import Icon from "$lib/components/ui/icon/icon.svelte";
+  import type { IconType } from "$lib/types/ui.ts";
 
   let options: ComboboxItem[] = [];
   let open = false;
   let value = "";
-  let icon: string | IconifyIcon | undefined = undefined;
+  let icon: IconType;
   let placeholder = "Select a value";
 
   $: selectedValue =

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { SidebarPosition } from "$lib/components/ui/sidebar/index.ts";
-  import Icon from "@iconify/svelte";
   import { Button } from "$lib/components/ui/button";
+  import { PanelLeftCloseIcon, PanelLeftOpenIcon, PanelRightCloseIcon } from "lucide-svelte";
 
   let isExpanded: boolean = false;
   let position: SidebarPosition;
@@ -19,16 +19,16 @@
     <Button on:click={() => {isExpanded = !isExpanded}} variant="ghost" size="icon_xxl">
       {#if position === SidebarPosition.left}
         {#if isExpanded}
-          <Icon icon="tabler:layout-sidebar-left-collapse-filled" />
+          <PanelLeftCloseIcon />
         {:else }
-          <Icon icon="tabler:layout-sidebar-left-expand-filled" />
-        {/if          }
+          <PanelLeftOpenIcon />
+        {/if  }
       {:else }
         {#if isExpanded}
-          <Icon icon="tabler:layout-sidebar-right-collapse-filled" />
+          <PanelRightCloseIcon />
         {:else }
-          <Icon icon="tabler:layout-sidebar-right-expand-filled" />
-        {/if          }
+          <PanelLeftCloseIcon />
+        {/if  }
       {/if}
     </Button>
 

@@ -1,7 +1,5 @@
 <script lang="ts">
-
   let sticky: boolean = true;
-
   export { sticky };
 </script>
 

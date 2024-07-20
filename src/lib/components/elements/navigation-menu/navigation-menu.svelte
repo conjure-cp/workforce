@@ -3,7 +3,7 @@
   import { Button } from "$lib/components/ui/button";
   import Sidebar from "$lib/components/ui/sidebar/sidebar.svelte";
   import { SidebarPosition } from "$lib/components/ui/sidebar";
-  import Icon from "@iconify/svelte";
+  import Icon from "$lib/components/ui/icon/icon.svelte";
   import { SettingsIcon } from "lucide-svelte";
   import type { Link } from "$lib/types/ui.ts";
   import { base } from "$app/paths";

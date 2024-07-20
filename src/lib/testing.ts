@@ -4,6 +4,8 @@ import { faker } from "@faker-js/faker";
 import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
 import { constraints, employees, locations, tasks, shifts, skills } from "$lib/stores.ts";
 import { get } from "svelte/store";
+import type { IconType } from "$lib/types/ui.ts";
+import Color from "color";
 
 const ICONIFY_ICONS = [
   "mdi:account",
@@ -28,12 +30,15 @@ const ICONIFY_ICONS = [
   "mdi:gift"
 ];
 
-export function generateIcon(): string {
-  return ICONIFY_ICONS[Math.floor(Math.random() * ICONIFY_ICONS.length)];
+export function generateIcon(): IconType {
+  return {
+    icon: ICONIFY_ICONS[Math.floor(Math.random() * ICONIFY_ICONS.length)],
+    color: new Color(faker.color.rgb())
+  };
 }
 
 export function generateSkill(): Skill {
-  return new Skill(faker.hacker.ingverb(), generateIcon());
+  return new Skill(faker.hacker.ingverb(), faker.lorem.sentence(), generateIcon());
 }
 
 export function generateSkills(n: number): Skill[] {

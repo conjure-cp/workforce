@@ -65,7 +65,7 @@
   <main class="w-full h-dvh flex flex-col items-start justify-start overflow-y-scroll">
     <TopBar sticky={true}>
       <svelte:fragment slot="start">
-        <Combobox options={schedules} placeholder="Select schedule..." icon="mdi:calendar" />
+        <Combobox options={schedules} placeholder="Select schedule..." icon={{icon: "mdi:calendar"}} />
       </svelte:fragment>
 
       <svelte:fragment slot="end">

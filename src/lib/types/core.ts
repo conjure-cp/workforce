@@ -3,15 +3,18 @@ import type { Constraint } from "$lib/types/constraints.ts";
 import { constraints } from "$lib/stores";
 import { get } from "svelte/store";
 import { v4 as uuidv4 } from "uuid";
+import type { IconType } from "$lib/types/ui.ts";
 
 export class Skill {
   uuid: string;
   name: string;
-  icon: string;
+  description: string;
+  icon: IconType;
 
-  public constructor(name: string, icon: string) {
+  public constructor(name: string, description: string, icon: IconType) {
     this.uuid = uuidv4();
     this.name = name;
+    this.description = description;
     this.icon = icon;
   }
 }
@@ -20,7 +23,7 @@ export class Task {
   uuid: string;
   name: string;
   description: string;
-  icon: string;
+  icon: IconType;
   min_people: number;
   max_people: number;
   required_skills: Skill[];
@@ -29,7 +32,7 @@ export class Task {
   public constructor(
     name: string,
     description: string,
-    icon: string,
+    icon: IconType,
     min_people: number,
     max_people: number,
     required_skills: Skill[],

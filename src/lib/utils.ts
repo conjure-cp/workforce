@@ -53,8 +53,24 @@ export const flyAndScale = (
   };
 };
 
+/**
+ * Convert the first letter of a string to uppercase
+ * @param s the string to capitalize
+ */
 export function capitalize(s: string) {
   if (s.length === 0) return s;
   if (s.length === 1) return s.toUpperCase();
   return s[0].toUpperCase() + s.slice(1);
+}
+
+/**
+ * Pads an array to a certain length with a value
+ * @param array The array to pad
+ * @param toLength The length to pad the array to
+ * @param value The value to pad the array with
+ */
+export function pad<T>(array: T[], toLength: number, value: T): T[] {
+  if (array.length > toLength) return array.slice(0, toLength);
+  else if (array.length < toLength) return array.concat(Array(toLength - array.length).fill(value));
+  return array;
 }
