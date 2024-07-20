@@ -151,9 +151,15 @@ export function generateConstraintForLocation(loc: Location): Constraint {
     () => {
       return {
         type: ConstraintType.NoTasks,
-        tasks: sampleTasks(faker.number.int({ min: 1, max: 5 })),
-        applies_to: loc,
-        icon: "mdi:clipboard"
+        tasks: sampleTasks(faker.number.int({ min: 1, max: 3 })),
+        applies_to: loc
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoPeople,
+        people: samplePeople(faker.number.int({ min: 1, max: 3 })),
+        applies_to: loc
       };
     }
   ];
@@ -168,9 +174,15 @@ export function generateConstraintForTask(task: Task): Constraint {
     () => {
       return {
         type: ConstraintType.NoLocations,
-        locations: sampleLocations(faker.number.int({ min: 1, max: 5 })),
-        applies_to: task,
-        icon: "mdi:account"
+        locations: sampleLocations(faker.number.int({ min: 1, max: 3 })),
+        applies_to: task
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoPeople,
+        people: samplePeople(faker.number.int({ min: 1, max: 3 })),
+        applies_to: task
       };
     }
   ];
@@ -186,16 +198,21 @@ export function generateConstraintForPerson(person: Person): Constraint {
       return {
         type: ConstraintType.NoLocations,
         locations: sampleLocations(faker.number.int({ min: 1, max: 3 })),
-        applies_to: person,
-        icon: "mdi:map-marker"
+        applies_to: person
       };
     },
     () => {
       return {
         type: ConstraintType.NoTasks,
         tasks: sampleTasks(faker.number.int({ min: 1, max: 3 })),
-        applies_to: person,
-        icon: "mdi:clipboard"
+        applies_to: person
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoPeople,
+        people: samplePeople(faker.number.int({ min: 1, max: 3 })),
+        applies_to: person
       };
     }
   ];

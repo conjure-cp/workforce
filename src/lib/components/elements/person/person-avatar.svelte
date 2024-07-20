@@ -3,7 +3,8 @@
   import type { Person } from "$lib/types/core.ts";
   import * as Tooltip from "$lib/components/ui/tooltip";
   import * as Avatar from "$lib/components/ui/avatar";
-  import { CakeIcon, PlusIcon, UserIcon } from "lucide-svelte";
+  import PersonTooltip from "$lib/components/elements/person/person-tooltip.svelte";
+  import { PlusIcon, UserIcon } from "lucide-svelte";
 
   let person: Person | undefined = undefined;
   let popoverEnabled: boolean = true;
@@ -46,16 +47,7 @@
     </Tooltip.Trigger>
     {#if popoverEnabled}
       <Tooltip.Content>
-        <div class="flex flex-row justify-between items-center">
-          <h3 class="font-semibold">{person.name}</h3>
-          <div class="flex flex-row ml-2 gap-1 items-center">
-            <CakeIcon />
-            {person.age}
-          </div>
-        </div>
-        <div>
-          {person.job_title}
-        </div>
+        <PersonTooltip person={person} />
       </Tooltip.Content>
     {/if}
   {/if}

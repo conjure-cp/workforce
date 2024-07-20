@@ -5,21 +5,26 @@ import { Location, Person, Task } from "$lib/types/core.ts";
 
 export enum ConstraintType {
   NoLocations,
-  NoTasks
+  NoTasks,
+  NoPeople
 }
 
 export type NoLocationsConstraint = {
   type: ConstraintType.NoLocations;
   locations: Location[];
   applies_to: Task | Person;
-  icon: string;
 };
 
 export type NoTasksConstraint = {
   type: ConstraintType.NoTasks;
   tasks: Task[];
   applies_to: Location | Person;
-  icon: string;
 };
 
-export type Constraint = NoLocationsConstraint | NoTasksConstraint;
+export type NoPeopleConstraint = {
+  type: ConstraintType.NoPeople;
+  people: Person[];
+  applies_to: Person | Location | Task;
+};
+
+export type Constraint = NoLocationsConstraint | NoTasksConstraint | NoPeopleConstraint;
