@@ -4,9 +4,9 @@ import { Location, Person, Task } from "$lib/types/core.ts";
 // ToDo: Discuss with Oz & add more constraints
 
 export enum ConstraintType {
-  NoLocations,
-  NoTasks,
-  NoPeople
+  NoLocations = "NoLocations",
+  NoTasks = "NoTasks",
+  NoPeople = "NoPeople"
 }
 
 export type NoLocationsConstraint = {
