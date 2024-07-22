@@ -9,6 +9,7 @@
   let compact: boolean = false;
   let min_people: number;
   let max_people: number;
+  let className: string = "";
 
   $: {
     people = pad(people, max_people, undefined);
@@ -25,11 +26,11 @@
     return "default";
   }
 
-  export { people, compact, min_people, max_people };
+  export { people, compact, min_people, max_people, className as class };
 </script>
 
 {#if compact}
-  <div class="group flex flex-row items-center justify-start flex-wrap">
+  <div class="group flex flex-row items-center justify-start flex-wrap {className}">
     {#each people as person, i}
       <div class="relative transition-all w-4 h-10 hover:z-20 hover:w-5 group-hover:opacity-55 hover:!opacity-100">
         <PersonSelector bind:person={person}
@@ -41,7 +42,7 @@
     {/each}
   </div>
 {:else}
-  <div class="flex flex-row items-center justify-start gap-2 flex-wrap">
+  <div class="flex flex-row items-center justify-start gap-2 flex-wrap {className}">
     {#each people as person, i}
       <PersonSelector bind:person={person}
                       options={options}

@@ -12,14 +12,17 @@
 </script>
 
 
-<div class="group/task-card w-full p-2 flex flex-col gap-2 bg-accent border-0 border-l-4 border-l-accent-foreground">
-  <h3 class="ml-1 font-semibold text-lg inline-flex flex-row justify-start items-center gap-2">
+<div class="group/task-card w-full p-2 flex flex-col bg-accent border-0 border-l-4 border-l-accent-foreground">
+  <h3 class="ml-1 mb-2 font-semibold text-lg inline-flex flex-row justify-start items-center gap-2">
     <Icon icon={task.icon} variant="monochrome" class="text-muted-foreground" />
     {capitalize(task.name)}
   </h3>
 
   {#if !compact}
-    <p class="ml-1 mb-2.5 text-muted-foreground">{task.description}</p>
+    <p class="ml-1 mb-3 text-muted-foreground">{task.description}</p>
+    {#if task.required_skills.length > 0}
+      <SkillsList skills={task.required_skills} compact={false} class="mb-4" />
+    {/if}
   {/if}
 
   <PeopleSelectorList people={task.people} min_people={task.min_people} max_people={task.max_people} />

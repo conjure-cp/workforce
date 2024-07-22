@@ -8,6 +8,7 @@
   let skills: (Skill | undefined)[] = [];
   let n_skills: number | undefined = undefined;
   let compact: boolean = true;
+  let className: string = "";
 
   $: {
     if (n_skills !== undefined) {
@@ -30,11 +31,11 @@
     return "default";
   }
 
-  export { skills, n_skills, compact };
+  export { skills, n_skills, compact, className as class };
 </script>
 
 
-<div class="flex flex-row items-center justify-start gap-2 flex-wrap">
+<div class="flex flex-row items-center justify-start gap-2 flex-wrap {className}">
   {#each skills as skill, i}
     <SkillSelector bind:skill={skill}
                    options={options}

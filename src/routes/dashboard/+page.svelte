@@ -3,9 +3,7 @@
   import PeopleList from "$lib/components/elements/person/people-list.svelte";
   import PeopleSelectorList from "$lib/components/elements/person/people-selector-list.svelte";
   import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
-  import SkillSelector from "$lib/components/elements/skill/skill-selector.svelte";
   import SkillsSelectorList from "$lib/components/elements/skill/skills-selector-list.svelte";
-  import SkillBadge from "$lib/components/elements/skill/skill.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { employees } from "$lib/stores.ts";
   import { Task } from "$lib/types/core.ts";
