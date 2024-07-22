@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { cubicOut } from "svelte/easing";
 import type { TransitionConfig } from "svelte/transition";
+import Color from "color";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -73,4 +74,8 @@ export function pad<T>(array: T[], toLength: number, value: T): T[] {
   if (array.length > toLength) return array.slice(0, toLength);
   else if (array.length < toLength) return array.concat(Array(toLength - array.length).fill(value));
   return array;
+}
+
+export function getTextColour(bg_colour: Color): Color {
+  return bg_colour.isLight() ? Color.rgb(0, 0, 0) : Color.rgb(255, 255, 255);
 }

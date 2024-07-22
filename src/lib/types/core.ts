@@ -1,6 +1,6 @@
 import { ZonedDateTime } from "@internationalized/date";
 import type { Constraint } from "$lib/types/constraints.ts";
-import { constraints } from "$lib/stores";
+import { constraints, employees, tasks } from "$lib/stores";
 import { get } from "svelte/store";
 import { v4 as uuidv4 } from "uuid";
 import type { IconType } from "$lib/types/ui.ts";
@@ -16,6 +16,16 @@ export class Skill {
     this.name = name;
     this.description = description;
     this.icon = icon;
+  }
+
+  public get people(): Person[] {
+    const employees_list = get(employees);
+    return employees_list.filter((p) => p.skills.includes(this));
+  }
+
+  public get tasks(): Task[] {
+    const tasks_list = get(tasks);
+    return tasks_list.filter((t) => t.required_skills.includes(this));
   }
 }
 

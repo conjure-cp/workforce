@@ -4,14 +4,15 @@
 
   let skills: Skill[] = [];
   let placeholder: string = "No skills";
+  let compact: boolean = true;
 
-  export { skills };
+  export { skills, compact };
 </script>
 
 {#if skills.length > 0}
   <div class="flex flex-row items-center justify-start gap-2 flex-wrap">
     {#each skills as skill}
-      <SkillBadge skill={skill} />
+      <SkillBadge {skill} {compact} />
     {/each}
   </div>
 {:else}

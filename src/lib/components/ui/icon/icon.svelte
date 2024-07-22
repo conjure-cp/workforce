@@ -4,9 +4,11 @@
 
   let icon: IconType;
   let className: string = "";
+  let variant: "color" | "monochrome" = "color";
 
   // noinspection ReservedWordAsName
-  export { icon, className as class };
+  export { icon, variant, className as class };
 </script>
 
-<Icon icon={icon.icon} class={className} style={icon.color ? `color: ${icon.color.hex()}` : ""} />
+<Icon icon={icon.icon} class={className}
+      style={(icon.color && variant !== "monochrome") ? `color: ${icon.color.hex()}` : ""} />

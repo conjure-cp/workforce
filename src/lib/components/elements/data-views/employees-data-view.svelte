@@ -7,7 +7,6 @@
   import { employees } from "$lib/stores.ts";
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
-  import { Button } from "$lib/components/ui/button";
 
   let data: ReadOrWritable<Person[]> = employees;
   let filterValue: Writable<string> = writable("");

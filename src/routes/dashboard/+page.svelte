@@ -5,6 +5,7 @@
   import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
   import SkillSelector from "$lib/components/elements/skill/skill-selector.svelte";
   import SkillsSelectorList from "$lib/components/elements/skill/skills-selector-list.svelte";
+  import SkillBadge from "$lib/components/elements/skill/skill.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { employees } from "$lib/stores.ts";
   import { Task } from "$lib/types/core.ts";
@@ -43,9 +44,11 @@
     <section class="w-full flex flex-col gap-3">
       <h2 class="text-xl">Skills</h2>
       <SkillsList skills={$skills} />
-      <SkillSelector />
+      <SkillsList skills={$skills} compact={false} />
       <SkillsSelectorList />
       <SkillsSelectorList n_skills={3} />
+      <SkillsSelectorList compact={false} />
+      <SkillsSelectorList n_skills={3} compact={false} />
     </section>
   </main>
 </div>

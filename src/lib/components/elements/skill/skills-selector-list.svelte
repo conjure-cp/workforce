@@ -7,6 +7,7 @@
   let options: Skill[] = $skillsStore;
   let skills: (Skill | undefined)[] = [];
   let n_skills: number | undefined = undefined;
+  let compact: boolean = true;
 
   $: {
     if (n_skills !== undefined) {
@@ -29,7 +30,7 @@
     return "default";
   }
 
-  export { skills, n_skills };
+  export { skills, n_skills, compact };
 </script>
 
 
@@ -38,6 +39,7 @@
     <SkillSelector bind:skill={skill}
                    options={options}
                    variant={chooseVariant(skill, i)}
+                   compact={compact}
                    filter={(s) => (!skills.includes(s) || (s === undefined) || (s === skill))} />
   {/each}
   {#if n_skills === undefined}
@@ -47,6 +49,7 @@
                      skills = [...skills, s];
                      return undefined;
                    }}
+                   compact={compact}
                    icon_variant="plus"
                    filter={(s) => !skills.includes(s) && s !== undefined} />
   {/if}

@@ -19,6 +19,7 @@
   let variant: "default" | "destructive" = "default";
   let icon_variant: "default" | "placeholder" | "plus" = "default";
   let placeholder: string = "Choose a skill";
+  let compact: boolean = true;
   let className: string = "";
   let filter: Filter = () => true;
   let onChange: OnChange = (_, new_value) => new_value;
@@ -36,7 +37,7 @@
   }
 
   // noinspection ReservedWordAsName
-  export { skill, variant, icon_variant, placeholder, options, filter, onChange, className as class };
+  export { skill, variant, icon_variant, compact, placeholder, options, filter, onChange, className as class };
 </script>
 
 <Popover.Root bind:open let:ids>
@@ -46,9 +47,9 @@
       variant="ghost"
       role="combobox"
       aria-expanded={open}
-      class="w-6 h-6 rounded-full overflow-visible"
+      class="w-fit h-fit !p-0 rounded-full overflow-visible"
     >
-      <SkillBadge skill={skill} variant={variant} icon_variant={icon_variant} placeholder={placeholder} />
+      <SkillBadge {skill} {variant} {icon_variant} {placeholder} {compact} />
     </Button>
   </Popover.Trigger>
   <Popover.Content class="w-[150] p-0">
@@ -65,7 +66,7 @@
             }}
             class="flex flex-row items-center justify-start gap-2"
           >
-            <SkillBadge skill={option} />
+            <SkillBadge skill={option} compact={true} />
             {option.name}
             <Check
               class={cn(
