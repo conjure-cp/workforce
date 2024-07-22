@@ -51,7 +51,7 @@ export function generatePerson(): Person {
     faker.person.jobTitle(),
     faker.image.avatar(),
     faker.date.birthdate(),
-    generateSkills(faker.number.int({ min: 1, max: 5 }))
+    sampleSkills(faker.number.int({ min: 1, max: 3 }))
   );
 }
 
