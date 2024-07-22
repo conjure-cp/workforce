@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ConstraintBadge from "$lib/components/elements/constraint/constraint.svelte";
+  import ConstraintBadge from "$lib/components/elements/constraint/constraint-badge.svelte";
   import type { Constraint } from "$lib/types/constraints.ts";
 
   let constraints: Constraint[] = [];

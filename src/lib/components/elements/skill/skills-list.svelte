@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Skill } from "$lib/types/core.ts";
-  import SkillBadge from "$lib/components/elements/skill/skill.svelte";
+  import SkillBadge from "$lib/components/elements/skill/skill-badge.svelte";
 
   let skills: Skill[] = [];
   let placeholder: string = "No skills";

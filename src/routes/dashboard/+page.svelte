@@ -4,8 +4,9 @@
   import PeopleSelectorList from "$lib/components/elements/person/people-selector-list.svelte";
   import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
   import SkillsSelectorList from "$lib/components/elements/skill/skills-selector-list.svelte";
+  import TasksList from "$lib/components/elements/task/tasks-list.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
-  import { employees } from "$lib/stores.ts";
+  import { employees, tasks } from "$lib/stores.ts";
   import { Task } from "$lib/types/core.ts";
   import { skills } from "$lib/stores.ts";
 
@@ -17,7 +18,7 @@
   const task: Task = new Task("Task 1", "Hello world!", { icon: "mdi:calendar" }, 2, 4, [], []);
 </script>
 
-<div class="w-full bg-gray-50">
+<div class="w-full h-dvh bg-gray-50 overflow-y-scroll">
   <main class="w-full flex flex-col gap-6 pl-6 pt-4">
     <h1 class="text-2xl font-semibold">Components playground</h1>
     <section class="w-full flex flex-col gap-3">
@@ -47,6 +48,11 @@
       <SkillsSelectorList n_skills={3} />
       <SkillsSelectorList compact={false} />
       <SkillsSelectorList n_skills={3} compact={false} />
+    </section>
+    <section class="w-full flex flex-col gap-3">
+      <h2 class="text-xl">Task lists</h2>
+      <TasksList tasks={$tasks} />
+      <TasksList tasks={$tasks} compact={false} />
     </section>
   </main>
 </div>

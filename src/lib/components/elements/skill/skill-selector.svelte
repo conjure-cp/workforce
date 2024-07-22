@@ -4,7 +4,7 @@
   import * as Command from "$lib/components/ui/command";
   import * as Popover from "$lib/components/ui/popover";
   import { Button } from "$lib/components/ui/button";
-  import SkillBadge from "$lib/components/elements/skill/skill.svelte";
+  import SkillBadge from "$lib/components/elements/skill/skill-badge.svelte";
   import { cn } from "$lib/utils.js";
   import { tick } from "svelte";
   import { skills } from "$lib/stores.ts";
