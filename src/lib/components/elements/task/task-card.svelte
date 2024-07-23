@@ -3,7 +3,6 @@
   import PeopleSelectorList from "$lib/components/elements/person/people-selector-list.svelte";
   import { capitalize } from "$lib/utils.ts";
   import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
-  import Icon from "$lib/components/ui/icon/icon.svelte";
 
   let task: Task;
   let compact: boolean = false;
