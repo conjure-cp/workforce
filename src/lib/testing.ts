@@ -6,6 +6,7 @@ import { constraints, employees, locations, tasks, shifts, skills } from "$lib/s
 import { get } from "svelte/store";
 import type { IconType } from "$lib/types/ui.ts";
 import Color from "color";
+import { sample, sampleOne } from "$lib/utils.ts";
 
 const ICONIFY_ICONS = [
   "mdi:account",
@@ -99,51 +100,51 @@ export function generateShifts(n: number): Shift[] {
 }
 
 export function samplePerson(): Person {
-  return get(employees)[faker.number.int({ min: 0, max: get(employees).length - 1 })];
+  return sampleOne(get(employees));
 }
 
 export function sampleTask(): Task {
-  return get(tasks)[faker.number.int({ min: 0, max: get(tasks).length - 1 })];
+  return sampleOne(get(tasks));
 }
 
 export function sampleLocation(): Location {
-  return get(locations)[faker.number.int({ min: 0, max: get(locations).length - 1 })];
+  return sampleOne(get(locations));
 }
 
 export function sampleSkill(): Skill {
-  return get(skills)[faker.number.int({ min: 0, max: get(skills).length - 1 })];
+  return sampleOne(get(skills));
 }
 
 export function sampleConstraint(): Constraint {
-  return get(constraints)[faker.number.int({ min: 0, max: get(constraints).length - 1 })];
+  return sampleOne(get(constraints));
 }
 
 export function sampleShift(): Shift {
-  return get(shifts)[faker.number.int({ min: 0, max: get(shifts).length - 1 })];
+  return sampleOne(get(shifts));
 }
 
-export function samplePeople(n: number): Person[] {
-  return Array.from({ length: n }, samplePerson);
+export function samplePeople(n: number, unique: boolean = true): Person[] {
+  return sample(get(employees), n, unique);
 }
 
-export function sampleTasks(n: number): Task[] {
-  return Array.from({ length: n }, sampleTask);
+export function sampleTasks(n: number, unique: boolean = true): Task[] {
+  return sample(get(tasks), n, unique);
 }
 
-export function sampleLocations(n: number): Location[] {
-  return Array.from({ length: n }, sampleLocation);
+export function sampleLocations(n: number, unique: boolean = true): Location[] {
+  return sample(get(locations), n, unique);
 }
 
-export function sampleConstraints(n: number): Constraint[] {
-  return Array.from({ length: n }, sampleConstraint);
+export function sampleConstraints(n: number, unique: boolean = true): Constraint[] {
+  return sample(get(constraints), n, unique);
 }
 
-export function sampleShifts(n: number): Shift[] {
-  return Array.from({ length: n }, sampleShift);
+export function sampleShifts(n: number, unique: boolean = true): Shift[] {
+  return sample(get(shifts), n, unique);
 }
 
-export function sampleSkills(n: number): Skill[] {
-  return Array.from({ length: n }, sampleSkill);
+export function sampleSkills(n: number, unique: boolean = true): Skill[] {
+  return sample(get(skills), n, unique);
 }
 
 export function generateConstraintForLocation(loc: Location): Constraint {

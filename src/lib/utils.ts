@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { cubicOut } from "svelte/easing";
 import type { TransitionConfig } from "svelte/transition";
 import Color from "color";
+import { faker } from "@faker-js/faker";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -78,4 +79,24 @@ export function pad<T>(array: T[], toLength: number, value: T): T[] {
 
 export function getTextColour(bg_colour: Color): Color {
   return bg_colour.isLight() ? Color.rgb(0, 0, 0) : Color.rgb(255, 255, 255);
+}
+
+export function sampleOne<T>(arr: T[]): T {
+  return arr[faker.number.int({ min: 0, max: arr.length - 1 })];
+}
+
+export function sample<T>(arr: T[], n: number, unique: boolean = true): T[] {
+  const ans: T[] = [];
+
+  for (let i = 0; i < n; i++) {
+    let el: T = sampleOne(arr);
+
+    while (!unique || !ans.includes(el)) {
+      el = sampleOne(arr);
+    }
+
+    ans.push(el);
+  }
+
+  return ans;
 }
