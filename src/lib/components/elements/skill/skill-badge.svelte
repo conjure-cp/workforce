@@ -71,7 +71,7 @@
           class="flex flex-row items-center justify-start w-max h-fit gap-2 pr-3 px-2 py-1 rounded-full outline-none outline-offset-0 transition-all hover:outline-accent-foreground {monochrome && 'bg-accent text-accent-foreground'}"
           style={(skill.icon.color && !monochrome) ? `background-color: ${color_hex}; color: ${text_color_hex}` : ""}>
           <Icon icon={skill.icon} variant="monochrome"
-                class="h-5 w-5 rounded-full bg-transparent" />
+                class="h-5 w-5 rounded-full bg-transparent opacity-70" />
           {capitalize(skill.name)}
         </div>
       {/if}

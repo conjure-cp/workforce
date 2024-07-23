@@ -88,14 +88,15 @@ export function sampleOne<T>(arr: T[]): T {
 export function sample<T>(arr: T[], n: number, unique: boolean = true): T[] {
   const ans: T[] = [];
 
+  if (n >= arr.length) return arr;
+
   for (let i = 0; i < n; i++) {
-    let el: T = sampleOne(arr);
-
-    while (!unique || !ans.includes(el)) {
-      el = sampleOne(arr);
+    if (unique) {
+      const remaining: T[] = arr.filter((e) => !ans.includes(e));
+      ans.push(sampleOne(remaining));
+    } else {
+      ans.push(sampleOne(arr));
     }
-
-    ans.push(el);
   }
 
   return ans;

@@ -14,7 +14,6 @@
 
 <div class="group/task-card w-full p-2 flex flex-col bg-accent border-0 border-l-4 border-l-accent-foreground">
   <h3 class="ml-1 mb-2 font-semibold text-lg inline-flex flex-row justify-start items-center gap-2">
-    <Icon icon={task.icon} variant="monochrome" class="text-muted-foreground" />
     {capitalize(task.name)}
   </h3>
 
