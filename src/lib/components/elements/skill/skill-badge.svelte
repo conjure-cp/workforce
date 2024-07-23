@@ -13,12 +13,13 @@
   let variant: "default" | "destructive" = "default";
   let icon_variant: "default" | "placeholder" | "plus" = "default";
   let compact: boolean = true;
+  let monochrome: boolean = false;
 
   $: color_hex = skill?.icon.color ? skill.icon.color.hex() : "";
   $: text_color_hex = skill?.icon.color ? getTextColour(skill.icon.color).hex() : "";
 
   // noinspection ReservedWordAsName
-  export { skill, variant, icon_variant, compact, popoverEnabled, placeholder, className as class };
+  export { skill, variant, icon_variant, compact, monochrome, popoverEnabled, placeholder, className as class };
 </script>
 
 <Tooltip.Root>
@@ -63,12 +64,12 @@
   {:else}
     <Tooltip.Trigger class="w-fit {className}">
       {#if compact}
-        <Icon icon={skill.icon}
-              class="h-6 w-6 rounded-full bg-accent outline-none hover:outline-accent-foreground transition-all" />
+        <Icon icon={skill.icon} variant={monochrome ? "monochrome" : "color"}
+              class="h-6 w-6 rounded-full bg-accent outline-none hover:outline-accent-foreground transition-all {monochrome && 'bg-accent text-accent-foreground'}" />
       {:else}
         <div
-          class="flex flex-row items-center justify-start w-max h-fit gap-2 pr-3 px-2 py-1 rounded-full outline-none outline-offset-0 transition-all hover:outline-accent-foreground"
-          style={skill.icon.color ? `background-color: ${color_hex}; color: ${text_color_hex}` : ""}>
+          class="flex flex-row items-center justify-start w-max h-fit gap-2 pr-3 px-2 py-1 rounded-full outline-none outline-offset-0 transition-all hover:outline-accent-foreground {monochrome && 'bg-accent text-accent-foreground'}"
+          style={(skill.icon.color && !monochrome) ? `background-color: ${color_hex}; color: ${text_color_hex}` : ""}>
           <Icon icon={skill.icon} variant="monochrome"
                 class="h-5 w-5 rounded-full bg-transparent" />
           {capitalize(skill.name)}
