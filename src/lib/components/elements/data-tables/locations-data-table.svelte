@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { type Person, Skill, type Task } from "$lib/types/core.ts";
-  import { tasks } from "$lib/stores.ts";
+  import { Location } from "$lib/types/core.ts";
+  import { locations } from "$lib/stores.ts";
   import { createRender, createTable, type ReadOrWritable } from "svelte-headless-table";
-  import TaskBadge from "$lib/components/elements/task/task-badge.svelte";
-  import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
+  import LocationBadge from "$lib/components/elements/location/location-badge.svelte";
   import DataTable from "$lib/components/elements/data-tables/core/data-table.svelte";
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
@@ -11,7 +10,7 @@
   import ConstraintsList from "$lib/components/elements/constraint/constraints-list.svelte";
   import type { Constraint } from "$lib/types/constraints.ts";
 
-  let data: ReadOrWritable<Task[]> = tasks;
+  let data: ReadOrWritable<Location[]> = locations;
   let filterValue: Writable<string> = writable("");
   let sortKeys: WritableSortKeys = createSortKeysStore([]);
   let className: string = "";
@@ -19,10 +18,10 @@
   const table = createTable(data);
   const columns = table.createColumns([
     table.column({
-      id: "icon",
-      accessor: (row: Task) => row,
-      header: "Icon",
-      cell: (data) => createRender(TaskBadge, { task: data.value }),
+      id: "image",
+      accessor: (row: Location) => row,
+      header: "Image",
+      cell: (data) => createRender(LocationBadge, { location: data.value }),
       plugins: {
         filter: {
           disable: true
@@ -39,27 +38,13 @@
       cell: ({ value }) => capitalize(value)
     }),
     table.column({
-      id: "description",
-      accessor: "description",
-      header: "Description"
-    }),
-    table.column({
-      id: "required_skills",
-      accessor: (row: Task) => row.required_skills,
-      header: "Required skills",
-      cell: (data) => createRender(SkillsList, { skills: data.value, compact: true }),
-      plugins: {
-        filter: {
-          getFilterValue: (value: Skill[]) => value.map((skill) => skill.name).join(" ")
-        },
-        sort: {
-          getSortValue: (value: Skill[]) => value.map((skill) => skill.name).join(" ")
-        }
-      }
+      id: "address",
+      accessor: "address",
+      header: "Address"
     }),
     table.column({
       id: "constraints",
-      accessor: (row: Task) => row.constraints,
+      accessor: (row: Location) => row.constraints,
       header: "Constraints",
       cell: (data) => createRender(ConstraintsList, { constraints: data.value }),
       plugins: {

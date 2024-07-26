@@ -64,15 +64,21 @@ export class Task {
   }
 }
 
+export type LngLat = [number, number];
+
 export class Location {
   uuid: string;
   name: string;
+  address: string;
   image_url: string;
+  coordinates: LngLat;
 
-  public constructor(name: string, image_url: string) {
+  public constructor(name: string, full_address: string, image_url: string, coordinates: LngLat) {
     this.uuid = uuidv4();
     this.name = name;
+    this.address = full_address;
     this.image_url = image_url;
+    this.coordinates = coordinates;
   }
 
   public get constraints(): Constraint[] {

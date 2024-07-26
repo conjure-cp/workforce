@@ -4,6 +4,7 @@ import { cubicOut } from "svelte/easing";
 import type { TransitionConfig } from "svelte/transition";
 import Color from "color";
 import { faker } from "@faker-js/faker";
+import type { LngLat } from "$lib/types/core.ts";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -100,4 +101,28 @@ export function sample<T>(arr: T[], n: number, unique: boolean = true): T[] {
   }
 
   return ans;
+}
+
+export function findBoundingBox(
+  coords: LngLat[],
+  padding: number = 0.01
+): [LngLat, LngLat] | undefined {
+  if (coords.length === 0) return undefined;
+
+  let minLng = coords[0][0];
+  let maxLng = coords[0][0];
+  let minLat = coords[0][1];
+  let maxLat = coords[0][1];
+
+  for (const [lng, lat] of coords) {
+    if (lng < minLng) minLng = lng;
+    if (lng > maxLng) maxLng = lng;
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
+  }
+
+  const topLeft: LngLat = [minLng - padding, maxLat + padding];
+  const bottomRight: LngLat = [maxLng + padding, minLat - padding];
+
+  return [topLeft, bottomRight];
 }

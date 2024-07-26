@@ -11,21 +11,24 @@
   let data: ReadOrWritable<Task[]> = tasks;
   let filterValue: Writable<string> = writable("");
   let sortKeys: WritableSortKeys = createSortKeysStore([]);
+  let className: string = "";
 
-  export { data };
+  export { data, className as class };
 </script>
 
-<TopBar sticky={true}>
-  <svelte:fragment slot="start">
-    <slot name="start" />
-  </svelte:fragment>
+<div class="h-full w-full flex flex-col items-start justify-start overflow-y-scroll {className}">
+  <TopBar sticky={true}>
+    <svelte:fragment slot="start">
+      <slot name="start" />
+    </svelte:fragment>
 
-  <svelte:fragment slot="middle">
-    <slot name="middle" />
-  </svelte:fragment>
+    <svelte:fragment slot="middle">
+      <slot name="middle" />
+    </svelte:fragment>
 
-  <svelte:fragment slot="end">
-    <Search onInput={(s) => filterValue.set(s)} />
-  </svelte:fragment>
-</TopBar>
-<TasksDataTable {data} bind:filterValue bind:sortKeys class="w-full" />
+    <svelte:fragment slot="end">
+      <Search onInput={(s) => filterValue.set(s)} />
+    </svelte:fragment>
+  </TopBar>
+  <TasksDataTable {data} bind:filterValue bind:sortKeys class="w-full" />
+</div>

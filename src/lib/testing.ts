@@ -6,7 +6,7 @@ import { constraints, employees, locations, tasks, shifts, skills } from "$lib/s
 import { get } from "svelte/store";
 import type { IconType } from "$lib/types/ui.ts";
 import Color from "color";
-import { sample, sampleOne } from "$lib/utils.ts";
+import { capitalize, sample, sampleOne } from "$lib/utils.ts";
 
 const ICONIFY_ICONS = [
   "mdi:account",
@@ -30,6 +30,32 @@ const ICONIFY_ICONS = [
   "mdi:folder",
   "mdi:gift"
 ];
+
+const LOCATION_WORDS = [
+  "Office",
+  "Warehouse",
+  "Store",
+  "Restaurant",
+  "Factory",
+  "Shop",
+  "Ward",
+  "Unit",
+  "Department",
+  "Room",
+  "Lab",
+  "Studio",
+  "Lecture Hall",
+  "Clinic"
+];
+
+const LOCATION_SUFFIX_GENERATORS: (() => string)[] = [
+  () => sampleOne(["A", "B", "C", "D", "E", "F"]),
+  () => faker.number.int({ min: 1, max: 100 }).toString()
+];
+
+export function generateLocationName(): string {
+  return `${sampleOne(LOCATION_WORDS)} ${sampleOne(LOCATION_SUFFIX_GENERATORS)()}`;
+}
 
 export function generateIcon(): IconType {
   return {
@@ -77,7 +103,16 @@ export function generateTasks(n: number): Task[] {
 }
 
 export function generateLocation(): Location {
-  return new Location(faker.location.streetAddress(), faker.image.url());
+  return new Location(
+    generateLocationName(),
+    faker.location.streetAddress(),
+    faker.image.url(),
+    faker.location.nearbyGPSCoordinate({
+      origin: [-2.799, 56.34039],
+      radius: 5,
+      isMetric: true
+    })
+  );
 }
 
 export function generateLocations(n: number): Location[] {
