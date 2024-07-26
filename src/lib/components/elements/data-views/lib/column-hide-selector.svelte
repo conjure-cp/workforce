@@ -42,7 +42,8 @@
 
   <DropdownMenu.Content>
     {#each flatColumns as col}
-      <DropdownMenu.CheckboxItem bind:checked={hideForId[col.id]}>
+      <DropdownMenu.CheckboxItem bind:checked={hideForId[col.id]}
+                                 class="{hideForId[col.id] ? 'line-through text-muted-foreground' : ''}">
         {col.header}
       </DropdownMenu.CheckboxItem>
     {/each}
