@@ -7,11 +7,13 @@
     createTable, Subscribe, Render
   } from "svelte-headless-table";
   import {
-    addPagination,
+    addHiddenColumns,
+    addPagination, addSelectedRows,
     addSortBy,
     addTableFilter,
     type AnyPlugins,
-    type PaginationConfig, type SortByConfig, type SortKey
+    type PaginationConfig,
+    type SortByConfig
   } from "svelte-headless-table/plugins";
   import { Button } from "$lib/components/ui/button";
   import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-svelte";
@@ -23,27 +25,38 @@
   let sortByConfig: SortByConfig | undefined = undefined;
   let className: string = "";
   let table = createTable(data, {
-    page: addPagination(paginationConfig), sort: addSortBy(sortByConfig), filter: addTableFilter({
+    page: addPagination(paginationConfig),
+    sort: addSortBy(sortByConfig),
+    filter: addTableFilter({
       fn: ({ filterValue, value }) => {
-        console.log("Filtering: ", `\n\tvalue = \'${value}\'\n\tfilterValue = \'${filterValue}\'`);
         return value.toLowerCase().includes(filterValue.toLowerCase());
       }
-    })
+    }),
+    hide: addHiddenColumns(),
+    select: addSelectedRows()
   });
 
   const {
-    visibleColumns,
     headerRows,
     pageRows,
     tableAttrs,
     tableBodyAttrs,
-    pluginStates
+    pluginStates,
+    flatColumns
   } = table.createViewModel(columns);
   const { pageIndex, hasPreviousPage, hasNextPage } = pluginStates.page;
   const { filterValue } = pluginStates.filter;
   const { sortKeys } = pluginStates.sort;
+  const { hiddenColumnIds } = pluginStates.hide;
+  const { selectedDataIds } = pluginStates.select;
 
-  export { data, columns, filterValue, sortKeys, className as class };
+  let hideForId: { [key: string]: boolean } = {};
+
+  $: $hiddenColumnIds = Object.entries(hideForId)
+    .filter(([, hide]) => hide)
+    .map(([id]) => id);
+
+  export { data, columns, filterValue, sortKeys, hideForId, flatColumns, className as class };
 </script>
 
 <div class={className}>

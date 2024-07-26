@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Person } from "$lib/types/core.ts";
   import { CakeIcon } from "lucide-svelte";
+  import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
 
   let person: Person;
 
@@ -14,6 +15,6 @@
     {person.age}
   </div>
 </div>
-<div>
+<p class="text-muted-foreground">
   {person.job_title}
-</div>
+</p>

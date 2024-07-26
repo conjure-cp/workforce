@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Location } from "$lib/types/core.ts";
   import { locations } from "$lib/stores.ts";
-  import { createRender, createTable, type ReadOrWritable } from "svelte-headless-table";
+  import { createRender, createTable, FlatColumn, type ReadOrWritable } from "svelte-headless-table";
   import LocationBadge from "$lib/components/elements/location/location-badge.svelte";
   import DataTable from "$lib/components/elements/data-tables/core/data-table.svelte";
   import { writable, type Writable } from "svelte/store";
@@ -9,10 +9,13 @@
   import { capitalize } from "$lib/utils.ts";
   import ConstraintsList from "$lib/components/elements/constraint/constraints-list.svelte";
   import type { Constraint } from "$lib/types/constraints.ts";
+  import type { AnyPlugins } from "svelte-headless-table/dist/plugins";
 
   let data: ReadOrWritable<Location[]> = locations;
   let filterValue: Writable<string> = writable("");
   let sortKeys: WritableSortKeys = createSortKeysStore([]);
+  let hideForId: { [key: string]: boolean } = {};
+  let flatColumns: FlatColumn<any, AnyPlugins, string>[];
   let className: string = "";
 
   const table = createTable(data);
@@ -58,7 +61,7 @@
     })
   ]);
 
-  export { data, filterValue, sortKeys, className as class };
+  export { data, filterValue, sortKeys, hideForId, flatColumns, className as class };
 </script>
 
-<DataTable {data} {columns} bind:filterValue bind:sortKeys class={className} />
+<DataTable {data} {columns} bind:filterValue bind:sortKeys bind:hideForId bind:flatColumns class={className} />

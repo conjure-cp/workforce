@@ -80,8 +80,6 @@
       <Tooltip.Content class="max-w-[250px] overflow-visible">
         <h3 class="font-semibold mb-1">{capitalize(task.name)}</h3>
         <p class="text-muted-foreground">{task.description}</p>
-        <h4 class="text-sm mt-2 mb-1">Required skills:</h4>
-        <SkillsList skills={task.required_skills} compact={true} />
       </Tooltip.Content>
     {/if}
   {/if}

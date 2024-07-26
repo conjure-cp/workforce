@@ -1,5 +1,7 @@
 <script lang="ts">
   import EmployeesDataView from "$lib/components/elements/data-views/employees-data-view.svelte";
+  import { SidebarPosition } from "$lib/components/ui/sidebar";
+  import Sidebar from "$lib/components/ui/sidebar/sidebar.svelte";
 </script>
 
 <div class="bg-gray-50 w-full">
@@ -7,3 +9,6 @@
     <EmployeesDataView />
   </main>
 </div>
+
+<Sidebar position={SidebarPosition.right}>
+</Sidebar>

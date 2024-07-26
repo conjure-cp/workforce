@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Person, Skill, type Task } from "$lib/types/core.ts";
   import { skills } from "$lib/stores.ts";
-  import { createRender, createTable, type ReadOrWritable } from "svelte-headless-table";
+  import { createRender, createTable, FlatColumn, type ReadOrWritable } from "svelte-headless-table";
   import SkillBadge from "$lib/components/elements/skill/skill-badge.svelte";
   import TasksList from "$lib/components/elements/task/tasks-list.svelte";
   import PeopleList from "$lib/components/elements/person/people-list.svelte";
@@ -9,10 +9,13 @@
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
   import { capitalize } from "$lib/utils.ts";
+  import type { AnyPlugins } from "svelte-headless-table/dist/plugins";
 
   let data: ReadOrWritable<Skill[]> = skills;
   let filterValue: Writable<string> = writable("");
   let sortKeys: WritableSortKeys = createSortKeysStore([]);
+  let hideForId: { [key: string]: boolean } = {};
+  let flatColumns: FlatColumn<any, AnyPlugins, string>[];
   let className: string = "";
 
   const table = createTable(data);
@@ -72,7 +75,7 @@
     })
   ]);
 
-  export { data, filterValue, sortKeys, className as class };
+  export { data, filterValue, sortKeys, hideForId, flatColumns, className as class };
 </script>
 
-<DataTable {data} {columns} bind:filterValue bind:sortKeys class={className} />
+<DataTable {data} {columns} bind:filterValue bind:sortKeys bind:hideForId bind:flatColumns class={className} />
