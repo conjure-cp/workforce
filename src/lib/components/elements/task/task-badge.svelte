@@ -4,7 +4,6 @@
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { ClipboardIcon, PlusIcon } from "lucide-svelte";
   import Icon from "$lib/components/ui/icon/icon.svelte";
-  import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
   import { capitalize, getTextColour } from "$lib/utils.js";
 
   let task: Task | undefined;

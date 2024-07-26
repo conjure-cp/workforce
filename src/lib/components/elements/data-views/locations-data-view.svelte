@@ -14,7 +14,7 @@
   let data: ReadOrWritable<Location[]> = locations;
   let filterValue: Writable<string> = writable("");
   let sortKeys: WritableSortKeys = createSortKeysStore([]);
-  let flatColumns: FlatColumn<any, AnyPlugins, string>[];
+  let flatColumns: FlatColumn<Location, AnyPlugins, string>[];
   let hideForId: { [key: string]: boolean } = {};
   let className: string = "";
 

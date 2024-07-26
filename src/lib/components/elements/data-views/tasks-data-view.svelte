@@ -13,7 +13,7 @@
   let data: ReadOrWritable<Task[]> = tasks;
   let filterValue: Writable<string> = writable("");
   let sortKeys: WritableSortKeys = createSortKeysStore([]);
-  let flatColumns: FlatColumn<any, AnyPlugins, string>[];
+  let flatColumns: FlatColumn<Task, AnyPlugins, string>[];
   let hideForId: { [key: string]: boolean } = {};
   let className: string = "";
 

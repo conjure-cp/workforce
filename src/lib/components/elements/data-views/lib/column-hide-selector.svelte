@@ -1,5 +1,8 @@
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
+  // We need to allow explicit any here because of the way the svelte-headless-table library is written
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
+  
   import { EyeOffIcon } from "lucide-svelte";
   import { Button } from "$lib/components/ui/button";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";

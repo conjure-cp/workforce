@@ -1,33 +1,38 @@
+<!--suppress ES6UnusedImports -->
 <script lang="ts">
-  // noinspection ES6UnusedImports
+  // We need to allow explicit any here because of the way the svelte-headless-table library is written
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
+
   import * as Table from "$lib/components/ui/table";
   import {
     type ReadOrWritable,
-    Column,
-    createTable, Subscribe, Render
+    createTable,
+    Subscribe,
+    Render
   } from "svelte-headless-table";
   import {
     addHiddenColumns,
     addPagination, addSelectedRows,
     addSortBy,
     addTableFilter,
-    type AnyPlugins,
     type PaginationConfig,
     type SortByConfig
   } from "svelte-headless-table/plugins";
   import { Button } from "$lib/components/ui/button";
   import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-svelte";
   import { cn } from "$lib/utils.ts";
+  import type { ColumnInitializer } from "$lib/components/elements/data-tables/core/index.ts";
+
 
   let data: ReadOrWritable<any[]>;
-  let columns: Column<any, AnyPlugins>[];
+  let columnInitializers: ColumnInitializer[] = [];
   let paginationConfig: PaginationConfig | undefined = undefined;
   let sortByConfig: SortByConfig | undefined = undefined;
   let className: string = "";
   let table = createTable(data, {
     page: addPagination(paginationConfig),
     sort: addSortBy(sortByConfig),
-    filter: addTableFilter({
+    tableFilter: addTableFilter({
       fn: ({ filterValue, value }) => {
         return value.toLowerCase().includes(filterValue.toLowerCase());
       }
@@ -36,6 +41,7 @@
     select: addSelectedRows()
   });
 
+  const columns = table.createColumns(columnInitializers.map((col) => table.column(col)));
   const {
     headerRows,
     pageRows,
@@ -45,18 +51,26 @@
     flatColumns
   } = table.createViewModel(columns);
   const { pageIndex, hasPreviousPage, hasNextPage } = pluginStates.page;
-  const { filterValue } = pluginStates.filter;
+  const { filterValue } = pluginStates.tableFilter;
   const { sortKeys } = pluginStates.sort;
   const { hiddenColumnIds } = pluginStates.hide;
   const { selectedDataIds } = pluginStates.select;
-
   let hideForId: { [key: string]: boolean } = {};
 
   $: $hiddenColumnIds = Object.entries(hideForId)
     .filter(([, hide]) => hide)
     .map(([id]) => id);
 
-  export { data, columns, filterValue, sortKeys, hideForId, flatColumns, className as class };
+  export {
+    data,
+    columnInitializers,
+    filterValue,
+    selectedDataIds,
+    sortKeys,
+    hideForId,
+    flatColumns,
+    className as class
+  };
 </script>
 
 <div class={className}>
@@ -110,7 +124,7 @@
               {...rowAttrs}
             >
               {#each row.cells as cell (cell.id)}
-                <Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
+                <Subscribe attrs={cell.attrs()} let:attrs props={cell.props()}>
                   <Table.Cell class="[&:has([role=checkbox])]:pl-3" {...attrs}>
                     <Render of={cell.render()} />
                   </Table.Cell>

@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { Person } from "$lib/types/core.ts";
   import { CakeIcon } from "lucide-svelte";
-  import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
 
   let person: Person;
 

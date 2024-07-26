@@ -6,7 +6,7 @@ import { constraints, employees, locations, tasks, shifts, skills } from "$lib/s
 import { get } from "svelte/store";
 import type { IconType } from "$lib/types/ui.ts";
 import Color from "color";
-import { capitalize, sample, sampleOne } from "$lib/utils.ts";
+import { sample, sampleOne } from "$lib/utils.ts";
 
 const ICONIFY_ICONS = [
   "mdi:account",
