@@ -4,7 +4,7 @@
   import EmployeesDataTable from "$lib/components/elements/data-tables/employees-data-table.svelte";
 
   import { FlatColumn, type ReadOrWritable } from "svelte-headless-table";
-  import { type Person, Skill } from "$lib/types/core.ts";
+  import { type Person } from "$lib/types/core.ts";
   import { employees } from "$lib/stores.ts";
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
