@@ -7,28 +7,35 @@
   let position: SidebarPosition;
   let expandedWidth: string = "250px";
   let collapsedWidth: string = "72px";
+  let variant: "justify-top" | "justify-center" | "justify-bottom" = "items-center";
 
-  export { isExpanded, position, expandedWidth, collapsedWidth };
+  let variantClasses: string = {
+    "justify-top": "justify-start h-full",
+    "justify-center": "justify-start",
+    "justify-bottom": "justify-end h-full"
+  }[variant];
+
+  export { isExpanded, position, expandedWidth, collapsedWidth, variant };
 </script>
 
 <nav
-  class="flex flex-col justify-between transition-all ease-out duration-200 overflow-hidden bg-gray-300 h-full z-20"
+  class="flex shrink-0 grow-0 flex-col justify-between transition-all ease-out duration-200 overflow-hidden bg-gray-300 h-full z-20"
   style="{isExpanded ? `width: ${expandedWidth}` : `width: ${collapsedWidth}`}">
   <div
-    class={`flex justify-start items-start p-3 ${position === SidebarPosition.left ? "flex-row-reverse" : "flex-row"} h-16`}>
+    class="flex justify-start items-start p-4 {position === SidebarPosition.left ? 'flex-row-reverse' : 'flex-row'}">
     <Button on:click={() => {isExpanded = !isExpanded}} variant="ghost" size="icon_xxl">
       {#if position === SidebarPosition.left}
         {#if isExpanded}
           <PanelLeftCloseIcon />
         {:else }
           <PanelLeftOpenIcon />
-        {/if  }
+        {/if        }
       {:else }
         {#if isExpanded}
           <PanelRightCloseIcon />
         {:else }
           <PanelLeftCloseIcon />
-        {/if  }
+        {/if        }
       {/if}
     </Button>
 
@@ -43,7 +50,7 @@
     {/if}
   </div>
 
-  <div class="flex flex-col items-start justify-start p-3">
+  <div class="flex flex-col items-start p-4 {variantClasses}">
     {#if isExpanded}
       {#if $$slots.expanded_main}
         <slot name="expanded_main" />
@@ -56,7 +63,7 @@
   </div>
 
   <div
-    class={`flex justify-start items-end p-3 ${position === SidebarPosition.left ? "flex-row-reverse" : "flex-row"} h-16`}>
+    class="flex justify-start items-end p-4 {position === SidebarPosition.left ? 'flex-row-reverse' : 'flex-row'}">
     {#if isExpanded}
       {#if $$slots.expanded_bottom}
         <slot name="expanded_bottom" />

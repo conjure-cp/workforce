@@ -11,7 +11,7 @@
   let links: Link[];
   let position: SidebarPosition = SidebarPosition.left;
   let collapsedWidth: string = "72px";
-  let expandedWidth: string = "280px";
+  let expandedWidth: string = "250px";
   let isExpanded: boolean = true;
 
   $: isActive = (href: string) => {
@@ -25,7 +25,7 @@
 </script>
 
 <Sidebar position={position} collapsedWidth={collapsedWidth} expandedWidth={expandedWidth} isExpanded={isExpanded}>
-  <h1 slot="expanded_top" class="font-bold py-1 text-3xl">Workforce Planning</h1>
+  <h1 slot="expanded_top" class="font-bold py-1 text-3xl w-[200px] pl-3">Workforce Planning</h1>
 
   <ul slot="expanded_main" class="list-none p-0 m-0 w-full">
     {#each links as link}
