@@ -14,7 +14,7 @@
   let data: ReadOrWritable<Person[]> = employees;
   let filterValue: Writable<string> = writable("");
   let sortKeys: WritableSortKeys = createSortKeysStore([]);
-  let flatColumns: FlatColumn<Skill, AnyPlugins, string>[];
+  let flatColumns: FlatColumn<Person, AnyPlugins, string>[];
   let hideForId: { [key: string]: boolean } = {};
   let className: string = "";
 
