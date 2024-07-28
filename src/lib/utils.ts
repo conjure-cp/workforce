@@ -129,3 +129,9 @@ export function findBoundingBox(
 
   return [topLeft, bottomRight];
 }
+
+export function stripPrefix(s: string, prefix: string): string {
+  if (prefix === "") return s;
+  while (s.startsWith(prefix)) s = s.slice(prefix.length);
+  return s;
+}

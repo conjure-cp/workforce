@@ -52,7 +52,7 @@
       <SkillBadge {skill} {variant} {icon_variant} {placeholder} {compact} />
     </Button>
   </Popover.Trigger>
-  <Popover.Content class="w-[150] p-0">
+  <Popover.Content class="w-[150px] p-0">
     <Command.Root>
       <Command.Input placeholder="Search" />
       <Command.Empty>No skills found</Command.Empty>

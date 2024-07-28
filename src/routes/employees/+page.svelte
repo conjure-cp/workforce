@@ -46,7 +46,7 @@
         </div>
       </div>
       <h2 class="text-xl font-semibold mt-8 ml-1">Skills:</h2>
-      <SkillsSelectorList skills={person.skills} compact={false} class="mt-2" />
+      <SkillsSelectorList skills={person.skills} compact={false} class="mt-2 w-full" />
     </svelte:fragment>
   </Sidebar>
 {/if}

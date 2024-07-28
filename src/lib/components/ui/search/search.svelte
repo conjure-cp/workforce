@@ -8,6 +8,7 @@
   let searchInput: Writable<string> = writable("");
   let placeholder: string = "Search";
   let debounceTimeout: number;
+  let className: string = "";
 
   let debounceDelay: number = 300;
   let onInput: (value: string) => void = () => {
@@ -31,13 +32,13 @@
     return () => clearTimeout(debounceTimeout);
   });
 
-  export { searchInput, placeholder, debounceDelay, onInput, onSubmit };
+  export { searchInput, placeholder, debounceDelay, onInput, onSubmit, className as class };
 </script>
 
-<form class="group/search relative h-10 rounded-md bg-white shadow overflow-clip"
+<form class="group/search relative h-10 rounded-md bg-white shadow overflow-clip {className}"
       on:submit|preventDefault={handleSubmit}>
   <Input type="text" placeholder={placeholder} bind:value={$searchInput}
-         on:input={handleInputChange} />
+         on:input={handleInputChange} class={className} />
   <Button type="submit" variant="ghost" size="icon"
           class="absolute right-0 top-1/2 transform -translate-y-1/2 transition-all text-muted-foreground group-hover/search:text-accent-foreground group-focus/search:text-accent-foreground">
     <SearchIcon />

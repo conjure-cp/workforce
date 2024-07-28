@@ -4,6 +4,7 @@
   import PeopleSelectorList from "$lib/components/elements/person/people-selector-list.svelte";
   import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
   import SkillsSelectorList from "$lib/components/elements/skill/skills-selector-list.svelte";
+  import IconPicker from "$lib/components/elements/icon-picker/icon-picker.svelte";
   import TasksList from "$lib/components/elements/task/tasks-list.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { employees, tasks } from "$lib/stores.ts";
@@ -24,6 +25,10 @@
     <section class="w-full flex flex-col gap-3">
       <h2 class="text-xl">Combobox</h2>
       <Combobox options={schedules} placeholder="Select schedule..." icon={{ icon: "mdi:calendar" }} />
+    </section>
+    <section class="w-full flex flex-col gap-3">
+      <h2 class="text-xl">Icon Picker</h2>
+      <IconPicker />
     </section>
     <section class="w-full flex flex-col gap-3">
       <h2 class="text-xl">People list</h2>
