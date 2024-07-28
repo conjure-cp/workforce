@@ -49,12 +49,13 @@ const LOCATION_WORDS = [
 ];
 
 const LOCATION_SUFFIX_GENERATORS: (() => string)[] = [
-  () => sampleOne(["A", "B", "C", "D", "E", "F"]),
+  () => sampleOne(["A", "B", "C", "D", "E", "F"]) as string,
   () => faker.number.int({ min: 1, max: 100 }).toString()
 ];
 
 export function generateLocationName(): string {
-  return `${sampleOne(LOCATION_WORDS)} ${sampleOne(LOCATION_SUFFIX_GENERATORS)()}`;
+  const suffixGen = sampleOne(LOCATION_SUFFIX_GENERATORS) as () => string;
+  return `${sampleOne(LOCATION_WORDS)} ${suffixGen()}`;
 }
 
 export function generateIcon(): IconType {
@@ -119,42 +120,45 @@ export function generateLocations(n: number): Location[] {
   return Array.from({ length: n }, generateLocation);
 }
 
-export function generateShift(): Shift {
+export function generateShift(): Shift | undefined {
+  const loc = sampleLocation();
+  if (loc === undefined) return undefined;
+
   return new Shift(
     faker.lorem.words(),
     faker.lorem.sentence(),
     fromDate(faker.date.recent(), "UTC"),
     fromDate(faker.date.soon(), "UTC"),
-    sampleLocation(),
+    loc,
     sampleTasks(faker.number.int({ min: 1, max: 3 }))
   );
 }
 
 export function generateShifts(n: number): Shift[] {
-  return Array.from({ length: n }, generateShift);
+  return Array.from({ length: n }, generateShift).filter((s) => s !== undefined) as Shift[];
 }
 
-export function samplePerson(): Person {
+export function samplePerson(): Person | undefined {
   return sampleOne(get(employees));
 }
 
-export function sampleTask(): Task {
+export function sampleTask(): Task | undefined {
   return sampleOne(get(tasks));
 }
 
-export function sampleLocation(): Location {
+export function sampleLocation(): Location | undefined {
   return sampleOne(get(locations));
 }
 
-export function sampleSkill(): Skill {
+export function sampleSkill(): Skill | undefined {
   return sampleOne(get(skills));
 }
 
-export function sampleConstraint(): Constraint {
+export function sampleConstraint(): Constraint | undefined {
   return sampleOne(get(constraints));
 }
 
-export function sampleShift(): Shift {
+export function sampleShift(): Shift | undefined {
   return sampleOne(get(shifts));
 }
 
@@ -258,20 +262,26 @@ export function generateConstraintForPerson(person: Person): Constraint {
   ]();
 }
 
-export function generateConstraintForRandomLocation(): Constraint {
-  return generateConstraintForLocation(sampleLocation());
+export function generateConstraintForRandomLocation(): Constraint | undefined {
+  const loc = sampleLocation();
+  if (loc === undefined) return undefined;
+  return generateConstraintForLocation(loc);
 }
 
-export function generateConstraintForRandomTask(): Constraint {
-  return generateConstraintForTask(sampleTask());
+export function generateConstraintForRandomTask(): Constraint | undefined {
+  const task = sampleTask();
+  if (task === undefined) return undefined;
+  return generateConstraintForTask(task);
 }
 
-export function generateConstraintForRandomPerson(): Constraint {
-  return generateConstraintForPerson(samplePerson());
+export function generateConstraintForRandomPerson(): Constraint | undefined {
+  const person = samplePerson();
+  if (person === undefined) return undefined;
+  return generateConstraintForPerson(person);
 }
 
 export function generateConstraints(n: number): Constraint[] {
-  const GENERATORS: (() => Constraint)[] = [
+  const GENERATORS: (() => Constraint | undefined)[] = [
     generateConstraintForRandomLocation,
     generateConstraintForRandomTask,
     generateConstraintForRandomPerson
@@ -279,5 +289,5 @@ export function generateConstraints(n: number): Constraint[] {
 
   return Array.from({ length: n }, () =>
     GENERATORS[faker.number.int({ min: 0, max: GENERATORS.length - 1 })]()
-  );
+  ).filter((c) => c !== undefined) as Constraint[];
 }

@@ -82,7 +82,8 @@ export function getTextColour(bg_colour: Color): Color {
   return bg_colour.isLight() ? Color.rgb(0, 0, 0) : Color.rgb(255, 255, 255);
 }
 
-export function sampleOne<T>(arr: T[]): T {
+export function sampleOne<T>(arr: T[]): T | undefined {
+  if (arr.length === 0) return undefined;
   return arr[faker.number.int({ min: 0, max: arr.length - 1 })];
 }
 
@@ -94,9 +95,11 @@ export function sample<T>(arr: T[], n: number, unique: boolean = true): T[] {
   for (let i = 0; i < n; i++) {
     if (unique) {
       const remaining: T[] = arr.filter((e) => !ans.includes(e));
-      ans.push(sampleOne(remaining));
+      const next = sampleOne(remaining);
+      if (next !== undefined) ans.push(next);
     } else {
-      ans.push(sampleOne(arr));
+      const next = sampleOne(arr);
+      if (next !== undefined) ans.push(next);
     }
   }
 
