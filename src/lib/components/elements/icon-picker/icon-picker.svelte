@@ -8,13 +8,15 @@
   import { tick } from "svelte";
   import Icon from "$lib/components/ui/icon/icon.svelte";
   import Search from "$lib/components/ui/search/search.svelte";
+  import ColourPicker from "$lib/components/ui/color-picker/color-picker.svelte";
   import type { IconType } from "$lib/types/ui.ts";
   import { Separator } from "$lib/components/ui/separator";
   import { capitalize, stripPrefix } from "$lib/utils.js";
+  import type Color from "color";
 
-  const limit: number = 64;
-  const iconSet: string = "mdi";
-  const defaultIcons: string[] = [
+  const LIMIT: number = 64;
+  const ICON_SET: string = "mdi";
+  const DEFAULT_ICONS: string[] = [
     "mdi:account",
     "mdi:hospital",
     "mdi:home",
@@ -47,19 +49,27 @@
 
   let open: boolean = false;
   let className: string = "";
-  let iconList: Writable<string[]> = writable(defaultIcons);
+  let iconList: Writable<string[]> = writable(DEFAULT_ICONS);
   let icon: IconType | undefined = undefined;
   let loading: boolean = false;
+
+  function onColourSelect(color: Color) {
+    icon = {
+      icon: icon?.icon ?? "",
+      color: color
+    };
+  }
 
   async function fetchIconList(query: string) {
     loading = true;
     try {
-      const response = await fetch(`https://api.iconify.design/search?query=${query}&prefix=${iconSet}&limit=${limit}`);
+      const response = await fetch(`https://api.iconify.design/search?query=${query}&prefix=${ICON_SET}&limit=${LIMIT}`);
       const data = await response.json();
       console.log(data);
       iconList.set(data.icons);
     } catch (error) {
       console.error("Error fetching icon list", error);
+      iconList.set([]);
     } finally {
       loading = false;
     }
@@ -67,7 +77,7 @@
 
   async function onSearch(query: string) {
     if (query === "") {
-      iconList.set(defaultIcons);
+      iconList.set(DEFAULT_ICONS);
       return;
     }
 
@@ -82,19 +92,6 @@
     tick().then(() => {
       document.getElementById(triggerId)?.focus();
     });
-  }
-
-  function makeIcon(iconName: string): IconType {
-    if (icon === undefined) {
-      return {
-        icon: iconName
-      };
-    }
-
-    return {
-      ...icon,
-      icon: iconName
-    };
   }
 
   $: {
@@ -113,7 +110,7 @@
       role="combobox"
       size="icon_lg"
       aria-expanded={open}
-      class="w-fit h-fit rounded-full p-1 overflow-visible {icon === undefined ? 'text-muted-foreground' : ''} transition-all outline-none hover:outline-accent-foreground"
+      class="w-fit h-fit rounded-full p-1 overflow-visible transition-all bg-muted outline-none hover:outline-accent-foreground {icon === undefined ? 'text-muted-foreground' : ''}"
     >
       {#if icon !== undefined}
         <Icon icon={icon} class="text-primary" />
@@ -122,7 +119,11 @@
       {/if}
     </Button>
   </Popover.Trigger>
-  <Popover.Content class="w-[250px] p-0">
+  <Popover.Content class="w-[310px] p-0">
+    <ColourPicker class="mt-4 mb-4 justify-center" color={icon?.color} onSelect={(c) => onColourSelect(c)} />
+
+    <Separator orientation="horizontal" />
+
     <Search debounceDelay={200} onInput={onSearch} class="!shadow-none !border-none !rounded-none" />
 
     <Separator orientation="horizontal" />
@@ -142,13 +143,19 @@
             <Tooltip.Trigger>
               <Button
                 on:click={() => {
-            icon = makeIcon(icon_name);
-            closeAndFocusTrigger(ids.trigger);
-          }}
+                  icon = {
+                    icon: icon_name,
+                    color: icon?.color
+                  };
+                  closeAndFocusTrigger(ids.trigger);
+                }}
                 variant="ghost"
                 size="icon_lg"
               >
-                <Icon icon={makeIcon(icon_name)} class="text-primary" />
+                <Icon icon={{
+                    icon: icon_name,
+                    color: icon?.color
+                  }} class="text-primary transition-all" />
               </Button>
             </Tooltip.Trigger>
             <Tooltip.Content class="text-muted-foreground">

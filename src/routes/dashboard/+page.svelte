@@ -6,10 +6,12 @@
   import SkillsSelectorList from "$lib/components/elements/skill/skills-selector-list.svelte";
   import IconPicker from "$lib/components/elements/icon-picker/icon-picker.svelte";
   import TasksList from "$lib/components/elements/task/tasks-list.svelte";
+  import ColourPicker from "$lib/components/ui/color-picker/color-picker.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { employees, tasks } from "$lib/stores.ts";
   import { Task } from "$lib/types/core.ts";
   import { skills } from "$lib/stores.ts";
+  import { generateSkill } from "$lib/testing.ts";
 
   const schedules: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
@@ -17,6 +19,7 @@
   ];
 
   const task: Task = new Task("Task 1", "Hello world!", { icon: "mdi:calendar" }, 2, 4, [], []);
+  let skill = generateSkill();
 </script>
 
 <div class="w-full h-dvh bg-gray-50 overflow-y-scroll">
@@ -29,6 +32,11 @@
     <section class="w-full flex flex-col gap-3">
       <h2 class="text-xl">Icon Picker</h2>
       <IconPicker />
+      <IconPicker bind:icon={skill.icon} />
+    </section>
+    <section class="w-full flex flex-col gap-3">
+      <h2 class="text-xl">Colour Picker</h2>
+      <ColourPicker />
     </section>
     <section class="w-full flex flex-col gap-3">
       <h2 class="text-xl">People list</h2>
