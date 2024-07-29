@@ -79,9 +79,17 @@
     },
     {
       accessor: (row: Person) => row,
-      header: "",
+      header: "Actions",
       cell: (cell: DataBodyCell<unknown>) => {
         return createRender(RowActionsEmployee, { person: cell.value as Person });
+      },
+      plugins: {
+        tableFilter: {
+          disable: true
+        },
+        sort: {
+          disable: true
+        }
       }
     }
   ];
