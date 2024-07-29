@@ -4,6 +4,7 @@ import { constraints, employees, tasks } from "$lib/stores";
 import { get } from "svelte/store";
 import { v4 as uuidv4 } from "uuid";
 import type { IconType } from "$lib/types/ui.ts";
+import { getInitials } from "$lib/utils.ts";
 
 export class Skill {
   uuid: string;
@@ -130,6 +131,14 @@ export class Shift {
   }
 }
 
+export interface PersonProps {
+  name: string;
+  job_title: string;
+  image_url: string;
+  birthday: Date;
+  skills: Skill[];
+}
+
 export class Person {
   uuid: string;
   name: string;
@@ -138,26 +147,22 @@ export class Person {
   birthday: Date;
   skills: Skill[];
 
-  public constructor(
-    name: string,
-    job_title: string,
-    image_url: string,
-    birthday: Date,
-    skills: Skill[]
-  ) {
+  public constructor(props: PersonProps | undefined) {
     this.uuid = uuidv4();
-    this.name = name;
-    this.job_title = job_title;
-    this.image_url = image_url;
-    this.birthday = birthday;
-    this.skills = skills;
+    this.name = "";
+    this.job_title = "";
+    this.image_url = "";
+    this.birthday = new Date();
+    this.skills = [];
+
+    if (props === undefined) {
+      return;
+    }
+    this.update(props);
   }
 
   public get initials(): string {
-    return this.name
-      .split(" ")
-      .map((n) => n[0].toUpperCase())
-      .join("");
+    return getInitials(this.name);
   }
 
   public get age(): number {
@@ -168,5 +173,23 @@ export class Person {
   public get constraints(): Constraint[] {
     const constraints_list = get(constraints);
     return constraints_list.filter((c) => c.applies_to === this);
+  }
+
+  public get props(): PersonProps {
+    return {
+      name: this.name,
+      job_title: this.job_title,
+      image_url: this.image_url,
+      birthday: this.birthday,
+      skills: this.skills
+    };
+  }
+
+  public update(props: PersonProps): void {
+    this.name = props.name;
+    this.job_title = props.job_title;
+    this.image_url = props.image_url;
+    this.birthday = props.birthday;
+    this.skills = props.skills;
   }
 }

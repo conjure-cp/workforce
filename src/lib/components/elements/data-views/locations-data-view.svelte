@@ -9,7 +9,7 @@
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
   import LocationsMap from "$lib/components/elements/location/locations-map.svelte";
   import type { AnyPlugins } from "svelte-headless-table/plugins";
-  import ColumnHideSelector from "$lib/components/elements/data-views/lib/column-hide-selector.svelte";
+  import ColumnHideSelector from "$lib/components/elements/data-tables/lib/column-hide-selector.svelte";
 
   let data: ReadOrWritable<Location[]> = locations;
   let filterValue: Writable<string> = writable("");

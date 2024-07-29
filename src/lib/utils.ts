@@ -135,3 +135,14 @@ export function stripPrefix(s: string, prefix: string): string {
   while (s.startsWith(prefix)) s = s.slice(prefix.length);
   return s;
 }
+
+export function getInitials(name: string): string {
+  if (name.length === 0) return "N/A";
+
+  if (name.length <= 3) return name.toUpperCase();
+
+  return name
+    .split(" ")
+    .map((n) => n[0].toUpperCase())
+    .join("");
+}

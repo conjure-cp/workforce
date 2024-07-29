@@ -14,8 +14,8 @@
 <div class="flex flex-col gap-3 pl-6 pt-4">
   <Button on:click={() => {
     skills.set(generateSkills(5));
-    locations.set(generateLocations(10));
-    employees.set(generatePeople(15));
+    locations.set(generateLocations(5));
+    employees.set(generatePeople(5));
     tasks.set(generateTasks(5));
     shifts.set(generateShifts(5));
     constraints.set(generateConstraints(10));

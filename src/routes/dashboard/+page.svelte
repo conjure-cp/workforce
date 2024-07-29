@@ -7,11 +7,13 @@
   import IconPicker from "$lib/components/elements/icon-picker/icon-picker.svelte";
   import TasksList from "$lib/components/elements/task/tasks-list.svelte";
   import ColourPicker from "$lib/components/ui/color-picker/color-picker.svelte";
+  import PersonEditDialog from "$lib/components/elements/person/person-edit-dialog.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { employees, tasks } from "$lib/stores.ts";
   import { Task } from "$lib/types/core.ts";
   import { skills } from "$lib/stores.ts";
-  import { generateSkill } from "$lib/testing.ts";
+  import { generateSkill, samplePerson } from "$lib/testing.ts";
+  import { Button } from "$lib/components/ui/button";
 
   const schedules: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
@@ -37,6 +39,14 @@
     <section class="w-full flex flex-col gap-3">
       <h2 class="text-xl">Colour Picker</h2>
       <ColourPicker />
+    </section>
+    <section class="w-full flex flex-col gap-3">
+      <h2 class="text-xl">Person edit dialog</h2>
+      <PersonEditDialog person={samplePerson()}>
+        <Button>
+          Edit employee
+        </Button>
+      </PersonEditDialog>
     </section>
     <section class="w-full flex flex-col gap-3">
       <h2 class="text-xl">People list</h2>

@@ -74,13 +74,13 @@ export function generateSkills(n: number): Skill[] {
 }
 
 export function generatePerson(): Person {
-  return new Person(
-    faker.person.fullName(),
-    faker.person.jobTitle(),
-    faker.image.avatar(),
-    faker.date.birthdate(),
-    sampleSkills(faker.number.int({ min: 1, max: 3 }))
-  );
+  return new Person({
+    name: faker.person.fullName(),
+    job_title: faker.person.jobTitle(),
+    image_url: faker.image.avatar(),
+    birthday: faker.date.birthdate(),
+    skills: sampleSkills(faker.number.int({ min: 1, max: 3 }))
+  });
 }
 
 export function generatePeople(n: number): Person[] {

@@ -8,7 +8,7 @@
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
   import type { AnyPlugins } from "svelte-headless-table/plugins";
-  import ColumnHideSelector from "$lib/components/elements/data-views/lib/column-hide-selector.svelte";
+  import ColumnHideSelector from "$lib/components/elements/data-tables/lib/column-hide-selector.svelte";
 
   let data: ReadOrWritable<Skill[]> = skills;
   let filterValue: Writable<string> = writable("");

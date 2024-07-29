@@ -6,6 +6,7 @@
   import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
   import ConstraintsList from "$lib/components/elements/constraint/constraints-list.svelte";
   import DataTable from "$lib/components/elements/data-tables/core/data-table.svelte";
+  import RowActionsEmployee from "$lib/components/elements/data-tables/lib/row-actions/row-actions-employee.svelte";
   import { writable, type Writable } from "svelte/store";
   import { type AnyPlugins, createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
   import type { Constraint } from "$lib/types/constraints.ts";
@@ -74,6 +75,13 @@
         sort: {
           getSortValue: (value: Constraint[]) => value.map((constraint) => constraint.type).join(" ")
         }
+      }
+    },
+    {
+      accessor: (row: Person) => row,
+      header: "",
+      cell: (cell: DataBodyCell<unknown>) => {
+        return createRender(RowActionsEmployee, { person: cell.value as Person });
       }
     }
   ];
