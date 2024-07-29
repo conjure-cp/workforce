@@ -51,7 +51,7 @@
       <PersonAvatar person={person} variant={variant} icon_variant={icon_variant} placeholder={placeholder} />
     </Button>
   </Popover.Trigger>
-  <Popover.Content class="w-[200px] p-0">
+  <Popover.Content class="w-[250px] p-0">
     <Command.Root>
       <Command.Input placeholder="Search" />
       <Command.Empty>No people found</Command.Empty>

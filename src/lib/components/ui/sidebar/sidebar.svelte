@@ -23,19 +23,19 @@
   style="{isExpanded ? `width: ${expandedWidth}` : `width: ${collapsedWidth}`}">
   <div
     class="flex justify-start items-start p-4 {position === SidebarPosition.left ? 'flex-row-reverse' : 'flex-row'}">
-    <Button on:click={() => {isExpanded = !isExpanded}} variant="ghost" size="icon_xxl">
+    <Button on:click={() => {isExpanded = !isExpanded}} variant="ghost" size="icon_xl">
       {#if position === SidebarPosition.left}
         {#if isExpanded}
           <PanelLeftCloseIcon />
         {:else }
           <PanelLeftOpenIcon />
-        {/if        }
+        {/if         }
       {:else }
         {#if isExpanded}
           <PanelRightCloseIcon />
         {:else }
           <PanelLeftCloseIcon />
-        {/if        }
+        {/if         }
       {/if}
     </Button>
 
