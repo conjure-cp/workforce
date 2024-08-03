@@ -21,12 +21,12 @@ export class Skill {
 
   public get people(): Person[] {
     const employees_list = get(employees);
-    return employees_list.filter((p) => p.skills.includes(this));
+    return employees_list.filter((p) => p.skills.map((s) => s.uuid).includes(this.uuid));
   }
 
   public get tasks(): Task[] {
     const tasks_list = get(tasks);
-    return tasks_list.filter((t) => t.required_skills.includes(this));
+    return tasks_list.filter((t) => t.required_skills.map((s) => s.uuid).includes(this.uuid));
   }
 }
 
@@ -61,7 +61,7 @@ export class Task {
 
   public get constraints(): Constraint[] {
     const constraints_list = get(constraints);
-    return constraints_list.filter((c) => c.applies_to === this);
+    return constraints_list.filter((c) => c.applies_to.uuid === this.uuid);
   }
 }
 
@@ -84,7 +84,7 @@ export class Location {
 
   public get constraints(): Constraint[] {
     const constraints_list = get(constraints);
-    return constraints_list.filter((c) => c.applies_to === this);
+    return constraints_list.filter((c) => c.applies_to.uuid === this.uuid);
   }
 }
 
@@ -172,7 +172,7 @@ export class Person {
 
   public get constraints(): Constraint[] {
     const constraints_list = get(constraints);
-    return constraints_list.filter((c) => c.applies_to === this);
+    return constraints_list.filter((c) => c.applies_to.uuid === this.uuid);
   }
 
   public get props(): PersonProps {

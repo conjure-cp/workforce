@@ -31,6 +31,11 @@
     return "default";
   }
 
+  function hasSkill(skills: (Skill | undefined)[], skill: Skill | undefined) {
+    if (skill === undefined) return false;
+    return skills.map((s) => s?.uuid).includes(skill.uuid);
+  }
+
   export { skills, n_skills, compact, className as class };
 </script>
 
@@ -41,7 +46,7 @@
                    options={options}
                    variant={chooseVariant(skill, i)}
                    compact={compact}
-                   filter={(s) => (!skills.includes(s) || (s === undefined) || (s === skill))} />
+                   filter={(s) => (!hasSkill(skills, s) || (s === undefined) || (s.uuid === skill?.uuid))} />
   {/each}
   {#if n_skills === undefined}
     <SkillSelector skill={undefined}
@@ -52,6 +57,6 @@
                    }}
                    compact={compact}
                    icon_variant="plus"
-                   filter={(s) => !skills.includes(s) && s !== undefined} />
+                   filter={(s) => s !== undefined && !hasSkill(skills, s)} />
   {/if}
 </div>

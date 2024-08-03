@@ -26,6 +26,11 @@
     return "default";
   }
 
+  function hasPerson(people: (Person | undefined)[], person: Person | undefined) {
+    if (person === undefined) return false;
+    return people.map((p) => p?.uuid).includes(person.uuid);
+  }
+
   export { people, compact, min_people, max_people, className as class };
 </script>
 
@@ -36,7 +41,7 @@
         <PersonSelector bind:person={person}
                         options={options}
                         variant={chooseVariant(person, i)}
-                        filter={(p) => (!people.includes(p) || (p === undefined) || (p === person))}
+                        filter={(p) => (!hasPerson(people, p) || (p === undefined) || (p.uuid === person?.uuid))}
                         class="absolute top-0 left-0 w-10 h-10" />
       </div>
     {/each}
@@ -47,7 +52,7 @@
       <PersonSelector bind:person={person}
                       options={options}
                       variant={chooseVariant(person, i)}
-                      filter={(p) => (!people.includes(p) || (p === undefined) || (p === person))} />
+                      filter={(p) => (!hasPerson(people, p) || (p === undefined) || (p.uuid === person?.uuid))} />
     {/each}
   </div>
 {/if}
