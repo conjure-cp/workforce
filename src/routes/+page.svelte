@@ -10,9 +10,10 @@
   import { FilterIcon } from "lucide-svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { SidebarPosition } from "$lib/components/ui/sidebar/index.ts";
-  import { Shift } from "$lib/types";
+  import type { Shift } from "$lib/types";
   import { shifts } from "$lib/stores.ts";
   import MiniSearch from "minisearch";
+  import { getPeopleForShift } from "$lib/types/shift.ts";
 
   let schedules: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
@@ -34,11 +35,11 @@
         case "tasks":
           return shift.tasks.map((task) => task.name).join(" ");
         case "people":
-          return shift.people.map((person) => person.name).join(" ");
+          return getPeopleForShift(shift).map((person) => person.name).join(" ");
         case "start_time":
-          return shift.start_time_fmt;
+          return shift.start_date_time.toString();
         case "end_time":
-          return shift.end_time_fmt;
+          return shift.end_date_time.toString();
         default:
           return "";
       }

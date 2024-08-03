@@ -8,7 +8,7 @@
   import { cn } from "$lib/utils.js";
   import { tick } from "svelte";
   import { employees } from "$lib/stores.ts";
-  import { Person } from "$lib/types";
+  import type { Person } from "$lib/types";
 
   type Filter = (s: Person | undefined) => boolean;
   type OnChange = (old_value: Person | undefined, new_value: Person | undefined) => Person | undefined;

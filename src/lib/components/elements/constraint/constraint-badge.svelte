@@ -4,7 +4,6 @@
   import * as Tooltip from "$lib/components/ui/tooltip";
   import PersonName from "$lib/components/elements/person/person-name.svelte";
   import { ClipboardXIcon, DraftingCompassIcon, MapPinOffIcon, PlusIcon, UserXIcon } from "lucide-svelte";
-  import { Location, Person, Task } from "$lib/types";
 
   let constraint: Constraint | undefined;
   let popoverEnabled: boolean = true;
@@ -55,7 +54,7 @@
       <Tooltip.Content class="max-w-[250px] overflow-visible">
         {#if constraint.type === ConstraintType.NoTasks}
           <h3 class="font-semibold mb-1">Tasks constraint</h3>
-          {#if constraint.applies_to instanceof Location}
+          {#if isLocation(constraint.applies_to)}
             <p class="text-muted-foreground align-middle">
               {#if constraint.tasks.length === 1}
                 {constraint.tasks[0].name} cannot be done at {constraint.applies_to.name}
@@ -63,7 +62,7 @@
                 {constraint.tasks.length} tasks cannot be done at {constraint.applies_to.name}
               {/if}
             </p>
-          {:else if constraint.applies_to instanceof Person}
+          {:else if isPerson(constraint.applies_to)}
             <p class="text-muted-foreground align-middle">
               {#if constraint.tasks.length === 1}
                 <PersonName person={constraint.applies_to} />
@@ -78,7 +77,7 @@
           {/if}
         {:else if constraint.type === ConstraintType.NoPeople}
           <h3 class="font-semibold mb-1">Employees constraint</h3>
-          {#if constraint.applies_to instanceof Location}
+          {#if isLocation(constraint.applies_to)}
             <p class="text-muted-foreground align-middle">
               {#if constraint.people.length === 1}
                 <PersonName person={constraint.people[0]} />
@@ -87,7 +86,7 @@
                 {constraint.people.length} people cannot work at {constraint.applies_to.name}
               {/if}
             </p>
-          {:else if constraint.applies_to instanceof Person}
+          {:else if isPerson(constraint.applies_to)}
             <p class="text-muted-foreground align-middle">
               {#if constraint.people.length === 1}
                 <PersonName person={constraint.applies_to} />
@@ -98,7 +97,7 @@
                 cannot work with {constraint.people.length} people
               {/if}
             </p>
-          {:else if constraint.applies_to instanceof Task}
+          {:else if isTask(constraint.applies_to)}
             <p class="text-muted-foreground align-middle">
               {#if constraint.people.length === 1}
                 <PersonName person={constraint.people[0]} />
@@ -112,7 +111,7 @@
           {/if}
         {:else if constraint.type === ConstraintType.NoLocations}
           <h3 class="font-semibold mb-1">Locations constraint</h3>
-          {#if constraint.applies_to instanceof Person}
+          {#if isPerson(constraint.applies_to)}
             <p class="text-muted-foreground align-middle">
               {#if constraint.locations.length === 1}
                 <PersonName person={constraint.applies_to} />
@@ -122,7 +121,7 @@
                 cannot work at {constraint.locations.length} locations
               {/if}
             </p>
-          {:else if constraint.applies_to instanceof Task}
+          {:else if isTask(constraint.applies_to)}
             <p class="text-muted-foreground align-middle">
               {#if constraint.locations.length === 1}
                 {constraint.applies_to.name} cannot be done at {constraint.locations[0].name}

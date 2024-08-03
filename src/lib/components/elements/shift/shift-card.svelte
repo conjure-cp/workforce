@@ -2,9 +2,10 @@
   // noinspection ES6UnusedImports
   import * as Card from "$lib/components/ui/card/index.ts";
   import type { Shift } from "$lib/types";
-  import Task from "../task/task-card.svelte";
+  import Task from "$lib/components/elements/task/task-card.svelte";
   import { ClockIcon, MapPinIcon } from "lucide-svelte";
   import { capitalize } from "$lib/utils.ts";
+  import { fmtZonedDateTime } from "$lib/utils.js";
 
   let shift: Shift;
 
@@ -20,7 +21,7 @@
   <Card.Content class="flex flex-col items-start justify-start gap-3">
     <div class="flex flex-row items-center justify-start gap-2 w-full">
       <ClockIcon />
-      {shift.start_time_fmt} - {shift.end_time_fmt}
+      {fmtZonedDateTime(shift.start_date_time)} - {fmtZonedDateTime(shift.end_date_time)}
     </div>
     <div class="flex flex-row items-center justify-start gap-2 w-full">
       <MapPinIcon />

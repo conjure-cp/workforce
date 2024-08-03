@@ -5,23 +5,25 @@ import { constraints } from "$lib/stores";
 
 export type LngLat = [number, number];
 
-export class Location {
-  uuid: string;
+export interface LocationProps {
   name: string;
   address: string;
   image_url: string;
   coordinates: LngLat;
+}
 
-  public constructor(name: string, full_address: string, image_url: string, coordinates: LngLat) {
-    this.uuid = uuidv4();
-    this.name = name;
-    this.address = full_address;
-    this.image_url = image_url;
-    this.coordinates = coordinates;
-  }
+export interface Location extends LocationProps {
+  uuid: string;
+}
 
-  public get constraints(): Constraint[] {
-    const constraints_list = get(constraints);
-    return constraints_list.filter((c) => c.applies_to.uuid === this.uuid);
-  }
+export function createLocation(props: LocationProps): Location {
+  return {
+    uuid: uuidv4(),
+    ...props
+  };
+}
+
+export function getConstraintsForLocation(location: Location): Constraint[] {
+  const constraints_list = get(constraints);
+  return constraints_list.filter((c) => c.applies_to.uuid === location.uuid);
 }

@@ -8,9 +8,10 @@
   import { Label } from "$lib/components/ui/label/index.js";
   import SkillsSelectorList from "$lib/components/elements/skill/skills-selector-list.svelte";
   import * as Avatar from "$lib/components/ui/avatar/index.js";
-  import { Person, type PersonProps } from "$lib/types";
+  import type { Person, PersonProps } from "$lib/types";
   import { UserCircleIcon } from "lucide-svelte";
   import { getInitials } from "$lib/utils.ts";
+  import { createPerson } from "$lib/types/person.ts";
 
   let open: boolean = false;
   let onSubmit: (p: Person) => void = () => {
@@ -22,13 +23,16 @@
     skills: [],
     image_url: "",
     birthday: new Date()
-  } : personInput.props;
+  } : personInput;
 
   function handleSubmit() {
     if (personInput === undefined) {
-      personInput = new Person(person);
+      personInput = createPerson(person);
     } else {
-      personInput.update(person);
+      personInput = {
+        ...personInput,
+        ...person
+      };
     }
 
     onSubmit(personInput);

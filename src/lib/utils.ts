@@ -5,6 +5,7 @@ import type { TransitionConfig } from "svelte/transition";
 import { faker } from "@faker-js/faker";
 import type { LngLat } from "$lib/types/location.ts";
 import Color from "color";
+import type { ZonedDateTime } from "@internationalized/date";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -154,4 +155,8 @@ export function getInitials(name: string): string {
     .split(" ")
     .map((n) => n[0].toUpperCase())
     .join("");
+}
+
+export function fmtZonedDateTime(dt: ZonedDateTime): string {
+  return dt.toDate().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }

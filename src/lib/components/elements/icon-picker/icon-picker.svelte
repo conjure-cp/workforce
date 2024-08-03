@@ -12,7 +12,6 @@
   import type { IconType } from "$lib/types/ui.ts";
   import { Separator } from "$lib/components/ui/separator";
   import { capitalize, stripPrefix } from "$lib/utils.js";
-  import type Color from "color";
 
   const LIMIT: number = 64;
   const ICON_SET: string = "mdi";

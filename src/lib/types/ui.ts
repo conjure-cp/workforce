@@ -1,6 +1,6 @@
 export interface IconType {
   icon: string;
-  color: string;
+  color?: string;
 }
 
 export interface Link {

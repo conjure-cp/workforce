@@ -1,4 +1,4 @@
-import { Person, Skill, Task, Location, Shift } from "$lib/types";
+import type { Person, Skill, Task, Location, Shift } from "$lib/types";
 import { fromDate } from "@internationalized/date";
 import { faker } from "@faker-js/faker";
 import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
@@ -6,6 +6,13 @@ import { constraints, employees, locations, tasks, shifts, skills } from "$lib/s
 import { get } from "svelte/store";
 import type { IconType } from "$lib/types/ui.ts";
 import { sample, sampleOne } from "$lib/utils.ts";
+import { createSkill } from "$lib/types/skill.ts";
+import { createPerson } from "$lib/types/person.ts";
+import { createTask } from "$lib/types/task.ts";
+import { createLocation } from "$lib/types/location.ts";
+import { createShift } from "$lib/types/shift.ts";
+
+const ST_ANDREWS: [latitude: number, longitude: number] = [-2.799, 56.34039];
 
 const ICONIFY_ICONS = [
   "mdi:account",
@@ -65,7 +72,11 @@ export function generateIcon(): IconType {
 }
 
 export function generateSkill(): Skill {
-  return new Skill(faker.hacker.ingverb(), faker.lorem.sentence(), generateIcon());
+  return createSkill({
+    name: faker.hacker.ingverb(),
+    description: faker.lorem.sentence(),
+    icon: generateIcon()
+  });
 }
 
 export function generateSkills(n: number): Skill[] {
@@ -73,7 +84,7 @@ export function generateSkills(n: number): Skill[] {
 }
 
 export function generatePerson(): Person {
-  return new Person({
+  return createPerson({
     name: faker.person.fullName(),
     job_title: faker.person.jobTitle(),
     image_url: faker.image.avatar(),
@@ -87,15 +98,15 @@ export function generatePeople(n: number): Person[] {
 }
 
 export function generateTask(): Task {
-  return new Task(
-    faker.lorem.words(),
-    faker.lorem.sentence(),
-    generateIcon(),
-    faker.number.int({ min: 1, max: 3 }),
-    faker.number.int({ min: 3, max: 5 }),
-    sampleSkills(faker.number.int({ min: 0, max: 3 })),
-    samplePeople(faker.number.int({ min: 0, max: 3 }))
-  );
+  return createTask({
+    name: faker.lorem.words(),
+    description: faker.lorem.sentence(),
+    icon: generateIcon(),
+    min_people: faker.number.int({ min: 1, max: 3 }),
+    max_people: faker.number.int({ min: 3, max: 5 }),
+    required_skills: sampleSkills(faker.number.int({ min: 0, max: 3 })),
+    people: samplePeople(faker.number.int({ min: 0, max: 3 }))
+  });
 }
 
 export function generateTasks(n: number): Task[] {
@@ -103,16 +114,16 @@ export function generateTasks(n: number): Task[] {
 }
 
 export function generateLocation(): Location {
-  return new Location(
-    generateLocationName(),
-    faker.location.streetAddress(),
-    faker.image.url(),
-    faker.location.nearbyGPSCoordinate({
-      origin: [-2.799, 56.34039],
+  return createLocation({
+    name: generateLocationName(),
+    address: faker.location.streetAddress(),
+    image_url: faker.image.url(),
+    coordinates: faker.location.nearbyGPSCoordinate({
+      origin: ST_ANDREWS,
       radius: 5,
       isMetric: true
     })
-  );
+  });
 }
 
 export function generateLocations(n: number): Location[] {
@@ -123,14 +134,14 @@ export function generateShift(): Shift | undefined {
   const loc = sampleLocation();
   if (loc === undefined) return undefined;
 
-  return new Shift(
-    faker.lorem.words(),
-    faker.lorem.sentence(),
-    fromDate(faker.date.recent(), "UTC"),
-    fromDate(faker.date.soon(), "UTC"),
-    loc,
-    sampleTasks(faker.number.int({ min: 1, max: 3 }))
-  );
+  return createShift({
+    name: faker.lorem.words(),
+    description: faker.lorem.sentence(),
+    start_date_time: fromDate(faker.date.recent(), "UTC"),
+    end_date_time: fromDate(faker.date.soon(), "UTC"),
+    location: loc,
+    tasks: sampleTasks(faker.number.int({ min: 1, max: 3 }))
+  });
 }
 
 export function generateShifts(n: number): Shift[] {

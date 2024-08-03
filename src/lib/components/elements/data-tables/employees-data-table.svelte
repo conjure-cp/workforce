@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type Person, Skill } from "$lib/types";
+  import type { Person, Skill } from "$lib/types";
   import { employees } from "$lib/stores.ts";
   import { createRender, DataBodyCell, FlatColumn, type ReadOrWritable } from "svelte-headless-table";
   import PersonAvatar from "$lib/components/elements/person/person-avatar.svelte";
@@ -11,6 +11,7 @@
   import { type AnyPlugins, createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
   import type { Constraint } from "$lib/types/constraints.ts";
   import type { ColumnInitializer } from "$lib/components/elements/data-tables/core";
+  import { getConstraintsForPerson } from "$lib/types/person.ts";
 
   let data: ReadOrWritable<Person[]> = employees;
   let filterValue: Writable<string> = writable("");
@@ -65,7 +66,7 @@
     },
     {
       id: "constraints",
-      accessor: (row: Person) => row.constraints,
+      accessor: (row: Person) => getConstraintsForPerson(row),
       header: "Constraints",
       cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, { constraints: cell.value as Constraint[] }),
       plugins: {

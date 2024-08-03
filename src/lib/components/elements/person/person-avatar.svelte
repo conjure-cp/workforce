@@ -5,6 +5,7 @@
   import * as Avatar from "$lib/components/ui/avatar";
   import PersonTooltip from "$lib/components/elements/person/person-tooltip.svelte";
   import { PlusIcon, UserIcon } from "lucide-svelte";
+  import { getInitialsForPerson } from "$lib/types/person.ts";
 
   let person: Person | undefined = undefined;
   let popoverEnabled: boolean = true;
@@ -42,7 +43,7 @@
       <Avatar.Root
         class="outline-none outline-offset-0 transition-all {variant === 'destructive' ? 'text-destructive hover:outline-destructive' : 'hover:outline-accent-foreground'}">
         <Avatar.Image src={person.image_url} alt={person.name} />
-        <Avatar.Fallback>{person.initials}</Avatar.Fallback>
+        <Avatar.Fallback>{getInitialsForPerson(person)}</Avatar.Fallback>
       </Avatar.Root>
     </Tooltip.Trigger>
     {#if popoverEnabled}

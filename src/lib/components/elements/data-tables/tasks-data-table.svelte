@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Skill, Task } from "$lib/types";
+  import type { Skill, Task } from "$lib/types";
   import { tasks } from "$lib/stores.ts";
   import {
     createRender,
@@ -17,6 +17,7 @@
   import type { Constraint } from "$lib/types/constraints.ts";
   import type { AnyPlugins } from "svelte-headless-table/plugins";
   import type { ColumnInitializer } from "$lib/components/elements/data-tables/core";
+  import { getCandidatesForTask } from "$lib/types/task.ts";
 
   let data: ReadOrWritable<Task[]> = tasks;
   let filterValue: Writable<string> = writable("");
@@ -70,7 +71,7 @@
     },
     {
       id: "constraints",
-      accessor: (row: Task) => row.constraints,
+      accessor: (row: Task) => getCandidatesForTask(row),
       header: "Constraints",
       cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, { constraints: cell.value as Constraint[] }),
       plugins: {

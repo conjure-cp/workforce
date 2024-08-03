@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Person, Skill, type Task } from "$lib/types";
+  import type { Person, Skill, Task } from "$lib/types";
   import { skills } from "$lib/stores.ts";
   import { createRender, DataBodyCell, FlatColumn, type ReadOrWritable } from "svelte-headless-table";
   import SkillBadge from "$lib/components/elements/skill/skill-badge.svelte";
@@ -11,6 +11,7 @@
   import { capitalize } from "$lib/utils.ts";
   import type { AnyPlugins } from "svelte-headless-table/plugins";
   import type { ColumnInitializer } from "$lib/components/elements/data-tables/core";
+  import { getPeopleWithSkill, getTasksWithSkill } from "$lib/types/skill.ts";
 
   let data: ReadOrWritable<Skill[]> = skills;
   let filterValue: Writable<string> = writable("");
@@ -47,7 +48,7 @@
     },
     {
       id: "tasks",
-      accessor: (row: Skill) => row.tasks,
+      accessor: (row: Skill) => getTasksWithSkill(row),
       header: "Required for tasks",
       cell: (cell: DataBodyCell<unknown>) => createRender(TasksList, { tasks: cell.value as Task[] }),
       plugins: {
@@ -61,7 +62,7 @@
     },
     {
       id: "people",
-      accessor: (row: Skill) => row.people,
+      accessor: (row: Skill) => getPeopleWithSkill(row),
       header: "People with this skill",
       cell: (cell: DataBodyCell<unknown>) => createRender(PeopleList, {
         people: cell.value as Person[],

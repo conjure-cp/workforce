@@ -4,6 +4,7 @@
   import * as Tooltip from "$lib/components/ui/tooltip";
   import * as Avatar from "$lib/components/ui/avatar";
   import PersonTooltip from "$lib/components/elements/person/person-tooltip.svelte";
+  import { getInitialsForPerson } from "$lib/types/person.ts";
 
   let person: Person;
   let popoverEnabled: boolean = true;
@@ -18,7 +19,7 @@
     {#if showAvatar}
       <Avatar.Root class="h-5 w-5 rounded-full inline-flex align-middle mr-1">
         <Avatar.Image src={person.image_url} alt={person.name} />
-        <Avatar.Fallback>{person.initials}</Avatar.Fallback>
+        <Avatar.Fallback>{getInitialsForPerson(person)}</Avatar.Fallback>
       </Avatar.Root>
     {/if}
     {person.name}

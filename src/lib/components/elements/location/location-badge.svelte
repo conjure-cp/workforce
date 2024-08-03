@@ -1,6 +1,6 @@
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
-  import { Location } from "$lib/types";
+  import type { Location } from "$lib/types";
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { MapPinIcon, PlusIcon } from "lucide-svelte";
 

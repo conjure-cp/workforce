@@ -10,17 +10,22 @@
   import PersonEditDialog from "$lib/components/elements/person/person-edit-dialog.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { employees, tasks } from "$lib/stores.ts";
-  import { Task } from "$lib/types";
+  import type { Task } from "$lib/types";
   import { skills } from "$lib/stores.ts";
   import { generateSkill, samplePerson } from "$lib/testing.ts";
   import { Button } from "$lib/components/ui/button";
+  import { createTask } from "$lib/types/task.ts";
 
   const schedules: ComboboxItem[] = [
     { label: "Schedule 1", value: "schedule1" },
     { label: "Schedule 2", value: "schedule2" }
   ];
 
-  const task: Task = new Task("Task 1", "Hello world!", { icon: "mdi:calendar" }, 2, 4, [], []);
+  const task: Task = createTask({
+    name: "Task 1", description: "Hello world!", min_people: 2, max_people: 4, required_skills: [], people: [], icon: {
+      icon: "mdi:calendar"
+    }
+  });
   let skill = generateSkill();
 </script>
 
