@@ -1,9 +1,6 @@
-import type { IconifyIcon } from "@iconify/svelte";
-import type Color from "color";
-
 export interface IconType {
-  icon: string | IconifyIcon;
-  color?: Color;
+  icon: string;
+  color: string;
 }
 
 export interface Link {

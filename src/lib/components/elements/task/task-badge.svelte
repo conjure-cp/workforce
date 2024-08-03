@@ -14,9 +14,6 @@
   let icon_variant: "default" | "placeholder" | "plus" = "default";
   let compact: boolean = true;
 
-  $: color_hex = task?.icon.color ? task.icon.color.hex() : "";
-  $: text_color_hex = task?.icon.color ? getTextColour(task.icon.color).hex() : "";
-
   // noinspection ReservedWordAsName
   export { task, variant, icon_variant, compact, popoverEnabled, placeholder, className as class };
 </script>
@@ -68,7 +65,7 @@
       {:else}
         <div
           class="flex flex-row items-center justify-start w-max h-fit gap-2 pr-3 px-2 py-1 rounded-full outline-none outline-offset-0 transition-all hover:outline-accent-foreground"
-          style={task.icon.color ? `background-color: ${color_hex}; color: ${text_color_hex}` : ""}>
+          style={task.icon.color ? `background-color: ${task.icon.color}; color: ${getTextColour(task.icon.color)}` : ""}>
           <Icon icon={task.icon} variant="monochrome"
                 class="h-5 w-5 rounded-full bg-transparent" />
           {capitalize(task.name)}

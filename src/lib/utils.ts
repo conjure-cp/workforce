@@ -2,9 +2,9 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { cubicOut } from "svelte/easing";
 import type { TransitionConfig } from "svelte/transition";
-import Color from "color";
 import { faker } from "@faker-js/faker";
-import type { LngLat } from "$lib/types";
+import type { LngLat } from "$lib/types/location.ts";
+import Color from "color";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -78,8 +78,17 @@ export function pad<T>(array: T[], toLength: number, value: T): T[] {
   return array;
 }
 
-export function getTextColour(bg_colour: Color): Color {
-  return bg_colour.isLight() ? Color.rgb(0, 0, 0) : Color.rgb(255, 255, 255);
+export function isLight(color: string): boolean {
+  return Color(color).isLight();
+}
+
+export function isDark(color: string): boolean {
+  return Color(color).isDark();
+}
+
+export function getTextColour(bg_colour: string | undefined): string {
+  if (bg_colour === undefined) return "#000000";
+  return isLight(bg_colour) ? "#000000" : "#ffffff";
 }
 
 export function sampleOne<T>(arr: T[]): T | undefined {

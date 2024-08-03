@@ -1,11 +1,11 @@
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
-  import Color from "color";
   import { Button } from "$lib/components/ui/button";
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { PipetteIcon } from "lucide-svelte";
+  import { getTextColour } from "$lib/utils.ts";
 
-  const DEFAULT_COLOURS: Color[] = [
+  const DEFAULT_COLOURS: string[] = [
     "#ef4444",
     "#f97316",
     "#eab308",
@@ -14,13 +14,13 @@
     "#3b82f6",
     "#8b5cf6",
     "#52525b"
-  ].map((hex) => new Color(hex));
+  ];
 
-  let options: Color[] = DEFAULT_COLOURS;
-  let color: Color | undefined = undefined;
+  let options: string[] = DEFAULT_COLOURS;
+  let color: string | undefined = undefined;
   let inputValue: string;
   let className: string = "";
-  let onSelect: (c: Color) => void = () => {
+  let onSelect: (c: string) => void = () => {
   };
 
   export { options, color, onSelect, className as class };
@@ -30,22 +30,22 @@
   {#each options as option}
     <Button
       class="w-6 h-6 p-0 rounded-full hover:drop-shadow-lg focus:drop-shadow-lg outline-offset-2 transition-all"
-      style={`background-color: ${option.hex()}; color: ${option.hex()}; outline: 2px solid ${color === option ? option.hex() : "transparent"};`}
+      style={`background-color: ${option}; color: ${option}; outline: 2px solid ${color === option ? option : "transparent"};`}
       on:click={() => {color = option; onSelect(color)}}
     />
   {/each}
   <Tooltip.Root>
     <Tooltip.Trigger>
-      <div class="w-6 h-6 rounded-full relative bg-muted hover:drop-shadow-lg transition-all"
-           style={(color && !options.includes(color)) ? `background-color: ${color.hex()}; outline: 2px solid ${color.hex()}; outline-offset: 2px` : ""}>
+      <div class="w-6 h-6 rounded-full relative bg-muted text-accent-foreground hover:drop-shadow-lg transition-all"
+           style={(color && !options.includes(color)) ? `background-color: ${color}; outline: 2px solid ${color}; outline-offset: 2px` : ""}>
         <input class="absolute top-0 left-0 w-6 h-6 rounded-full z-10"
                type="color"
                style="opacity: 0.5%"
                bind:value={inputValue}
-               on:input={() => {color = new Color(inputValue); onSelect(color)}} />
+               on:input={() => {color = inputValue; onSelect(color)}} />
         <PipetteIcon
-          class="absolute top-0 left-0 w-6 h-6 p-1"
-          style={(color && !options.includes(color) && color.isDark()) ? "color: white" : "color: black"}
+          class="absolute top-0 left-0 w-6 h-6 p-1 text-accent-foreground"
+          style={(color && !options.includes(color)) ? `color: ${getTextColour(color)}` : ""}
         />
       </div>
     </Tooltip.Trigger>

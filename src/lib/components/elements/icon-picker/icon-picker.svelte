@@ -53,7 +53,7 @@
   let icon: IconType | undefined = undefined;
   let loading: boolean = false;
 
-  function onColourSelect(color: Color) {
+  function onColourSelect(color: string) {
     icon = {
       icon: icon?.icon ?? "",
       color: color

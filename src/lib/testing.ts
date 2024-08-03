@@ -5,7 +5,6 @@ import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
 import { constraints, employees, locations, tasks, shifts, skills } from "$lib/stores.ts";
 import { get } from "svelte/store";
 import type { IconType } from "$lib/types/ui.ts";
-import Color from "color";
 import { sample, sampleOne } from "$lib/utils.ts";
 
 const ICONIFY_ICONS = [
@@ -61,7 +60,7 @@ export function generateLocationName(): string {
 export function generateIcon(): IconType {
   return {
     icon: ICONIFY_ICONS[Math.floor(Math.random() * ICONIFY_ICONS.length)],
-    color: new Color(faker.color.rgb())
+    color: faker.color.rgb()
   };
 }
 

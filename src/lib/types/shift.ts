@@ -2,6 +2,7 @@ import { ZonedDateTime } from "@internationalized/date";
 import { v4 as uuidv4 } from "uuid";
 import type { Task } from "$lib/types/task.ts";
 import type { Person } from "$lib/types/person.ts";
+import type { Location } from "$lib/types/location.ts";
 
 export class Shift {
   uuid: string;

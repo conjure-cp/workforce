@@ -11,4 +11,4 @@
 </script>
 
 <Icon icon={icon.icon} class={className}
-      style={(icon.color && variant !== "monochrome") ? `color: ${icon.color.hex()}` : ""} />
+      style={(icon.color && variant !== "monochrome") ? `color: ${icon.color}` : ""} />
