@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Marker, Popup } from "svelte-maplibre";
   import { MapPinIcon } from "lucide-svelte";
-  import type { Location } from "$lib/types/core.ts";
+  import type { Location } from "$lib/types";
 
   let location: Location;
   let className: string = "";

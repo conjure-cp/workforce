@@ -1,6 +1,6 @@
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
-  import type { Skill } from "$lib/types/core.ts";
+  import type { Skill } from "$lib/types";
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { GraduationCapIcon, PlusIcon } from "lucide-svelte";
   import Icon from "$lib/components/ui/icon/icon.svelte";

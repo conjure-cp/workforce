@@ -1,6 +1,6 @@
 <script lang="ts">
   import PersonSelector from "$lib/components/elements/person/person-selector.svelte";
-  import type { Person } from "$lib/types/core.ts";
+  import type { Person } from "$lib/types";
   import { pad } from "$lib/utils.ts";
   import { employees } from "$lib/stores.ts";
 

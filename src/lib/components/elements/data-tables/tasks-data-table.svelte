@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Skill, Task } from "$lib/types/core.ts";
+  import { Skill, Task } from "$lib/types";
   import { tasks } from "$lib/stores.ts";
   import {
     createRender,

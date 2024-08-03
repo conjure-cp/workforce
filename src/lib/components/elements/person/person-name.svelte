@@ -1,6 +1,6 @@
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
-  import type { Person } from "$lib/types/core.ts";
+  import type { Person } from "$lib/types";
   import * as Tooltip from "$lib/components/ui/tooltip";
   import * as Avatar from "$lib/components/ui/avatar";
   import PersonTooltip from "$lib/components/elements/person/person-tooltip.svelte";

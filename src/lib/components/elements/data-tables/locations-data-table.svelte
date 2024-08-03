@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Location } from "$lib/types/core.ts";
+  import { Location } from "$lib/types";
   import { locations } from "$lib/stores.ts";
   import { createRender, DataBodyCell, FlatColumn, type ReadOrWritable } from "svelte-headless-table";
   import LocationBadge from "$lib/components/elements/location/location-badge.svelte";

@@ -1,6 +1,6 @@
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
-  import type { Task } from "$lib/types/core.ts";
+  import type { Task } from "$lib/types";
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { ClipboardIcon, PlusIcon } from "lucide-svelte";
   import Icon from "$lib/components/ui/icon/icon.svelte";

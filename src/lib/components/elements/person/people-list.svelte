@@ -1,6 +1,6 @@
 <script lang="ts">
   import PersonAvatar from "$lib/components/elements/person/person-avatar.svelte";
-  import type { Person } from "$lib/types/core.ts";
+  import type { Person } from "$lib/types";
 
   let people: Person[] = [];
   let compact: boolean = false;

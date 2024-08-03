@@ -3,7 +3,7 @@
   import Search from "$lib/components/ui/search/search.svelte";
   import TasksDataTable from "$lib/components/elements/data-tables/tasks-data-table.svelte";
   import { FlatColumn, type ReadOrWritable } from "svelte-headless-table";
-  import type { Task } from "$lib/types/core.ts";
+  import type { Task } from "$lib/types";
   import { tasks } from "$lib/stores.ts";
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Person } from "$lib/types/core.ts";
+  import type { Person } from "$lib/types";
   import { CakeIcon } from "lucide-svelte";
 
   let person: Person;

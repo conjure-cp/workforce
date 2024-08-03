@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type Person, Skill } from "$lib/types/core.ts";
+  import { type Person, Skill } from "$lib/types";
   import { employees } from "$lib/stores.ts";
   import { createRender, DataBodyCell, FlatColumn, type ReadOrWritable } from "svelte-headless-table";
   import PersonAvatar from "$lib/components/elements/person/person-avatar.svelte";

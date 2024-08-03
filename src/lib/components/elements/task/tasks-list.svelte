@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Task } from "$lib/types/core.ts";
+  import type { Task } from "$lib/types";
   import TaskBadge from "$lib/components/elements/task/task-badge.svelte";
 
   let tasks: Task[] = [];

@@ -1,4 +1,4 @@
-import { Person, Skill, Task, Location, Shift } from "$lib/types/core.ts";
+import { Person, Skill, Task, Location, Shift } from "$lib/types";
 import { fromDate } from "@internationalized/date";
 import { faker } from "@faker-js/faker";
 import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";

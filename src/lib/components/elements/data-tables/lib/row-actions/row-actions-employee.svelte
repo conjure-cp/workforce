@@ -3,7 +3,7 @@
   import Ellipsis from "lucide-svelte/icons/ellipsis";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import { Button } from "$lib/components/ui/button";
-  import type { Person } from "$lib/types/core.ts";
+  import type { Person } from "$lib/types";
   import PersonEditDialog from "$lib/components/elements/person/person-edit-dialog.svelte";
   import { employees, deleteEmployee } from "$lib/stores.ts";
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   // noinspection ES6UnusedImports
   import * as Card from "$lib/components/ui/card/index.ts";
-  import type { Shift } from "$lib/types/core.ts";
+  import type { Shift } from "$lib/types";
   import Task from "../task/task-card.svelte";
   import { ClockIcon, MapPinIcon } from "lucide-svelte";
   import { capitalize } from "$lib/utils.ts";

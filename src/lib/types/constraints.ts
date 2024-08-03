@@ -1,7 +1,9 @@
-import { Location, Person, Task } from "$lib/types/core.ts";
-
 // ToDo: Each constraint must contain an ical type to reflect the time when it applies
 // ToDo: Discuss with Oz & add more constraints
+
+import type { Person } from "$lib/types/person.ts";
+import type { Location } from "$lib/types/location.ts";
+import type { Task } from "$lib/types/task.ts";
 
 export enum ConstraintType {
   NoLocations = "NoLocations",

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Task } from "$lib/types/core.ts";
+  import type { Task } from "$lib/types";
   import PeopleSelectorList from "$lib/components/elements/person/people-selector-list.svelte";
   import { capitalize } from "$lib/utils.ts";
   import SkillsList from "$lib/components/elements/skill/skills-list.svelte";

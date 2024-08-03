@@ -10,7 +10,7 @@
   import { FilterIcon } from "lucide-svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { SidebarPosition } from "$lib/components/ui/sidebar/index.ts";
-  import { Shift } from "$lib/types/core.ts";
+  import { Shift } from "$lib/types";
   import { shifts } from "$lib/stores.ts";
   import MiniSearch from "minisearch";
 

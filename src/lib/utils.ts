@@ -4,7 +4,7 @@ import { cubicOut } from "svelte/easing";
 import type { TransitionConfig } from "svelte/transition";
 import Color from "color";
 import { faker } from "@faker-js/faker";
-import type { LngLat } from "$lib/types/core.ts";
+import type { LngLat } from "$lib/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

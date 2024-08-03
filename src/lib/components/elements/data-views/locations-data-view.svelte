@@ -3,7 +3,7 @@
   import Search from "$lib/components/ui/search/search.svelte";
   import LocationsDataTable from "$lib/components/elements/data-tables/locations-data-table.svelte";
   import { FlatColumn, type ReadOrWritable } from "svelte-headless-table";
-  import { Location } from "$lib/types/core.ts";
+  import { Location } from "$lib/types";
   import { locations } from "$lib/stores.ts";
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";

@@ -8,7 +8,7 @@
   import { Label } from "$lib/components/ui/label/index.js";
   import SkillsSelectorList from "$lib/components/elements/skill/skills-selector-list.svelte";
   import * as Avatar from "$lib/components/ui/avatar/index.js";
-  import { Person, type PersonProps } from "$lib/types/core.ts";
+  import { Person, type PersonProps } from "$lib/types";
   import { UserCircleIcon } from "lucide-svelte";
   import { getInitials } from "$lib/utils.ts";
 

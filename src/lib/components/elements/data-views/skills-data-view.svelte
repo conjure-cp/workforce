@@ -3,7 +3,7 @@
   import Search from "$lib/components/ui/search/search.svelte";
   import SkillsDataTable from "$lib/components/elements/data-tables/skills-data-table.svelte";
   import { FlatColumn, type ReadOrWritable } from "svelte-headless-table";
-  import type { Skill } from "$lib/types/core.ts";
+  import type { Skill } from "$lib/types";
   import { skills } from "$lib/stores.ts";
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";

@@ -4,7 +4,7 @@
   import * as Tooltip from "$lib/components/ui/tooltip";
   import PersonName from "$lib/components/elements/person/person-name.svelte";
   import { ClipboardXIcon, DraftingCompassIcon, MapPinOffIcon, PlusIcon, UserXIcon } from "lucide-svelte";
-  import { Location, Person, Task } from "$lib/types/core.ts";
+  import { Location, Person, Task } from "$lib/types";
 
   let constraint: Constraint | undefined;
   let popoverEnabled: boolean = true;

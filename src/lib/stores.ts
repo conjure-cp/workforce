@@ -1,5 +1,9 @@
 import { type Writable, writable } from "svelte/store";
-import { type Location, type Person, type Shift, Skill, type Task } from "$lib/types/core.ts";
+import type { Skill } from "$lib/types/skill.ts";
+import type { Person } from "$lib/types/person.ts";
+import type { Location } from "$lib/types/location.ts";
+import type { Task } from "$lib/types/task.ts";
+import type { Shift } from "$lib/types/shift.ts";
 import type { Constraint } from "$lib/types/constraints.ts";
 
 export const skills: Writable<Skill[]> = writable([]);

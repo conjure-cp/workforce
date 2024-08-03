@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Skill } from "$lib/types/core.ts";
+  import type { Skill } from "$lib/types";
   import SkillBadge from "$lib/components/elements/skill/skill-badge.svelte";
 
   let skills: Skill[] = [];

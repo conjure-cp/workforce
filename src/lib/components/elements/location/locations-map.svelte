@@ -3,7 +3,7 @@
   import { locations } from "$lib/stores.ts";
   import { findBoundingBox } from "$lib/utils.ts";
   import LocationMapMarker from "$lib/components/elements/location/location-map-marker.svelte";
-  import type { Location } from "$lib/types/core.ts";
+  import type { Location } from "$lib/types";
 
   let locs: Location[] = $locations;
   let className: string = "";

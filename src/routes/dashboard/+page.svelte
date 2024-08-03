@@ -10,7 +10,7 @@
   import PersonEditDialog from "$lib/components/elements/person/person-edit-dialog.svelte";
   import type { ComboboxItem } from "$lib/components/ui/combobox";
   import { employees, tasks } from "$lib/stores.ts";
-  import { Task } from "$lib/types/core.ts";
+  import { Task } from "$lib/types";
   import { skills } from "$lib/stores.ts";
   import { generateSkill, samplePerson } from "$lib/testing.ts";
   import { Button } from "$lib/components/ui/button";
