@@ -55,6 +55,7 @@
     "clsx": "^2.1.1",
     "cmdk-sv": "^0.0.18",
     "color": "^4.2.3",
+    "devalue": "^5.0.0",
     "lucide-svelte": "^0.416.0",
     "minisearch": "^7.1.0",
     "paneforge": "^0.0.5",
