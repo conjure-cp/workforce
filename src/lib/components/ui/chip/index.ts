@@ -22,7 +22,7 @@ export const chipClasses = {
     [ChipVariant.default]:
       "bg-muted text-muted-foreground hover:text-accent-foreground hover:outline-accent-foreground",
     [ChipVariant.outline]:
-      "outline-primary text-primary bg-background hover:bg-primary hover:text-primary-foreground hover:outline-primary",
+      "outline-muted-foreground text-muted-foreground bg-background hover:bg-accent hover:text-accent-foreground hover:outline-accent-foreground",
     [ChipVariant.primary]:
       "bg-primary text-primary-foreground hover:bg-primary/90 hover:outline-primary/90",
     [ChipVariant.destructive]: "bg-destructive/10 text-destructive hover:outline-destructive",

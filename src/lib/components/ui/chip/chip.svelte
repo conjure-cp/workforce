@@ -8,18 +8,19 @@
   let color: string | undefined = undefined;
   let className: string = "";
 
-  $: textColor = getTextColour(color);
-  $: darkenedColor = darken(color, 0.2);
+  $: chipColor = color ? color : "hsl(var(--muted-foreground) / 1)";
+  $: textColor = color ? getTextColour(color) : "white";
+  $: darkenedColor = color ? darken(color, 0.2) : "hsl(var(--muted-foreground) / 1)";
 
   export { variant, size, color, className as class };
 </script>
 
 <div
   class="group/chip {cl.base} {cl.variants[variant]} {cl.sizes[size]} {className}"
-  class:color={[ChipVariant.color, ChipVariant.colorOutline, ChipVariant.colorSolid].includes(variant) && color}
+  class:color={[ChipVariant.color, ChipVariant.colorOutline, ChipVariant.colorSolid].includes(variant)}
   class:outline={variant === ChipVariant.colorOutline}
   class:solid={variant === ChipVariant.colorSolid}
-  style="--chip-color: {color}; --chip-text-color: {textColor}; --chip-darkened-color: {darkenedColor};"
+  style="--chip-color: {chipColor}; --chip-text-color: {textColor}; --chip-darkened-color: {darkenedColor};"
 >
   <span class="group-hover/chip:hidden {$$slots.default && 'pl-2'} {$$slots.hover && 'group-hover/chip:pl-2'}">
     <slot name="icon">

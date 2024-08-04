@@ -9,9 +9,11 @@
   import Icon from "$lib/components/ui/icon/icon.svelte";
   import Search from "$lib/components/ui/search/search.svelte";
   import ColourPicker from "$lib/components/ui/color-picker/color-picker.svelte";
+  import Chip from "$lib/components/ui/chip/chip.svelte";
   import type { IconType } from "$lib/types/ui.ts";
   import { Separator } from "$lib/components/ui/separator";
   import { capitalize, stripPrefix } from "$lib/utils.js";
+  import { ChipVariant } from "$lib/components/ui/chip";
 
   const LIMIT: number = 64;
   const ICON_SET: string = "mdi";
@@ -104,12 +106,16 @@
       role="combobox"
       size="icon_lg"
       aria-expanded={open}
-      class="w-fit h-fit rounded-full p-1 overflow-visible transition-all bg-muted outline-none hover:outline-accent-foreground {icon === undefined ? 'text-muted-foreground' : ''}"
+      class="w-fit h-fit rounded-full outline-none p-0"
     >
       {#if icon !== undefined}
-        <Icon icon={icon} class="text-primary" />
+        <Chip variant={ChipVariant.colorOutline} color={icon.color}>
+          <Icon {icon} slot="icon" variant="monochrome" class="w-5 h-5" />
+        </Chip>
       {:else}
-        <ChevronDownIcon />
+        <Chip variant={ChipVariant.outline}>
+          <ChevronDownIcon slot="icon" class="w-5 h-5" />
+        </Chip>
       {/if}
     </Button>
   </Popover.Trigger>
