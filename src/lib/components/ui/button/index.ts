@@ -18,13 +18,12 @@ const buttonVariants = tv({
     size: {
       default: "h-10 rounded-md px-4 py-2 text-base",
       sm: "h-8 rounded-md px-3 py-2 text-sm",
-      lg: "h-11 rounded-md px-8 py-4 text-xl",
-      xl: "h-12 rounded-md px-8 py-4 text-2xl",
-      xxl: "h-12 rounded-md px-8 py-4 text-3xl",
+      lg: "h-11 rounded-md px-8 py-4 text-lg",
+      xl: "h-12 rounded-md px-8 py-4 text-xl",
       icon_sm: "h-8 w-8 text-sm",
       icon: "h-10 w-10 text-base",
-      icon_lg: "h-11 w-11 text-xl",
-      icon_xl: "h-12 w-12 text-2xl"
+      icon_lg: "h-11 w-11 text-lg",
+      icon_xl: "h-12 w-12 text-xl"
     }
   },
   defaultVariants: {

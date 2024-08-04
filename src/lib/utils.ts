@@ -89,7 +89,18 @@ export function isDark(color: string): boolean {
 
 export function getTextColour(bg_colour: string | undefined): string {
   if (bg_colour === undefined) return "#000000";
+  if (bg_colour === "") return "#000000";
   return isLight(bg_colour) ? "#000000" : "#ffffff";
+}
+
+export function darken(color: string, amount: number): string {
+  if (color === "") return "#000000";
+  return Color(color).darken(amount).hex();
+}
+
+export function lighten(color: string, amount: number): string {
+  if (color === "") return "#ffffff";
+  return Color(color).lighten(amount).hex();
 }
 
 export function sampleOne<T>(arr: T[]): T | undefined {

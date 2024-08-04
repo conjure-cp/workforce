@@ -47,7 +47,7 @@
         <Icon icon={icon} class="h-full w-auto opacity-50 mr-2" />
       {/if}
       {selectedValue}
-      <ChevronsUpDown class="ml-3 h-5 w-5 shrink-0 opacity-50" />
+      <ChevronsUpDown class="ml-auto h-5 w-5 shrink-0 opacity-50" />
     </Button>
   </Popover.Trigger>
   <Popover.Content class="w-[250px] p-0">
@@ -63,13 +63,13 @@
               closeAndFocusTrigger(ids.trigger);
             }}
           >
+            {option.label}
             <Check
               class={cn(
-                "mr-2 h-6 w-6",
+                "ml-auto h-5 w-5",
                 value !== option.value && "text-transparent"
               )}
             />
-            {option.label}
           </Command.Item>
         {/each}
       </Command.Group>
