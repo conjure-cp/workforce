@@ -1,4 +1,4 @@
-import { type Writable, writable } from "svelte/store";
+import { type Writable, writable, get } from "svelte/store";
 import type { Skill } from "$lib/types/skill.ts";
 import type { Person } from "$lib/types/person.ts";
 import type { Location } from "$lib/types/location.ts";
@@ -12,6 +12,10 @@ export const locations: Writable<Location[]> = writable([]);
 export const tasks: Writable<Task[]> = writable([]);
 export const constraints: Writable<Constraint[]> = writable([]);
 export const shifts: Writable<Shift[]> = writable([]);
+
+export function getConstraintsFor(item: Person | Task | Location): Constraint[] {
+  return get(constraints).filter((c) => appliesTo(c, item));
+}
 
 export function deleteEmployee(employee: Person) {
   tasks.update((list) =>

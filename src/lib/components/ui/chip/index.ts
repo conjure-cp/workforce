@@ -10,6 +10,7 @@ export enum ChipVariant {
   outline = "outline",
   primary = "primary",
   destructive = "destructive",
+  destructiveOutline = "destructiveOutline",
   color = "color",
   colorSolid = "colorSolid",
   colorOutline = "colorOutline"
@@ -25,6 +26,8 @@ export const chipClasses = {
     [ChipVariant.primary]:
       "bg-primary text-primary-foreground hover:bg-primary/90 hover:outline-primary/90",
     [ChipVariant.destructive]: "bg-destructive/10 text-destructive hover:outline-destructive",
+    [ChipVariant.destructiveOutline]:
+      "bg-destructive/10 text-destructive outline-destructive hover:bg-destructive hover:text-destructive-foreground",
     [ChipVariant.color]: "",
     [ChipVariant.colorOutline]: "",
     [ChipVariant.colorSolid]: ""

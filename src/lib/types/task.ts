@@ -34,16 +34,3 @@ export function getCandidatesForTask(task: Task): Person[] {
     required_skills.isSubsetOf(new Set(p.skills.map((s) => s.uuid)))
   );
 }
-
-export function getConstraintsForTask(task: Task): Constraint[] {
-  const constraints_list = get(constraints);
-  return constraints_list.filter((c) => {
-    switch (c.type) {
-      case ConstraintType.NO_TASK_AT_LOCATION:
-      case ConstraintType.PERSON_CANNOT_DO_TASK:
-        return c.task.uuid === task.uuid;
-      default:
-        return false;
-    }
-  });
-}

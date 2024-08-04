@@ -6,10 +6,10 @@ import type { Location } from "$lib/types/location.ts";
 import type { Task } from "$lib/types/task.ts";
 
 export enum ConstraintType {
-  NO_WORK_TOGETHER,
-  NO_PERSON_AT_LOCATION,
-  NO_TASK_AT_LOCATION,
-  PERSON_CANNOT_DO_TASK
+  NO_WORK_TOGETHER = "NO_WORK_TOGETHER",
+  NO_PERSON_AT_LOCATION = "NO_PERSON_AT_LOCATION",
+  NO_TASK_AT_LOCATION = "NO_TASK_AT_LOCATION",
+  PERSON_CANNOT_DO_TASK = "PERSON_CANNOT_DO_TASK"
 }
 
 export type NoWorkTogetherConstraint = {

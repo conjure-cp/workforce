@@ -22,16 +22,3 @@ export function createLocation(props: LocationProps): Location {
     ...props
   };
 }
-
-export function getConstraintsForLocation(location: Location): Constraint[] {
-  const constraints_list = get(constraints);
-  return constraints_list.filter((c) => {
-    switch (c.type) {
-      case ConstraintType.NO_PERSON_AT_LOCATION:
-      case ConstraintType.NO_TASK_AT_LOCATION:
-        return c.location.uuid === location.uuid;
-      default:
-        return false;
-    }
-  });
-}

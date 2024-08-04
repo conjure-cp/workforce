@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Location } from "$lib/types";
-  import { locations } from "$lib/stores.ts";
+  import { getConstraintsFor, locations } from "$lib/stores.ts";
   import { createRender, DataBodyCell, FlatColumn, type ReadOrWritable } from "svelte-headless-table";
   import LocationBadge from "$lib/components/elements/location/location-badge.svelte";
   import DataTable from "$lib/components/elements/data-tables/core/data-table.svelte";
@@ -11,7 +11,6 @@
   import type { Constraint } from "$lib/types/constraints.ts";
   import type { AnyPlugins } from "svelte-headless-table/plugins";
   import type { ColumnInitializer } from "$lib/components/elements/data-tables/core";
-  import { getConstraintsForLocation } from "$lib/types/location.ts";
 
   let data: ReadOrWritable<Location[]> = locations;
   let filterValue: Writable<string> = writable("");
@@ -48,7 +47,7 @@
     },
     {
       id: "constraints",
-      accessor: (row: Location) => getConstraintsForLocation(row),
+      accessor: (row: Location) => getConstraintsFor(row),
       header: "Constraints",
       cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, { constraints: cell.value as Constraint[] }),
       plugins: {

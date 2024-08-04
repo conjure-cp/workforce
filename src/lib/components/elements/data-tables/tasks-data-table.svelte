@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Skill, Task } from "$lib/types";
-  import { tasks } from "$lib/stores.ts";
+  import { getConstraintsFor, tasks } from "$lib/stores.ts";
   import {
     createRender,
     DataBodyCell,
@@ -71,7 +71,7 @@
     },
     {
       id: "constraints",
-      accessor: (row: Task) => getCandidatesForTask(row),
+      accessor: (row: Task) => getConstraintsFor(row),
       header: "Constraints",
       cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, { constraints: cell.value as Constraint[] }),
       plugins: {

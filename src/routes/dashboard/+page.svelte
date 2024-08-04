@@ -39,11 +39,14 @@
     <h1 class="text-2xl font-semibold">Components playground</h1>
     <section class="w-full flex flex-col gap-3">
       <h2 class="text-xl">Chip</h2>
-      <Chip />
       <Chip>
         <GraduationCapIcon slot="icon" />
       </Chip>
       <Chip>
+        <GraduationCapIcon slot="icon" />
+        <XIcon slot="hover_icon" />
+      </Chip>
+      <Chip variant={ChipVariant.outline}>
         <GraduationCapIcon slot="icon" />
         <XIcon slot="hover_icon" />
       </Chip>

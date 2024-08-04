@@ -214,32 +214,15 @@ export function generateConstraintForLocation(loc: Location): Constraint {
     }
   ];
 
-  return CONSTRAINT_GENERATORS[
-    faker.number.int({ min: 0, max: CONSTRAINT_GENERATORS.length - 1 })
-  ]();
+  return sampleOne(CONSTRAINT_GENERATORS)();
 }
 
 export function generateConstraintForTask(task: Task): Constraint {
-  const CONSTRAINT_GENERATORS: (() => Constraint)[] = [
-    () => {
-      return {
-        type: ConstraintType.NO_TASK_AT_LOCATION,
-        task: task,
-        location: sampleLocation() as Location
-      };
-    },
-    () => {
-      return {
-        type: ConstraintType.PERSON_CANNOT_DO_TASK,
-        person: samplePerson() as Person,
-        task: task
-      };
-    }
-  ];
-
-  return CONSTRAINT_GENERATORS[
-    faker.number.int({ min: 0, max: CONSTRAINT_GENERATORS.length - 1 })
-  ]();
+  return {
+    type: ConstraintType.PERSON_CANNOT_DO_TASK,
+    person: samplePerson() as Person,
+    task: task
+  };
 }
 
 export function generateConstraintForPerson(person: Person): Constraint {
@@ -259,9 +242,7 @@ export function generateConstraintForPerson(person: Person): Constraint {
     }
   ];
 
-  return CONSTRAINT_GENERATORS[
-    faker.number.int({ min: 0, max: CONSTRAINT_GENERATORS.length - 1 })
-  ]();
+  return sampleOne(CONSTRAINT_GENERATORS)();
 }
 
 export function generateConstraintForRandomLocation(): Constraint | undefined {
@@ -289,7 +270,7 @@ export function generateConstraints(n: number): Constraint[] {
     generateConstraintForRandomPerson
   ];
 
-  return Array.from({ length: n }, () =>
-    GENERATORS[faker.number.int({ min: 0, max: GENERATORS.length - 1 })]()
-  ).filter((c) => c !== undefined) as Constraint[];
+  return Array.from({ length: n }, () => sampleOne(GENERATORS)()).filter(
+    (c) => c !== undefined
+  ) as Constraint[];
 }

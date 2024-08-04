@@ -32,17 +32,3 @@ export function getAgeForPerson(person: Person): number {
   const today = new Date();
   return today.getFullYear() - person.birthday.getFullYear();
 }
-
-export function getConstraintsForPerson(person: Person): Constraint[] {
-  const constraints_list = get(constraints);
-  return constraints_list.filter((c) => {
-    switch (c.type) {
-      case ConstraintType.NO_PERSON_AT_LOCATION:
-        return c.person.uuid === person.uuid;
-      case ConstraintType.NO_WORK_TOGETHER:
-        return c.people.map((p) => p.uuid).includes(person.uuid);
-      default:
-        return false;
-    }
-  });
-}
