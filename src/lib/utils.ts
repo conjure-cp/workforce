@@ -170,6 +170,7 @@ export function getInitials(name: string): string {
     .join("");
 }
 
-export function fmtZonedDateTime(dt: ZonedDateTime): string {
+export function fmtDateTime(dt: ZonedDateTime | Date): string {
+  if (dt instanceof Date) return dt.toLocaleString([], { hour: "2-digit", minute: "2-digit" });
   return dt.toDate().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }

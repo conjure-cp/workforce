@@ -130,15 +130,15 @@ export function generateLocations(n: number): Location[] {
   return Array.from({ length: n }, generateLocation);
 }
 
-export function generateShift(): Shift | undefined {
-  const loc = sampleLocation();
-  if (loc === undefined) return undefined;
+export function generateShift(): Shift {
+  let loc = sampleLocation();
+  if (loc === undefined) loc = generateLocation();
 
   return createShift({
     name: faker.lorem.words(),
     description: faker.lorem.sentence(),
-    start_date_time: fromDate(faker.date.recent(), "UTC"),
-    end_date_time: fromDate(faker.date.soon(), "UTC"),
+    start_date_time: faker.date.recent(),
+    end_date_time: faker.date.soon(),
     location: loc,
     tasks: sampleTasks(faker.number.int({ min: 1, max: 3 }))
   });
@@ -214,7 +214,9 @@ export function generateConstraintForLocation(loc: Location): Constraint {
     }
   ];
 
-  return sampleOne(CONSTRAINT_GENERATORS)();
+  const gen = sampleOne(CONSTRAINT_GENERATORS);
+  if (gen === undefined) throw new Error("No constraint generator found");
+  else return gen();
 }
 
 export function generateConstraintForTask(task: Task): Constraint {
@@ -242,7 +244,9 @@ export function generateConstraintForPerson(person: Person): Constraint {
     }
   ];
 
-  return sampleOne(CONSTRAINT_GENERATORS)();
+  const gen = sampleOne(CONSTRAINT_GENERATORS);
+  if (gen === undefined) throw new Error("No constraint generator found");
+  else return gen();
 }
 
 export function generateConstraintForRandomLocation(): Constraint | undefined {
@@ -270,7 +274,9 @@ export function generateConstraints(n: number): Constraint[] {
     generateConstraintForRandomPerson
   ];
 
-  return Array.from({ length: n }, () => sampleOne(GENERATORS)()).filter(
-    (c) => c !== undefined
-  ) as Constraint[];
+  return Array.from({ length: n }, () => {
+    const gen = sampleOne(GENERATORS);
+    if (gen === undefined) throw new Error("No constraint generator found");
+    return gen();
+  }).filter((c) => c !== undefined) as Constraint[];
 }

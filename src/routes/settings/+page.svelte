@@ -17,8 +17,8 @@
     locations.set(generateLocations(10));
     employees.set(generatePeople(15));
     tasks.set(generateTasks(5));
-    shifts.set(generateShifts(5));
     constraints.set(generateConstraints(10));
+    shifts.set(generateShifts(5));
   }}>
     Generate dummy data
   </Button>

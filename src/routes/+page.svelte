@@ -47,18 +47,17 @@
     fields: ["name", "description", "location", "tasks", "people", "start_time", "end_time"],
     storeFields: ["name"]
   });
-  let all_shifts: Shift[];
+
   let search: string = "";
   $: search_ids = miniSearch.search(search, {
     prefix: true,
     fuzzy: 0.2
   }).map((res) => res.id);
-  $: filtered_shifts = search === "" ? all_shifts : all_shifts.filter((shift) => search_ids.includes(shift.uuid));
+  $: filtered_shifts = search === "" ? $shifts : $shifts.filter((shift) => search_ids.includes(shift.uuid));
 
   shifts.subscribe(value => {
     miniSearch.removeAll();
     miniSearch.addAllAsync(value);
-    all_shifts = value;
   });
 </script>
 
