@@ -200,16 +200,16 @@ export function generateConstraintForLocation(loc: Location): Constraint {
   const CONSTRAINT_GENERATORS: (() => Constraint)[] = [
     () => {
       return {
-        type: ConstraintType.NoTasks,
-        tasks: sampleTasks(faker.number.int({ min: 1, max: 3 })),
-        applies_to: loc
+        type: ConstraintType.NO_TASK_AT_LOCATION,
+        task: sampleTask() as Task,
+        location: loc
       };
     },
     () => {
       return {
-        type: ConstraintType.NoPeople,
-        people: samplePeople(faker.number.int({ min: 1, max: 3 })),
-        applies_to: loc
+        type: ConstraintType.NO_PERSON_AT_LOCATION,
+        person: samplePerson() as Person,
+        location: loc
       };
     }
   ];
@@ -223,16 +223,16 @@ export function generateConstraintForTask(task: Task): Constraint {
   const CONSTRAINT_GENERATORS: (() => Constraint)[] = [
     () => {
       return {
-        type: ConstraintType.NoLocations,
-        locations: sampleLocations(faker.number.int({ min: 1, max: 3 })),
-        applies_to: task
+        type: ConstraintType.NO_TASK_AT_LOCATION,
+        task: task,
+        location: sampleLocation() as Location
       };
     },
     () => {
       return {
-        type: ConstraintType.NoPeople,
-        people: samplePeople(faker.number.int({ min: 1, max: 3 })),
-        applies_to: task
+        type: ConstraintType.PERSON_CANNOT_DO_TASK,
+        person: samplePerson() as Person,
+        task: task
       };
     }
   ];
@@ -246,23 +246,15 @@ export function generateConstraintForPerson(person: Person): Constraint {
   const CONSTRAINT_GENERATORS: (() => Constraint)[] = [
     () => {
       return {
-        type: ConstraintType.NoLocations,
-        locations: sampleLocations(faker.number.int({ min: 1, max: 3 })),
-        applies_to: person
+        type: ConstraintType.NO_WORK_TOGETHER,
+        people: [person, samplePerson() as Person]
       };
     },
     () => {
       return {
-        type: ConstraintType.NoTasks,
-        tasks: sampleTasks(faker.number.int({ min: 1, max: 3 })),
-        applies_to: person
-      };
-    },
-    () => {
-      return {
-        type: ConstraintType.NoPeople,
-        people: samplePeople(faker.number.int({ min: 1, max: 3 })),
-        applies_to: person
+        type: ConstraintType.NO_PERSON_AT_LOCATION,
+        person: person,
+        location: sampleLocation() as Location
       };
     }
   ];

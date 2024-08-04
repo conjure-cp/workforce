@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import type { Constraint } from "$lib/types/constraints.ts";
+import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
 import { get } from "svelte/store";
 import { constraints } from "$lib/stores";
 
@@ -25,5 +25,13 @@ export function createLocation(props: LocationProps): Location {
 
 export function getConstraintsForLocation(location: Location): Constraint[] {
   const constraints_list = get(constraints);
-  return constraints_list.filter((c) => c.applies_to.uuid === location.uuid);
+  return constraints_list.filter((c) => {
+    switch (c.type) {
+      case ConstraintType.NO_PERSON_AT_LOCATION:
+      case ConstraintType.NO_TASK_AT_LOCATION:
+        return c.location.uuid === location.uuid;
+      default:
+        return false;
+    }
+  });
 }

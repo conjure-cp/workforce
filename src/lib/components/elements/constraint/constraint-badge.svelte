@@ -38,13 +38,16 @@
     {/if}
   {:else}
     <Tooltip.Trigger class="w-6 h-6 {className}">
-      {#if constraint.type === ConstraintType.NoTasks}
-        <ClipboardXIcon
-          class="h-6 w-6 rounded-full bg-accent outline-none hover:outline-accent-foreground transition-all" />
-      {:else if constraint.type === ConstraintType.NoPeople}
+      {#if constraint.type === ConstraintType.NO_WORK_TOGETHER}
         <UserXIcon class="h-6 w-6 rounded-full bg-accent outline-none hover:outline-accent-foreground transition-all" />
-      {:else if constraint.type === ConstraintType.NoLocations}
+      {:else if constraint.type === ConstraintType.NO_PERSON_AT_LOCATION}
         <MapPinOffIcon
+          class="h-6 w-6 rounded-full bg-accent outline-none hover:outline-accent-foreground transition-all" />
+      {:else if constraint.type === ConstraintType.NO_TASK_AT_LOCATION}
+        <MapPinOffIcon
+          class="h-6 w-6 rounded-full bg-accent outline-none hover:outline-accent-foreground transition-all" />
+      {:else if constraint.type === ConstraintType.PERSON_CANNOT_DO_TASK}
+        <ClipboardXIcon
           class="h-6 w-6 rounded-full bg-accent outline-none hover:outline-accent-foreground transition-all" />
       {:else}
         ??
@@ -52,86 +55,26 @@
     </Tooltip.Trigger>
     {#if popoverEnabled}
       <Tooltip.Content class="max-w-[250px] overflow-visible">
-        {#if constraint.type === ConstraintType.NoTasks}
-          <h3 class="font-semibold mb-1">Tasks constraint</h3>
-          {#if isLocation(constraint.applies_to)}
-            <p class="text-muted-foreground align-middle">
-              {#if constraint.tasks.length === 1}
-                {constraint.tasks[0].name} cannot be done at {constraint.applies_to.name}
-              {:else}
-                {constraint.tasks.length} tasks cannot be done at {constraint.applies_to.name}
-              {/if}
-            </p>
-          {:else if isPerson(constraint.applies_to)}
-            <p class="text-muted-foreground align-middle">
-              {#if constraint.tasks.length === 1}
-                <PersonName person={constraint.applies_to} />
-                cannot do {constraint.tasks[0].name}
-              {:else}
-                <PersonName person={constraint.applies_to} />
-                cannot do {constraint.tasks.length} tasks
-              {/if}
-            </p>
-          {:else}
-            ??
-          {/if}
-        {:else if constraint.type === ConstraintType.NoPeople}
-          <h3 class="font-semibold mb-1">Employees constraint</h3>
-          {#if isLocation(constraint.applies_to)}
-            <p class="text-muted-foreground align-middle">
-              {#if constraint.people.length === 1}
-                <PersonName person={constraint.people[0]} />
-                cannot work at {constraint.applies_to.name}
-              {:else}
-                {constraint.people.length} people cannot work at {constraint.applies_to.name}
-              {/if}
-            </p>
-          {:else if isPerson(constraint.applies_to)}
-            <p class="text-muted-foreground align-middle">
-              {#if constraint.people.length === 1}
-                <PersonName person={constraint.applies_to} />
-                cannot work with
-                <PersonName person={constraint.people[0]} />
-              {:else}
-                <PersonName person={constraint.applies_to} />
-                cannot work with {constraint.people.length} people
-              {/if}
-            </p>
-          {:else if isTask(constraint.applies_to)}
-            <p class="text-muted-foreground align-middle">
-              {#if constraint.people.length === 1}
-                <PersonName person={constraint.people[0]} />
-                cannot do {constraint.applies_to.name}
-              {:else}
-                {constraint.people.length} people cannot do {constraint.applies_to.name}
-              {/if}
-            </p>
-          {:else}
-            ??
-          {/if}
-        {:else if constraint.type === ConstraintType.NoLocations}
-          <h3 class="font-semibold mb-1">Locations constraint</h3>
-          {#if isPerson(constraint.applies_to)}
-            <p class="text-muted-foreground align-middle">
-              {#if constraint.locations.length === 1}
-                <PersonName person={constraint.applies_to} />
-                cannot work at {constraint.locations[0].name}
-              {:else}
-                <PersonName person={constraint.applies_to} />
-                cannot work at {constraint.locations.length} locations
-              {/if}
-            </p>
-          {:else if isTask(constraint.applies_to)}
-            <p class="text-muted-foreground align-middle">
-              {#if constraint.locations.length === 1}
-                {constraint.applies_to.name} cannot be done at {constraint.locations[0].name}
-              {:else}
-                {constraint.applies_to.name} cannot be done at {constraint.locations.length} locations
-              {/if}
-            </p>
-          {:else}
-            ??
-          {/if}
+        {#if constraint.type === ConstraintType.NO_WORK_TOGETHER}
+          <p class="align-middle">
+            <PersonName person={constraint.people[0]} />
+            cannot work with
+            <PersonName person={constraint.people[1]} />
+          </p>
+        {:else if constraint.type === ConstraintType.NO_PERSON_AT_LOCATION}
+          <p class="align-middle">
+            <PersonName person={constraint.person} />
+            cannot work at {constraint.location.name}
+          </p>
+        {:else if constraint.type === ConstraintType.NO_TASK_AT_LOCATION}
+          <p>
+            Task "{constraint.task.name}" cannot be done at {constraint.location.name}
+          </p>
+        {:else if constraint.type === ConstraintType.PERSON_CANNOT_DO_TASK}
+          <p>
+            <PersonName person={constraint.person} />
+            cannot do task "{constraint.task.name}"
+          </p>
         {:else}
           ??
         {/if}

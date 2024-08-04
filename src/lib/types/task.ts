@@ -1,5 +1,5 @@
 import type { IconType } from "$lib/types/ui.ts";
-import type { Constraint } from "$lib/types/constraints.ts";
+import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
 import { get } from "svelte/store";
 import type { Skill } from "$lib/types/skill.ts";
 import type { Person } from "$lib/types/person.ts";
@@ -27,15 +27,23 @@ export function createTask(props: TaskProps): Task {
   };
 }
 
-export function getConstraintsForTask(task: Task): Constraint[] {
-  const constraints_list = get(constraints);
-  return constraints_list.filter((c) => c.applies_to.uuid === task.uuid);
-}
-
 export function getCandidatesForTask(task: Task): Person[] {
   const employees_list = get(employees);
   const required_skills = new Set(task.required_skills.map((s) => s.uuid));
   return employees_list.filter((p) =>
     required_skills.isSubsetOf(new Set(p.skills.map((s) => s.uuid)))
   );
+}
+
+export function getConstraintsForTask(task: Task): Constraint[] {
+  const constraints_list = get(constraints);
+  return constraints_list.filter((c) => {
+    switch (c.type) {
+      case ConstraintType.NO_TASK_AT_LOCATION:
+      case ConstraintType.PERSON_CANNOT_DO_TASK:
+        return c.task.uuid === task.uuid;
+      default:
+        return false;
+    }
+  });
 }

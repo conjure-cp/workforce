@@ -71,7 +71,7 @@
             <Check
               class={cn(
                 "ml-auto h-6 w-6",
-                (skill && skill.uuid !== option.uuid) && "text-transparent"
+                skill?.uuid !== option.uuid && "text-transparent"
               )}
             />
           </Command.Item>

@@ -4,7 +4,7 @@ import type { Person } from "$lib/types/person.ts";
 import type { Location } from "$lib/types/location.ts";
 import type { Task } from "$lib/types/task.ts";
 import type { Shift } from "$lib/types/shift.ts";
-import type { Constraint } from "$lib/types/constraints.ts";
+import { appliesTo, type Constraint } from "$lib/types/constraints.ts";
 
 export const skills: Writable<Skill[]> = writable([]);
 export const employees: Writable<Person[]> = writable([]);
@@ -20,15 +20,6 @@ export function deleteEmployee(employee: Person) {
       return t;
     })
   );
-  constraints.update((list) =>
-    list
-      .filter((c) => c.applies_to.uuid !== employee.uuid)
-      .map((c) => {
-        if (c.type === "NoPeople") {
-          c.people = c.people.filter((p) => p.uuid !== employee.uuid);
-        }
-        return c;
-      })
-  );
+  constraints.update((list) => list.filter((c) => !appliesTo(c, employee)));
   employees.update((list) => list.filter((e) => e.uuid !== employee.uuid));
 }
