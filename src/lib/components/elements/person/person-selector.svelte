@@ -55,7 +55,7 @@
     <Command.Root>
       <Command.Input placeholder="Search" />
       <Command.Empty>No people found</Command.Empty>
-      <Command.Group>
+      <Command.Group class="max-h-[250px] overflow-y-scroll">
         {#each filtered_options as option}
           <Command.Item
             value="{option.name};{option.job_title};{option.uuid}"

@@ -64,7 +64,6 @@
     try {
       const response = await fetch(`https://api.iconify.design/search?query=${query}&prefix=${ICON_SET}&limit=${LIMIT}`);
       const data = await response.json();
-      console.log(data);
       iconList.set(data.icons);
     } catch (error) {
       console.error("Error fetching icon list", error);
@@ -91,10 +90,6 @@
     tick().then(() => {
       document.getElementById(triggerId)?.focus();
     });
-  }
-
-  $: {
-    console.log("Icon", icon);
   }
 
   export { icon, className as class };

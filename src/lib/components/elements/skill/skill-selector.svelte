@@ -21,7 +21,7 @@
   let compact: boolean = true;
   let open: boolean = false;
   let className: string = "";
-  
+
   let filter: Filter = () => true;
   let onChange: OnChange = (_, new_value) => new_value;
 
@@ -57,7 +57,7 @@
     <Command.Root>
       <Command.Input placeholder="Search" />
       <Command.Empty>No skills found</Command.Empty>
-      <Command.Group>
+      <Command.Group class="max-h-[250px] overflow-y-scroll">
         {#each filtered_options as option}
           <Command.Item
             value="{option.name};{option.uuid}"

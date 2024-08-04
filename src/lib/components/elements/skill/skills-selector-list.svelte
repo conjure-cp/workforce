@@ -18,8 +18,6 @@
     } else {
       skills = skills.filter((s) => s !== undefined);
     }
-
-    console.log(skills);
   }
 
   function chooseVariant(s: Skill | undefined, i: number) {
