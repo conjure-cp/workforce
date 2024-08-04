@@ -36,7 +36,7 @@
   }
 
   // noinspection ReservedWordAsName
-  export { person, options, variant, icon_variant, placeholder, onChange, filter, className as class };
+  export { person, options, variant, placeholder, onChange, filter, className as class };
 </script>
 
 <Popover.Root bind:open let:ids>
