@@ -1,9 +1,8 @@
 import type { IconType } from "$lib/types/ui.ts";
-import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
 import { get } from "svelte/store";
 import type { Skill } from "$lib/types/skill.ts";
 import type { Person } from "$lib/types/person.ts";
-import { constraints, employees } from "$lib/stores";
+import { employees } from "$lib/stores";
 import { v4 as uuidv4 } from "uuid";
 
 export interface TaskProps {

@@ -17,7 +17,6 @@
   import type { Constraint } from "$lib/types/constraints.ts";
   import type { AnyPlugins } from "svelte-headless-table/plugins";
   import type { ColumnInitializer } from "$lib/components/elements/data-tables/core";
-  import { getCandidatesForTask } from "$lib/types/task.ts";
 
   let data: ReadOrWritable<Task[]> = tasks;
   let filterValue: Writable<string> = writable("");

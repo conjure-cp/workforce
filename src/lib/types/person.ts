@@ -1,7 +1,4 @@
 import { getInitials } from "$lib/utils.ts";
-import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
-import { get } from "svelte/store";
-import { constraints } from "$lib/stores";
 import type { Skill } from "$lib/types/skill.ts";
 import { v4 as uuidv4 } from "uuid";
 

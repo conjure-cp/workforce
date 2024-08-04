@@ -1,7 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
-import { get } from "svelte/store";
-import { constraints } from "$lib/stores";
 
 export type LngLat = [number, number];
 
