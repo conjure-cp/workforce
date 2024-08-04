@@ -5,7 +5,7 @@
 
   let variant: ChipVariant = ChipVariant.default;
   let size: ChipSize = ChipSize.md;
-  let color: string = "";
+  let color: string | undefined = undefined;
   let className: string = "";
 
   $: textColor = getTextColour(color);

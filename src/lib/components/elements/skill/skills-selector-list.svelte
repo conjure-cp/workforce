@@ -3,6 +3,7 @@
   import { skills as skillsStore } from "$lib/stores";
   import type { Skill } from "$lib/types";
   import { pad } from "$lib/utils.ts";
+  import { ChipVariant } from "$lib/components/ui/chip";
 
   let options: Skill[] = $skillsStore;
   let skills: (Skill | undefined)[] = [];
@@ -24,11 +25,11 @@
   function chooseVariant(s: Skill | undefined, i: number) {
     if (n_skills !== undefined && i < n_skills) {
       if (s === undefined) {
-        return "destructive";
+        return ChipVariant.destructive;
       }
     }
 
-    return "default";
+    return ChipVariant.default;
   }
 
   function hasSkill(skills: (Skill | undefined)[], skill: Skill | undefined) {
@@ -56,7 +57,6 @@
                      return undefined;
                    }}
                    compact={compact}
-                   icon_variant="plus"
                    filter={(s) => s !== undefined && !hasSkill(skills, s)} />
   {/if}
 </div>

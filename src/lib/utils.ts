@@ -93,12 +93,14 @@ export function getTextColour(bg_colour: string | undefined): string {
   return isLight(bg_colour) ? "#000000" : "#ffffff";
 }
 
-export function darken(color: string, amount: number): string {
+export function darken(color: string | undefined, amount: number): string {
+  if (color === undefined) return "#000000";
   if (color === "") return "#000000";
   return Color(color).darken(amount).hex();
 }
 
-export function lighten(color: string, amount: number): string {
+export function lighten(color: string | undefined, amount: number): string {
+  if (color === undefined) return "#ffffff";
   if (color === "") return "#ffffff";
   return Color(color).lighten(amount).hex();
 }

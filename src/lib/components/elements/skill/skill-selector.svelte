@@ -5,22 +5,23 @@
   import * as Popover from "$lib/components/ui/popover";
   import { Button } from "$lib/components/ui/button";
   import SkillBadge from "$lib/components/elements/skill/skill-badge.svelte";
-  import { cn } from "$lib/utils.js";
+  import { capitalize, cn } from "$lib/utils.js";
   import { tick } from "svelte";
   import { skills } from "$lib/stores.ts";
   import type { Skill } from "$lib/types";
+  import { ChipVariant } from "$lib/components/ui/chip";
 
   type Filter = (s: Skill | undefined) => boolean;
   type OnChange = (old_value: Skill | undefined, new_value: Skill | undefined) => Skill | undefined;
 
-  let open = false;
   let skill: Skill | undefined = undefined;
   let options: Skill[] = $skills;
-  let variant: "default" | "destructive" = "default";
-  let icon_variant: "default" | "placeholder" | "plus" = "default";
+  let variant: ChipVariant = ChipVariant.default;
   let placeholder: string = "Choose a skill";
   let compact: boolean = true;
+  let open: boolean = false;
   let className: string = "";
+  
   let filter: Filter = () => true;
   let onChange: OnChange = (_, new_value) => new_value;
 
@@ -37,7 +38,7 @@
   }
 
   // noinspection ReservedWordAsName
-  export { skill, variant, icon_variant, compact, placeholder, options, filter, onChange, className as class };
+  export { skill, variant, compact, placeholder, options, filter, onChange, className as class };
 </script>
 
 <Popover.Root bind:open let:ids>
@@ -49,7 +50,7 @@
       aria-expanded={open}
       class="w-fit h-fit !p-0 rounded-full overflow-visible"
     >
-      <SkillBadge {skill} {variant} {icon_variant} {placeholder} {compact} />
+      <SkillBadge {skill} {variant} {placeholder} {compact} />
     </Button>
   </Popover.Trigger>
   <Popover.Content class="w-[200px] p-0">
@@ -67,7 +68,7 @@
             class="flex flex-row items-center justify-start gap-2"
           >
             <SkillBadge skill={option} compact={true} />
-            {option.name}
+            {capitalize(option.name)}
             <Check
               class={cn(
                 "ml-auto h-6 w-6",
