@@ -1,1 +1,0 @@
-import{v as u}from"./scheduler.BnYkJXHO.js";import{v as a,e as o}from"./person.BFqpHn8l.js";function m(e){return{uuid:a(),...e}}function d(e){const t=u(o),r=new Set(e.required_skills.map(s=>s.uuid));return t.filter(s=>r.isSubsetOf(new Set(s.skills.map(i=>i.uuid))))}export{m as c,d as g};

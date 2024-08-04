@@ -1,1 +1,0 @@
-import{v as r,c as o,C as n}from"./person.BFqpHn8l.js";import{v as a}from"./scheduler.BnYkJXHO.js";function u(t){return{uuid:r(),...t}}function _(t){return a(o).filter(s=>{switch(s.type){case n.NO_PERSON_AT_LOCATION:case n.NO_TASK_AT_LOCATION:return s.location.uuid===t.uuid;default:return!1}})}export{u as c,_ as g};
