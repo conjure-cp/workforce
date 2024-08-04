@@ -3,6 +3,7 @@
   import type { Person } from "$lib/types";
   import { pad } from "$lib/utils.ts";
   import { employees } from "$lib/stores.ts";
+  import { ChipVariant } from "$lib/components/ui/chip";
 
   let options: Person[] = $employees;
   let people: (Person | undefined)[] = [];
@@ -19,11 +20,11 @@
   function chooseVariant(p: Person | undefined, i: number) {
     if (i < min_people) {
       if (p === undefined) {
-        return "destructive";
+        return ChipVariant.destructive;
       }
     }
 
-    return "default";
+    return ChipVariant.default;
   }
 
   function hasPerson(people: (Person | undefined)[], person: Person | undefined) {

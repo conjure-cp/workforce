@@ -9,6 +9,7 @@
   import { tick } from "svelte";
   import { employees } from "$lib/stores.ts";
   import type { Person } from "$lib/types";
+  import { ChipVariant } from "$lib/components/ui/chip";
 
   type Filter = (s: Person | undefined) => boolean;
   type OnChange = (old_value: Person | undefined, new_value: Person | undefined) => Person | undefined;
@@ -16,8 +17,7 @@
   let open = false;
   let person: Person | undefined = undefined;
   let options: Person[] = $employees;
-  let variant: "default" | "destructive" = "default";
-  let icon_variant: "default" | "placeholder" | "plus" = "default";
+  let variant: ChipVariant = ChipVariant.default;
   let placeholder: string = "Assign person";
   let className: string = "";
   let filter: Filter = () => true;
@@ -48,7 +48,7 @@
       aria-expanded={open}
       class="w-10 h-10 rounded-full overflow-visible"
     >
-      <PersonAvatar person={person} variant={variant} icon_variant={icon_variant} placeholder={placeholder} />
+      <PersonAvatar person={person} variant={variant} placeholder={placeholder} />
     </Button>
   </Popover.Trigger>
   <Popover.Content class="w-[250px] p-0">

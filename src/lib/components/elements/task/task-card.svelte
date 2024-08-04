@@ -23,5 +23,6 @@
     {/if}
   {/if}
 
-  <PeopleSelectorList people={task.people} min_people={task.min_people} max_people={task.max_people} />
+  <PeopleSelectorList people={task.people} min_people={task.min_people} max_people={task.max_people}
+                      class="mt-3 ml-0.5" />
 </div>
