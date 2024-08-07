@@ -1,5 +1,5 @@
 import{J as U,s as P,o as V,l as S,D as F,w as z,E as H,b as L,f as N,G as y,i as j,h as X,u as Y,p as Z,q as p,x,K as I,m as D}from"./scheduler.D8qTjLsa.js";import{b as Q,t as R,S as $,i as ee}from"./index.0MdJMp89.js";import{g as T}from"./index.CMkSj3Qc.js";function G(l){return(l==null?void 0:l.length)!==void 0?l:Array.from(l)}function oe(l,t){Q(l,1,1,()=>{t.delete(l.key)})}function ae(l,t,o,i,n,h,r,f,g,u,c,k){let e=l.length,a=h.length,s=e;const v={};for(;s--;)v[l[s].key]=s;const b=[],w=new Map,C=new Map,q=[];for(s=a;s--;){const d=k(n,h,s),m=o(d);let _=r.get(m);_?q.push(()=>_.p(d,t)):(_=u(m,d),_.c()),w.set(m,b[s]=_),m in v&&C.set(m,Math.abs(s-v[m]))}const A=new Set,B=new Set;function E(d){R(d,1),d.m(f,c),r.set(d.key,d),c=d.first,a--}for(;e&&a;){const d=b[a-1],m=l[e-1],_=d.key,W=m.key;d===m?(c=d.first,e--,a--):w.has(W)?!r.has(_)||A.has(_)?E(d):B.has(W)?e--:C.get(_)>C.get(W)?(B.add(_),E(d)):(A.add(W),e--):(g(m,r),e--)}for(;e--;){const d=l[e];w.has(d.key)||g(d,r)}for(;a;)E(b[a-1]);return U(q),b}/**
- * @license lucide-svelte v0.416.0 - ISC
+ * @license lucide-svelte v0.424.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
