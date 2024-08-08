@@ -8,7 +8,6 @@
   import { getIcon } from "./lib/utils.ts";
   import { ChipVariant } from "$lib/components/ui/chip";
   import { DraftingCompassIcon, PlusIcon } from "lucide-svelte";
-  import type { IconType } from "$lib/types/ui.ts";
 
   let constraint: Constraint | undefined;
   let forOperand: ConstraintOperand | undefined = undefined;
