@@ -13,8 +13,7 @@
   import { writable, type Writable } from "svelte/store";
   import { createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
   import { capitalize } from "$lib/utils.ts";
-  import ConstraintsList from "$lib/components/elements/constraint/constraints-list.svelte";
-  import type { Constraint } from "$lib/types/constraints.ts";
+  import ConstraintsList from "$lib/components/elements/constraint/constraints-for-list.svelte";
   import type { AnyPlugins } from "svelte-headless-table/plugins";
   import type { ColumnInitializer } from "$lib/components/elements/data-tables/core";
 
@@ -70,15 +69,15 @@
     },
     {
       id: "constraints",
-      accessor: (row: Task) => getConstraintsFor(row),
+      accessor: (row: Task) => row,
       header: "Constraints",
-      cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, { constraints: cell.value as Constraint[] }),
+      cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, { forOperand: cell.value as Task }),
       plugins: {
         tableFilter: {
-          getFilterValue: (value: Constraint[]) => value.map((constraint) => constraint.type).join(" ")
+          getFilterValue: (value: Task) => getConstraintsFor(value).map((constraint) => constraint.type).join(" ")
         },
         sort: {
-          getSortValue: (value: Constraint[]) => value.map((constraint) => constraint.type).join(" ")
+          getSortValue: (value: Task) => getConstraintsFor(value).map((constraint) => constraint.type).join(" ")
         }
       }
     }

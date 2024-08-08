@@ -7,7 +7,7 @@
   let forOperand: ConstraintOperand | undefined = undefined;
 
   function getOp2(constraint: Constraint, op1: ConstraintOperand) {
-    const rest = getOperands(constraint).filter((op) => op !== op1);
+    const rest = getOperands(constraint).filter((op) => op.uuid !== op1.uuid);
     return rest.length > 0 ? rest[0] : undefined;
   }
 

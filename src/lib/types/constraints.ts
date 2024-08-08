@@ -44,5 +44,7 @@ export function getOperands(constraint: Constraint): ConstraintOperand[] {
 }
 
 export function appliesTo(constraint: Constraint, item: ConstraintOperand): boolean {
-  return getOperands(constraint).includes(item);
+  return getOperands(constraint)
+    .map((o) => o.uuid)
+    .includes(item.uuid);
 }

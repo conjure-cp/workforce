@@ -8,6 +8,7 @@
   import { getIcon } from "./lib/utils.ts";
   import { ChipVariant } from "$lib/components/ui/chip";
   import { DraftingCompassIcon, PlusIcon } from "lucide-svelte";
+  import type { IconType } from "$lib/types/ui.ts";
 
   let constraint: Constraint | undefined;
   let forOperand: ConstraintOperand | undefined = undefined;
@@ -17,12 +18,14 @@
   let className: string = "";
 
   const assignedVariant: ChipVariant = ChipVariant.destructiveOutline;
-  $: icon = { icon: getIcon(constraint, forOperand), color: undefined };
+  $: icon = {
+    icon: getIcon(constraint, forOperand),
+    color: undefined
+  };
 
   // noinspection ReservedWordAsName
   export { constraint, forOperand, variant, popoverEnabled, placeholder, className as class };
 </script>
-
 
 <Tooltip.Root>
   <Tooltip.Trigger>

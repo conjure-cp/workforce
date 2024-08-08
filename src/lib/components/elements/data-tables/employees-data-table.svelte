@@ -4,7 +4,7 @@
   import { createRender, DataBodyCell, FlatColumn, type ReadOrWritable } from "svelte-headless-table";
   import PersonAvatar from "$lib/components/elements/person/person-avatar.svelte";
   import SkillsList from "$lib/components/elements/skill/skills-list.svelte";
-  import ConstraintsList from "$lib/components/elements/constraint/constraints-list.svelte";
+  import ConstraintsList from "$lib/components/elements/constraint/constraints-for-list.svelte";
   import DataTable from "$lib/components/elements/data-tables/core/data-table.svelte";
   import RowActionsEmployee from "$lib/components/elements/data-tables/lib/row-actions/row-actions-employee.svelte";
   import { writable, type Writable } from "svelte/store";
@@ -68,7 +68,6 @@
       accessor: (row: Person) => row,
       header: "Constraints",
       cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, {
-        constraints: getConstraintsFor(cell.value as Person),
         forOperand: cell.value as Person
       }),
       plugins: {

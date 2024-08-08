@@ -22,11 +22,10 @@ export function getIcon(
   }
 
   if (forOperand !== undefined) {
-    const opSet = new Set(getOperands(constraint));
-    opSet.delete(forOperand);
+    const opSet = getOperands(constraint).filter((op) => op.uuid !== forOperand.uuid);
 
-    if (opSet.size === 1) {
-      const opType = Array.from(opSet)[0].type;
+    if (opSet.length === 1) {
+      const opType = opSet[0].type;
       const icon = OPERAND_ICONS.get(opType);
       if (icon !== undefined) {
         return icon;

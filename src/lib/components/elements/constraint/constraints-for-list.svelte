@@ -1,12 +1,14 @@
 <script lang="ts">
   import ConstraintBadge from "$lib/components/elements/constraint/constraint-badge.svelte";
-  import { type Constraint, type ConstraintOperand } from "$lib/types/constraints.ts";
+  import { type ConstraintOperand } from "$lib/types/constraints.ts";
+  import { getConstraintsFor } from "$lib/stores.ts";
 
-  let constraints: Constraint[] = [];
-  let forOperand: ConstraintOperand | undefined = undefined;
+  let forOperand: ConstraintOperand;
   let placeholder: string = "No constraints";
 
-  export { constraints, forOperand };
+  $: constraints = getConstraintsFor(forOperand);
+
+  export { forOperand };
 </script>
 
 {#if constraints.length > 0}
