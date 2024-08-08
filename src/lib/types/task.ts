@@ -4,6 +4,7 @@ import type { Skill } from "$lib/types/skill.ts";
 import type { Person } from "$lib/types/person.ts";
 import { employees } from "$lib/stores";
 import { v4 as uuidv4 } from "uuid";
+import { Type } from "$lib/types/index.ts";
 
 export interface TaskProps {
   name: string;
@@ -17,11 +18,13 @@ export interface TaskProps {
 
 export interface Task extends TaskProps {
   uuid: string;
+  type: Type.Task;
 }
 
 export function createTask(props: TaskProps): Task {
   return {
     uuid: uuidv4(),
+    type: Type.Task,
     ...props
   };
 }

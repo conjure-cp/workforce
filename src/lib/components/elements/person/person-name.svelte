@@ -22,7 +22,7 @@
         <Avatar.Fallback>{getInitialsForPerson(person)}</Avatar.Fallback>
       </Avatar.Root>
     {/if}
-    {person.name}
+    <b>{person.name}</b>
   </Tooltip.Trigger>
   {#if popoverEnabled}
     <Tooltip.Content>

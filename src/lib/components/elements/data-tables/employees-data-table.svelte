@@ -9,7 +9,6 @@
   import RowActionsEmployee from "$lib/components/elements/data-tables/lib/row-actions/row-actions-employee.svelte";
   import { writable, type Writable } from "svelte/store";
   import { type AnyPlugins, createSortKeysStore, type WritableSortKeys } from "svelte-headless-table/plugins";
-  import type { Constraint } from "$lib/types/constraints.ts";
   import type { ColumnInitializer } from "$lib/components/elements/data-tables/core";
   import { getAgeForPerson } from "$lib/types/person.ts";
 
@@ -66,15 +65,18 @@
     },
     {
       id: "constraints",
-      accessor: (row: Person) => getConstraintsFor(row),
+      accessor: (row: Person) => row,
       header: "Constraints",
-      cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, { constraints: cell.value as Constraint[] }),
+      cell: (cell: DataBodyCell<unknown>) => createRender(ConstraintsList, {
+        constraints: getConstraintsFor(cell.value as Person),
+        forOperand: cell.value as Person
+      }),
       plugins: {
         tableFilter: {
-          getFilterValue: (value: Constraint[]) => value.map((constraint) => constraint.type).join(" ")
+          getFilterValue: (value: Person) => getConstraintsFor(value).map((constraint) => constraint.type).join(" ")
         },
         sort: {
-          getSortValue: (value: Constraint[]) => value.map((constraint) => constraint.type).join(" ")
+          getSortValue: (value: Person) => getConstraintsFor(value).map((constraint) => constraint.type).join(" ")
         }
       }
     },

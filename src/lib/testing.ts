@@ -1,5 +1,4 @@
 import type { Person, Skill, Task, Location, Shift } from "$lib/types";
-import { fromDate } from "@internationalized/date";
 import { faker } from "@faker-js/faker";
 import { type Constraint, ConstraintType } from "$lib/types/constraints.ts";
 import { constraints, employees, locations, tasks, shifts, skills } from "$lib/stores.ts";
@@ -200,16 +199,30 @@ export function generateConstraintForLocation(loc: Location): Constraint {
   const CONSTRAINT_GENERATORS: (() => Constraint)[] = [
     () => {
       return {
-        type: ConstraintType.NO_TASK_AT_LOCATION,
+        type: ConstraintType.NoTask,
         task: sampleTask() as Task,
-        location: loc
+        applies_to: loc
       };
     },
     () => {
       return {
-        type: ConstraintType.NO_PERSON_AT_LOCATION,
+        type: ConstraintType.NoPerson,
         person: samplePerson() as Person,
-        location: loc
+        applies_to: loc
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoLocation,
+        location: loc,
+        applies_to: sampleTask() as Task
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoLocation,
+        location: loc,
+        applies_to: samplePerson() as Person
       };
     }
   ];
@@ -220,26 +233,70 @@ export function generateConstraintForLocation(loc: Location): Constraint {
 }
 
 export function generateConstraintForTask(task: Task): Constraint {
-  return {
-    type: ConstraintType.PERSON_CANNOT_DO_TASK,
-    person: samplePerson() as Person,
-    task: task
-  };
+  const CONSTRAINT_GENERATORS: (() => Constraint)[] = [
+    () => {
+      return {
+        type: ConstraintType.NoTask,
+        task: task,
+        applies_to: sampleLocation() as Location
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoTask,
+        task: task,
+        applies_to: samplePerson() as Person
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoLocation,
+        location: sampleLocation() as Location,
+        applies_to: task
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoPerson,
+        person: samplePerson() as Person,
+        applies_to: task
+      };
+    }
+  ];
+
+  const gen = sampleOne(CONSTRAINT_GENERATORS);
+  if (gen === undefined) throw new Error("No constraint generator found");
+  else return gen();
 }
 
 export function generateConstraintForPerson(person: Person): Constraint {
   const CONSTRAINT_GENERATORS: (() => Constraint)[] = [
     () => {
       return {
-        type: ConstraintType.NO_WORK_TOGETHER,
-        people: [person, samplePerson() as Person]
+        type: ConstraintType.NoPerson,
+        person: person,
+        applies_to: sampleLocation() as Location
       };
     },
     () => {
       return {
-        type: ConstraintType.NO_PERSON_AT_LOCATION,
+        type: ConstraintType.NoPerson,
         person: person,
-        location: sampleLocation() as Location
+        applies_to: sampleTask() as Task
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoLocation,
+        location: sampleLocation() as Location,
+        applies_to: person
+      };
+    },
+    () => {
+      return {
+        type: ConstraintType.NoTask,
+        task: sampleTask() as Task,
+        applies_to: person
       };
     }
   ];

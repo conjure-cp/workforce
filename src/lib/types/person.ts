@@ -1,6 +1,7 @@
 import { getInitials } from "$lib/utils.ts";
 import type { Skill } from "$lib/types/skill.ts";
 import { v4 as uuidv4 } from "uuid";
+import { Type } from "$lib/types/index.ts";
 
 export interface PersonProps {
   name: string;
@@ -12,11 +13,13 @@ export interface PersonProps {
 
 export interface Person extends PersonProps {
   uuid: string;
+  type: Type.Person;
 }
 
 export function createPerson(props: PersonProps): Person {
   return {
     uuid: uuidv4(),
+    type: Type.Person,
     ...props
   };
 }

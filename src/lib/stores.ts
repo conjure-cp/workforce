@@ -4,7 +4,7 @@ import type { Person } from "$lib/types/person.ts";
 import type { Location } from "$lib/types/location.ts";
 import type { Task } from "$lib/types/task.ts";
 import type { Shift } from "$lib/types/shift.ts";
-import { appliesTo, type Constraint } from "$lib/types/constraints.ts";
+import { appliesTo, type Constraint, type ConstraintOperand } from "$lib/types/constraints.ts";
 import { persisted } from "svelte-persisted-store";
 import * as devalue from "devalue";
 
@@ -15,7 +15,7 @@ export const tasks = persisted<Task[]>("tasks", [], { serializer: devalue });
 export const constraints = persisted<Constraint[]>("constraints", [], { serializer: devalue });
 export const shifts = persisted<Shift[]>("shifts", [], { serializer: devalue });
 
-export function getConstraintsFor(item: Person | Task | Location): Constraint[] {
+export function getConstraintsFor(item: ConstraintOperand): Constraint[] {
   return get(constraints).filter((c) => appliesTo(c, item));
 }
 

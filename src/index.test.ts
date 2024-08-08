@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import type { Shift, Location, Person, Task, Skill } from "$lib/types";
+import { describe, expect, it } from "vitest";
+import { type Location, type Person, type Shift, type Skill, type Task, Type } from "$lib/types";
 import * as devalue from "devalue";
 import {
   generateLocation,
@@ -12,6 +12,8 @@ import {
 describe("Serialization", () => {
   it("should serialize a location", () => {
     const location: Location = generateLocation();
+
+    console.assert(location.type === Type.Location);
 
     const serialized = devalue.stringify(location);
     console.log(serialized);
@@ -28,6 +30,8 @@ describe("Serialization", () => {
 
   it("should serialize a person", () => {
     const person: Person = generatePerson();
+
+    console.assert(person.type === Type.Person);
 
     const serialized = devalue.stringify(person);
     console.log(serialized);
@@ -61,6 +65,8 @@ describe("Serialization", () => {
   it("should serialize a shift", () => {
     const shift: Shift = generateShift();
 
+    console.assert(shift.type === Type.Shift);
+
     const serialized = devalue.stringify(shift);
     console.log(serialized);
 
@@ -76,6 +82,8 @@ describe("Serialization", () => {
 
   it("should serialize a skill", () => {
     const skill: Skill = generateSkill();
+
+    console.assert(skill.type === Type.Skill);
 
     const serialized = devalue.stringify(skill);
     console.log(serialized);

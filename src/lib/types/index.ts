@@ -5,4 +5,12 @@ import type { Task } from "$lib/types/task.ts";
 import type { Shift } from "$lib/types/shift.ts";
 import type { Constraint } from "$lib/types/constraints.ts";
 
+export enum Type {
+  Person = "Person",
+  Location = "Location",
+  Task = "Task",
+  Shift = "Shift",
+  Skill = "Skill"
+}
+
 export type { Skill, Person, Location, Task, Shift, PersonProps, Constraint };
