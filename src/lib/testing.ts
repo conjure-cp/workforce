@@ -53,14 +53,84 @@ const LOCATION_WORDS = [
   "Clinic"
 ];
 
+const TASK_WORDS = [
+  "Cleaning",
+  "Front Desk",
+  "Stocking",
+  "Cooking",
+  "Delivery",
+  "Maintenance",
+  "Security",
+  "Customer Service",
+  "Code Review",
+  "Management",
+  "Research",
+  "Design",
+  "Teaching",
+  "Training",
+  "Writing",
+  "Editing",
+  "Marketing",
+  "Sales",
+  "Support",
+  "QA"
+];
+
+const TASK_SUFFIXES = [
+  "Worker",
+  "Staff",
+  "Manager",
+  "Supervisor",
+  "Specialist",
+  "Assistant",
+  "Associate",
+  "Consultant",
+  "Analyst",
+  "Engineer",
+  "Technician"
+];
+
+const SHIFT_PREFIXES = [
+  "Morning",
+  "Afternoon",
+  "Evening",
+  "Night",
+  "Weekend",
+  "Holiday",
+  "Remote",
+  "On-Site",
+  "Training",
+  "Emergency"
+];
+
 const LOCATION_SUFFIX_GENERATORS: (() => string)[] = [
   () => sampleOne(["A", "B", "C", "D", "E", "F"]) as string,
   () => faker.number.int({ min: 1, max: 100 }).toString()
 ];
 
+const TASK_SUFFIX_GENERATORS: (() => string)[] = [
+  () => sampleOne(TASK_SUFFIXES) as string,
+  () => ""
+];
+
+const SHIFT_SUFFIX_GENERATORS: (() => string)[] = [
+  () => sampleOne(["A", "B", "C", "D", "E", "F"]) as string,
+  () => ""
+];
+
 export function generateLocationName(): string {
   const suffixGen = sampleOne(LOCATION_SUFFIX_GENERATORS) as () => string;
   return `${sampleOne(LOCATION_WORDS)} ${suffixGen()}`;
+}
+
+export function generateTaskName(): string {
+  const suffixGen = sampleOne(TASK_SUFFIX_GENERATORS) as () => string;
+  return `${sampleOne(TASK_WORDS)} ${suffixGen()}`;
+}
+
+export function generateShiftName(): string {
+  const suffixGen = sampleOne(SHIFT_SUFFIX_GENERATORS) as () => string;
+  return `${sampleOne(SHIFT_PREFIXES)} Shift ${suffixGen()}`;
 }
 
 export function generateIcon(): IconType {
@@ -98,7 +168,7 @@ export function generatePeople(n: number): Person[] {
 
 export function generateTask(): Task {
   return createTask({
-    name: faker.lorem.words(),
+    name: generateTaskName(),
     description: faker.lorem.sentence(),
     icon: generateIcon(),
     min_people: faker.number.int({ min: 1, max: 3 }),
@@ -134,7 +204,7 @@ export function generateShift(): Shift {
   if (loc === undefined) loc = generateLocation();
 
   return createShift({
-    name: faker.lorem.words(),
+    name: generateShiftName(),
     description: faker.lorem.sentence(),
     start_date_time: faker.date.recent(),
     end_date_time: faker.date.soon(),
