@@ -1,1 +1,0 @@
-import{v as i}from"./scheduler.DxIB1JCc.js";import{v as u,T as a,e as r,t as o}from"./stores.B1PD3HYV.js";function k(s){return{uuid:u(),type:a.Skill,...s}}function c(s){return i(r).filter(e=>e.skills.map(t=>t.uuid).includes(s.uuid))}function m(s){return i(o).filter(e=>e.required_skills.map(t=>t.uuid).includes(s.uuid))}export{c as a,k as c,m as g};

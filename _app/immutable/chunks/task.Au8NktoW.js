@@ -1,0 +1,1 @@
+import{v as s,T as i,b as t,d as a}from"./person.CzWh4rkJ.js";function o(r){return{uuid:s(),type:i.Task,...r}}function n(r){return r.required_skill_uuids.map(e=>a(e)).filter(e=>e!==void 0)}function l(r){return r.people_uuids.map(e=>t(e)).filter(e=>e!==void 0)}export{n as a,o as c,l as g};
