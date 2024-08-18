@@ -1,0 +1,1 @@
+import{g as n,d as s,T as o,v as a}from"./person.DEL9NjrQ.js";import{g as i}from"./task.BAsfaQWs.js";function m(t){return{type:o.Assignment,uuid:a(),...t}}function r(t){return t.task_uuids.map(e=>n(e)).filter(e=>e!==void 0)}function c(t){return[...new Set(r(t).flatMap(e=>i(e)))]}function p(t){return s(t.location_uuid)}export{r as a,c as b,m as c,p as g};

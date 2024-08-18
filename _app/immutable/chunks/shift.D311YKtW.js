@@ -1,1 +1,0 @@
-import{g as o}from"./task.Lq0Dm78K.js";import{g as a,v as i,T as r,d as n}from"./person.CuXAW-so.js";function g(t){return{uuid:i(),type:r.Shift,...t}}function s(t){return t.task_uuids.map(e=>a(e)).filter(e=>e!==void 0)}function c(t){return[...new Set(s(t).flatMap(e=>o(e)))]}function p(t){return n(t.location_uuid)}export{s as a,c as b,g as c,p as g};
