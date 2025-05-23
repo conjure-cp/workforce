@@ -9,6 +9,7 @@ import { State } from "./state";
 import { Task } from "./task";
 import { WithProperties } from "./with-properties";
 import type { Templates } from "./templates";
+import { type PropertyPredicate } from "./property_predicate";
 
 export {
   Assignments,
@@ -24,4 +25,5 @@ export {
   type Assignment,
   type Settings,
   type Templates,
+  type PropertyPredicate,
 };

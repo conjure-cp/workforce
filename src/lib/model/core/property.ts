@@ -9,10 +9,7 @@ import { displayFromJSON, displayToJSON, uuidOf, type IdOr } from "./misc";
 import type { State } from "./state";
 
 const types = z.enum(["single", "multiple", "text"]);
-const selectOptionSchema = z.object({
-  ...displaySchema.shape,
-  uuid: z.string(),
-});
+const selectOptionSchema = z.object({ ...displaySchema.shape, uuid: z.string() });
 
 export type PropertyType = z.infer<typeof types>;
 export type SelectOption = z.infer<typeof selectOptionSchema>;
@@ -26,20 +23,18 @@ export interface SelectPropertyProps extends PropertyProps {
 }
 
 export abstract class Property<T> extends Displayable {
-  abstract readonly type: z.infer<typeof types>;
-  abstract parse(value: unknown): SafeParseReturnType<unknown, T>;
+  abstract readonly type: PropertyType;
+  abstract readonly schema: z.ZodType<T, z.ZodTypeDef, unknown>;
+  // abstract parse(value: unknown): SafeParseReturnType<unknown, T>;
   abstract serialize(value: T): JsonValue;
 
   static propsFromJSON(json: JsonObject): PropertyProps {
-    return {
-      ...displayFromJSON(json),
-      type: types.parse(json.type),
-    };
+    return { ...displayFromJSON(json), type: types.parse(json.type) };
   }
 
   /**
    * Create a concrete Property instance from JSON data.
-   * @warning This method must NEVER be called by subclasses (e.g. via `super` to avoid infinite recursion).
+   * @warning This method must NEVER be called by subclasses (e.g. via `super`) to avoid infinite recursion.
               It is meant as a "factory" that calls their respective deserialisation methods instead.
    * @param json JSON data
    * @param state State to bind the Property instance to.
@@ -57,15 +52,16 @@ export abstract class Property<T> extends Displayable {
     }
   }
 
+  parse(value: unknown): SafeParseReturnType<unknown, T> {
+    return this.schema.safeParse(value);
+  }
+
   toJSON(): JsonObject {
-    return {
-      ...super.toJSON(),
-      type: this.type,
-    };
+    return { ...super.toJSON(), type: this.type };
   }
 
   copy(): Property<T> {
-    return Property.fromJSON(this.toJSON(), this.state) as Property<T>;
+    return Property.fromJSON(this.toJSON(), this.state) as unknown as Property<T>;
   }
 }
 
@@ -90,20 +86,13 @@ export abstract class ASelectProperty<T> extends Property<T> {
       name: this.name + " - " + idx,
       uuid: uuidv4(),
       icon: this.icon?.color
-        ? this.icon.with({
-            color: varyColor(this.icon.color, {
-              lightness: (idx * 5 - 25) % 50,
-            }),
-          })
+        ? this.icon.with({ color: varyColor(this.icon.color, { lightness: (idx * 5 - 25) % 50 }) })
         : this.icon,
     };
   }
 
   toJSON(): JsonObject {
-    return {
-      ...super.toJSON(),
-      options: this.options.map(ASelectProperty.optionJSON),
-    };
+    return { ...super.toJSON(), options: this.options.map(ASelectProperty.optionJSON) };
   }
 
   get options(): SelectOption[] {
@@ -160,23 +149,17 @@ export abstract class ASelectProperty<T> extends Property<T> {
   }
 
   protected static optionFromJSON(json: JsonObject): SelectOption {
-    return {
-      ...displayFromJSON(json),
-      uuid: z.string().parse(json.uuid),
-    };
+    return { ...displayFromJSON(json), uuid: z.string().parse(json.uuid) };
   }
 
   protected static optionJSON(option: SelectOption): JsonObject {
     console.log("optionJSON", option);
-    return {
-      ...displayToJSON(option),
-      uuid: option.uuid,
-    };
+    return { ...displayToJSON(option), uuid: option.uuid };
   }
 }
 
 export class SelectProperty extends ASelectProperty<SelectOption> {
-  type: z.infer<typeof types> = "single";
+  type: PropertyType = "single";
   schema = z.union([
     this.optSchema,
     z
@@ -185,10 +168,6 @@ export class SelectProperty extends ASelectProperty<SelectOption> {
       .transform((a) => a[0]),
   ]);
 
-  parse(value: unknown) {
-    return this.schema.safeParse(value);
-  }
-
   serialize(value: SelectOption): JsonValue {
     console.log("SelectProperty.serialize", value);
     return value.uuid;
@@ -196,38 +175,29 @@ export class SelectProperty extends ASelectProperty<SelectOption> {
 
   static fromJSON(json: JsonObject, state: State): SelectProperty {
     return new SelectProperty(
-      {
-        ...ASelectProperty.propsFromJSON(json),
-      },
+      { ...ASelectProperty.propsFromJSON(json) },
       state,
       z.optional(z.string()).parse(json.uuid),
     );
   }
 
   copy(): SelectProperty {
-    return new SelectProperty(
-      {
-        ...super.copy(),
-        options: this.options,
-      },
-      this.state,
-      this.uuid,
-    );
+    return new SelectProperty({ ...super.copy(), options: this.options }, this.state, this.uuid);
+  }
+
+  asMultiSelect(uuid?: string): MultiSelectProperty {
+    return new MultiSelectProperty(this.copy(), this.state, uuid || this.uuid);
   }
 }
 
 export class MultiSelectProperty extends ASelectProperty<SelectOption[]> {
-  type: z.infer<typeof types> = "multiple";
+  type: PropertyType = "multiple";
   schema = z.union([
     z
       .array(z.optional(this.optSchema).catch(undefined))
       .transform((a) => a.filter((v) => v !== undefined) as SelectOption[]),
     this.optSchema.transform((v) => (v ? [v] : [])),
   ]);
-
-  parse(value: unknown) {
-    return this.schema.safeParse(value);
-  }
 
   serialize(value: SelectOption[]): JsonValue {
     console.log("MultiSelectProperty.serialize", value);
@@ -236,9 +206,7 @@ export class MultiSelectProperty extends ASelectProperty<SelectOption[]> {
 
   static fromJSON(json: JsonObject, state: State): MultiSelectProperty {
     return new MultiSelectProperty(
-      {
-        ...ASelectProperty.propsFromJSON(json),
-      },
+      { ...ASelectProperty.propsFromJSON(json) },
       state,
       z.optional(z.string()).parse(json.uuid),
     );
@@ -246,22 +214,20 @@ export class MultiSelectProperty extends ASelectProperty<SelectOption[]> {
 
   copy(): MultiSelectProperty {
     return new MultiSelectProperty(
-      {
-        ...super.copy(),
-        options: this.options,
-      },
+      { ...super.copy(), options: this.options },
       this.state,
       this.uuid,
     );
+  }
+
+  asSingleSelect(uuid?: string): SelectProperty {
+    return new SelectProperty(this.copy(), this.state, uuid || this.uuid);
   }
 }
 
 export class TextProperty extends Property<string> {
   type: z.infer<typeof types> = "text";
-
-  parse(value: unknown): SafeParseReturnType<unknown, string> {
-    return z.string().safeParse(value);
-  }
+  schema = z.string();
 
   serialize(value: string): JsonValue {
     return value;
@@ -269,9 +235,7 @@ export class TextProperty extends Property<string> {
 
   static fromJSON(json: JsonObject, state: State): TextProperty {
     return new TextProperty(
-      {
-        ...super.propsFromJSON(json),
-      },
+      { ...super.propsFromJSON(json) },
       state,
       z.optional(z.string()).parse(json.uuid),
     );

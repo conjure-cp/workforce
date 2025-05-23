@@ -6,8 +6,13 @@
 </script>
 
 {#each properties.keys as property}
+  {@const value = properties.get(property) || undefined}
   <div class="flex flex-col gap-1.5">
     <span class="font-semibold">{property.name}</span>
-    <PropertyInput {properties} {property} />
+    <PropertyInput
+      {property}
+      {value}
+      onChanged={(property, value) => properties.put(property, value)}
+    />
   </div>
 {/each}

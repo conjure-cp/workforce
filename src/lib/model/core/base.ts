@@ -12,12 +12,16 @@ import type { State } from "./state";
  * Use the `eq` method to compare objects.
  */
 export abstract class Base implements Copy<Base>, Eq<Base> {
-  readonly uuid: string;
+  private _uuid: string;
   state: State;
 
   constructor(state: State, uuid?: string) {
-    this.uuid = uuid || uuidv4();
+    this._uuid = uuid || uuidv4();
     this.state = state;
+  }
+
+  get uuid(): string {
+    return this._uuid;
   }
 
   /**
@@ -26,12 +30,19 @@ export abstract class Base implements Copy<Base>, Eq<Base> {
   abstract copy(): Base;
 
   /**
+   * Create a deep copy of the object with a new UUID.
+   */
+  withUUID(uuid?: string): Base {
+    const copied = this.copy();
+    copied._uuid = uuid || uuidv4();
+    return copied;
+  }
+
+  /**
    * Convert the object to a JSON value for serialization.
    */
   toJSON(): JsonObject {
-    return {
-      uuid: this.uuid,
-    };
+    return { uuid: this._uuid };
   }
 
   /**
@@ -40,7 +51,7 @@ export abstract class Base implements Copy<Base>, Eq<Base> {
    * @returns True if the objects are equal, false otherwise
    */
   eq(other: Base): boolean {
-    return this.uuid === other.uuid;
+    return this._uuid === other._uuid;
   }
 
   /**
@@ -48,7 +59,7 @@ export abstract class Base implements Copy<Base>, Eq<Base> {
    * @returns That object, or undefined if it doesn't exist
    */
   pull(): Base | undefined {
-    return this.state.get(this.uuid);
+    return this.state.get(this._uuid);
   }
 
   /**

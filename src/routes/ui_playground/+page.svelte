@@ -15,6 +15,7 @@
   import { Selector } from "$lib/components/selector";
   import SelectorMany from "$lib/components/selector/selector-many.svelte";
   import TimePicker from "$lib/components/time-picker/time-picker.svelte";
+  import PropertyPredicateInput from "$lib/components/property/property-predicate.svelte";
   import { Button } from "$lib/components/ui/button";
   import * as Tabs from "$lib/components/ui/tabs";
   import { dummyState } from "$lib/dummy-data";
@@ -32,6 +33,7 @@
   import Color from "color";
   import { GraduationCapIcon, XIcon } from "lucide-svelte";
   import { v4 as uuid } from "uuid";
+  import { randomPredicate } from "$lib/dummy-data/misc";
 
   const schedules = [
     { label: "Schedule 1", value: "schedule1" },
@@ -65,10 +67,7 @@
 
   let time1: ZonedDateTime = now(getLocalTimeZone());
   let time2 = new Date();
-  let time3: TimeDuration = {
-    hours: 10,
-    minutes: 30,
-  };
+  let time3: TimeDuration = { hours: 10, minutes: 30 };
 
   interface Event {
     start: Time;
@@ -85,24 +84,9 @@
   let precision = 5;
   let showTime = true;
   let events: Event[] = [
-    {
-      start: new Time(10, 0),
-      end: new Time(13, 0),
-      color: randomColor(),
-      id: uuid(),
-    },
-    {
-      start: new Time(9, 0),
-      end: new Time(15, 0),
-      color: randomColor(),
-      id: uuid(),
-    },
-    {
-      start: new Time(15, 0),
-      end: new Time(17, 0),
-      color: randomColor(),
-      id: uuid(),
-    },
+    { start: new Time(10, 0), end: new Time(13, 0), color: randomColor(), id: uuid() },
+    { start: new Time(9, 0), end: new Time(15, 0), color: randomColor(), id: uuid() },
+    { start: new Time(15, 0), end: new Time(17, 0), color: randomColor(), id: uuid() },
   ];
 </script>
 
@@ -208,10 +192,6 @@
     </section>
     <section>
       <h2 class="text-xl">Tabs (Vertical)</h2>
-      <script lang="ts">
-        import * as Tabs from "$lib/components/ui/tabs";
-      </script>
-
       <Tabs.Root value="account" class="w-[400px]" orientation="vertical">
         <Tabs.List>
           <Tabs.Trigger value="account">Account</Tabs.Trigger>
@@ -220,6 +200,20 @@
         <Tabs.Content value="account">Make changes to your account here.</Tabs.Content>
         <Tabs.Content value="password">Change your password here.</Tabs.Content>
       </Tabs.Root>
+    </section>
+    <section>
+      <h2 class="text-xl">Property Predicate</h2>
+      <div class="my-2 flex flex-col gap-2">
+        {#each $properties as property}
+          <span>{property.name}</span>
+          <PropertyPredicateInput
+            predicate={randomPredicate(property)}
+            onChanged={(predicate) => {
+              console.log(predicate);
+            }}
+          />
+        {/each}
+      </div>
     </section>
     <section>
       <h2 class="mb-1.5 text-xl">Edit Dialog</h2>
