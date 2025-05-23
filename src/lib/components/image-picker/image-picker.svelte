@@ -1,3 +1,7 @@
+<!--
+Dropdown to pick `Display.icon` or `Display.avatar`.
+A server is needed to upload the image, so this is not implemented yet.
+-->
 <script lang="ts" generics="T extends Display">
   import IconPickerContent from "./icon-picker-content.svelte";
 

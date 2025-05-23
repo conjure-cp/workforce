@@ -1,3 +1,10 @@
+<!--
+Dropdown menu that is displayed at the end of each row.
+
+Props:
+- `item`: The item this row represents.
+- `actions`: A map of human-readable names to functions that take the item as an argument.
+-->
 <!--suppress ES6UnusedImports -->
 <script lang="ts" generics="T">
   import { Button } from "$lib/components/ui/button";

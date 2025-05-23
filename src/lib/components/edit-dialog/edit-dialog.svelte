@@ -1,3 +1,19 @@
+<!--
+Entry point for edit dialogs.
+
+- Content is defined in the `EditForm` component.
+- Default slot is the trigger button.
+- Named slots `options` and `actions` can be used to add extra options to the dialog.
+
+Props:
+- `selected`: The item being edited. For convenience, the component accepts `undefined` as well and displays an empty state.
+- `title`: The title of the dialog.
+- `open`: If true, the dialog is open. Bindable.
+- `state`: The global state containing the objects.
+- `onSubmit`: A callback that fires when the user submits the form. Takes the item as an argument.
+- `onOpenChange`: A callback that fires when the dialog is opened or closed. Argument is the new value of `open`.
+-->
+
 <script lang="ts" generics="T">
   import { Button } from "$lib/components/ui/button";
   import * as Dialog from "$lib/components/ui/dialog";

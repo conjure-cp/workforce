@@ -28,13 +28,9 @@
       <Avatar.Fallback>{misc.getInitials(item.name)}</Avatar.Fallback>
     </Avatar.Root>
   {:else if item.icon}
-    <Chip
-      {size}
-      color={item.icon.color ?? DEFAULT_COLOR}
-      variant="default"
-      class="my-0.5 {className}"
-    >
-      <IconElement slot="icon" icon={item.icon} />
+    {@const color = item.icon.color ?? DEFAULT_COLOR}
+    <Chip {size} {color} variant="default" class="my-0.5 {className}">
+      <IconElement slot="icon" icon={item.icon} color={null} />
     </Chip>
   {:else if defaultIcon}
     <Chip
@@ -43,7 +39,7 @@
       variant="default"
       class="my-0.5 {className}"
     >
-      <IconElement slot="icon" icon={defaultIcon} />
+      <IconElement slot="icon" icon={defaultIcon} color={null} />
     </Chip>
   {/if}
 {:else if emptyIcon}
@@ -53,7 +49,7 @@
     variant="outline"
     class="my-0.5 {className}"
   >
-    <IconElement slot="icon" icon={emptyIcon} />
+    <IconElement slot="icon" icon={emptyIcon} color={null} />
   </Chip>
 {:else if defaultIcon}
   <Chip
@@ -62,6 +58,6 @@
     variant="outline"
     class="my-0.5 {className}"
   >
-    <IconElement slot="icon" icon={defaultIcon} />
+    <IconElement slot="icon" icon={defaultIcon} color={null} />
   </Chip>
 {/if}

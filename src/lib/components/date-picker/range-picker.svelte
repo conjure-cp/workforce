@@ -1,3 +1,9 @@
+<!--
+# (Date) Range Picker Component
+
+A dropdown with a calendar that allows the user to select a date range (start - end).
+See also: `date-picker.svelte` - the APIs are essentially the same.
+-->
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
   import { Button } from "$lib/components/ui/button";

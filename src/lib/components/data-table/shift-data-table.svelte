@@ -1,3 +1,16 @@
+<!--
+# Shift Data Table
+
+Data table for the Shift data type.
+See also: `$lib/model/core/shift.ts`.
+
+## Props:
+- `data`: Svelte store of `Shift[]` to be displayed in the table.
+- `showHeader`: If true, displays a header with some controls.
+- `state`: The global state containing the objects.
+- `actions`: A map of `(<action name>, (item: Shift) => void)`. By default, contains "Edit" (opens the edit dialog) and "Delete" (deletes the item).
+-->
+
 <script lang="ts">
   import { state as GLOBAL_STATE, Shift, State, Task } from "$lib/model";
   import type { Display } from "$lib/ui";
@@ -31,41 +44,19 @@
   let alertOpen = false;
   let dialogOpen = false;
   let dialogTitle = "Edit Person";
+
+  // Column definitions
   let columnInitializers: ColumnInitializer<Shift>[] = [
     {
       accessor: (row) => row as Display,
       cell: (cell) => createRender(ProfilePicture, { item: cell.value }),
       header: "Icon",
       id: "icon",
-      plugins: {
-        sort: {
-          disable: true,
-        },
-        tableFilter: {
-          disable: true,
-        },
-      },
+      plugins: { sort: { disable: true }, tableFilter: { disable: true } },
     },
-    {
-      accessor: (row: Shift) => row.name,
-      header: "Name",
-      id: "name",
-    },
-    {
-      accessor: (row: Shift) => row.fmtStartTime(),
-      header: "Start Time",
-      id: "timeStart",
-    },
-    {
-      accessor: (row: Shift) => row.fmtEndTime(),
-      header: "End Time",
-      id: "timeEnd",
-    },
-    // {
-    //   accessor: (row: Shift) => `${formattedDuration(row.duration)}`,
-    //   header: "Actual Duration",
-    //   id: "actualDuration",
-    // },
+    { accessor: (row: Shift) => row.name, header: "Name", id: "name" },
+    { accessor: (row: Shift) => row.fmtStartTime(), header: "Start Time", id: "timeStart" },
+    { accessor: (row: Shift) => row.fmtEndTime(), header: "End Time", id: "timeEnd" },
     {
       accessor: (row: Shift) => `${formattedDuration(row.paidDuration)}`,
       header: "Contracted Duration",
@@ -78,6 +69,9 @@
     },
   ];
 
+  // If the old ("granular") mode is used, display tasks in each shift.
+  // This requirement has been dropped: we now assign people to monolithic shifts without any speciific tasks.
+  // Keeping this code as it may be useful in the future.
   const settings = state.settings;
   if (_get(settings).assignmentMode === "granular") {
     columnInitializers.push({
@@ -86,16 +80,13 @@
       header: "Tasks in Shift",
       id: "tasks",
       plugins: {
-        sort: {
-          getSortValue: (value: Task[]) => value.map((t) => t.name).join(" "),
-        },
-        tableFilter: {
-          getFilterValue: (value: Task[]) => value.map((t) => t.name).join(" "),
-        },
+        sort: { getSortValue: (value: Task[]) => value.map((t) => t.name).join(" ") },
+        tableFilter: { getFilterValue: (value: Task[]) => value.map((t) => t.name).join(" ") },
       },
     });
   }
 
+  // Row action definitions
   let actions = new Map([...rowActions, ["Edit", rowClick], ["Delete", rowDelete]]);
 
   function rowDelete(item: Shift) {

@@ -1,3 +1,10 @@
+<!--
+# Icon Picker Form
+
+Form that allows the user to select any icon from the Iconify API.
+Options are fetched as the user types in the search bar.
+Some pre-defined icons are shown by default.
+-->
 <script lang="ts">
   import { ColorPicker } from "$lib/components/color-picker";
   import { Icon } from "$lib/components/icon";

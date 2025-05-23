@@ -1,3 +1,12 @@
+<!--
+Standard component for displaying anything that implements `Display`.
+The following variants are available:
+- `default`: Displays the profile picture / icon only. Name and description are shown in a tooltip.
+- `text`: Displays the name of the item as a text link. The profile picture / icon is shown in a tooltip.
+- `full`: Displays the profile picture / icon and the name of the item. The description is shown in a tooltip.
+
+TODO: better docs
+-->
 <script lang="ts" generics="T extends Display">
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { Icon, type Display } from "$lib/ui";

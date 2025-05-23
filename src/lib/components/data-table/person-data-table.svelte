@@ -1,3 +1,17 @@
+<!--
+# Person Data Table
+
+Data table for the Person data type.
+See also: `$lib/model/core/person.ts`.
+
+## Props:
+- `data`: Svelte store of `Person[]` to be displayed in the table.
+- `showHeader`: If true, displays a header with some controls.
+- `state`: The global state containing the objects.
+- `rowActions`: A map of EXTRA actions `(<action name>, (item: Person) => void)` on top of the default "Edit" and "Delete".
+
+TODO: Actions API should be made consistent with e.g. the `LocationDataTable` component.
+-->
 <script lang="ts">
   import { EditDialog } from "$lib/components/edit-dialog";
   import { ProfilePicture } from "$lib/components/profile";
@@ -25,36 +39,28 @@
 
   let flatColumns: FlatColumn<Person, any, string>[]; // eslint-disable-line @typescript-eslint/no-explicit-any
   let className = "";
+  // Dialog state / controls
   let selected: Person | undefined = undefined;
   let alertOpen = false;
   let dialogOpen = false;
   let dialogTitle = "Edit Person";
+  // Define format for date of birth
   const dobFormatter = new Intl.DateTimeFormat(navigator.language || "en", {
     day: "numeric",
     month: "short",
     year: "numeric",
   });
 
+  // Column definitions
   let columnInitializers: ColumnInitializer<Person>[] = [
     {
       accessor: (row) => row as Display,
       cell: (cell) => createRender(ProfilePicture, { item: cell.value }),
       header: "Avatar",
       id: "avatar",
-      plugins: {
-        sort: {
-          disable: true,
-        },
-        tableFilter: {
-          disable: true,
-        },
-      },
+      plugins: { sort: { disable: true }, tableFilter: { disable: true } },
     },
-    {
-      accessor: (row: Person) => row.name,
-      header: "Name",
-      id: "name",
-    },
+    { accessor: (row: Person) => row.name, header: "Name", id: "name" },
     {
       accessor: (row: Person) =>
         row.dob ? dobFormatter.format(row.dob.toDate(getLocalTimeZone())) : "Not Set",
@@ -63,6 +69,7 @@
     },
   ];
 
+  // Add columns for dynamic user-defined properties
   for (const prop of _get(state.templates).person.keys) {
     columnInitializers.push({
       accessor: (row: Person) => row.properties.get(prop),
@@ -72,6 +79,7 @@
     });
   }
 
+  // Row actions
   let actions = new Map([...rowActions, ["Edit", rowClick], ["Delete", rowDelete]]);
 
   function rowDelete(item: Person) {

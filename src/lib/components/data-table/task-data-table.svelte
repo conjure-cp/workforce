@@ -1,3 +1,9 @@
+<!--
+A data table for the `Task` model.
+This is currently not used anywhere as the "granular" mode has been dropped.
+The models have changed since and this component has not been tested. Keeping it in case we need it in the future.
+See also: `$lib/model/core/task.ts`.
+-->
 <script lang="ts">
   import { EditDialog } from "$lib/components/edit-dialog";
   import { ProfilePicture } from "$lib/components/profile";
@@ -34,20 +40,9 @@
       cell: (cell) => createRender(ProfilePicture, { item: cell.value }),
       header: "Picture",
       id: "picture",
-      plugins: {
-        sort: {
-          disable: true,
-        },
-        tableFilter: {
-          disable: true,
-        },
-      },
+      plugins: { sort: { disable: true }, tableFilter: { disable: true } },
     },
-    {
-      accessor: (row: Task) => row.name,
-      header: "Name",
-      id: "name",
-    },
+    { accessor: (row: Task) => row.name, header: "Name", id: "name" },
     {
       accessor: (row: Task) => mkCapacity(row.min.people, row.max.people, "people"),
       header: "Required Workers",

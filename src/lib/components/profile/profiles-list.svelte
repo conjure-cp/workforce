@@ -1,3 +1,7 @@
+<!--
+Displays multiple displayable items. See also: `profile.svelte` for a single item.
+TODO: better docs
+-->
 <script lang="ts" generics="T extends Display">
   import { Icon, type Display } from "$lib/ui";
   import { v4 as uuid } from "uuid";

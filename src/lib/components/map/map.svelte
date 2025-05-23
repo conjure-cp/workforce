@@ -1,3 +1,8 @@
+<!--
+Displays an interactive OSM map with location markers.
+
+TODO: better docs
+-->
 <script lang="ts">
   import { Location } from "$lib/model";
   import { Geopoint, type LngLat, findBoundingBox } from "$lib/model/geocoding";

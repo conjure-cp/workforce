@@ -1,3 +1,10 @@
+<!--
+Marker component for displaying a Location or coordinates on the map.
+If draggable, the value can be changed by dragging the marker.
+
+TODO: better docs
+-->
+
 <script lang="ts">
   import { Location } from "$lib/model/core";
   import { Icon } from "$lib/ui";

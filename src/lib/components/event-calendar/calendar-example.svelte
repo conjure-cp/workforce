@@ -1,3 +1,6 @@
+<!--
+Usage example for the EventCalendar component.
+-->
 <script lang="ts">
   import { timeFromMinutes, toMinutes } from "$lib/model/temporal/utils";
   import { HashMap } from "$lib/utils";

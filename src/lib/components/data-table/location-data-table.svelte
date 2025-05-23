@@ -1,3 +1,17 @@
+<!--
+# Location Data Table
+
+Data table for the Location data type.
+See also: `$lib/model/core/location.ts`.
+
+## Props:
+- `data`: Svelte store of `Location[]` to be displayed in the table.
+- `header`: If true, displays a map to visualise locations and a header with some controls.
+- `state`: The global state containing the locations.
+- `actions`: A map of `(<action name>, (item: Location) => void)`. By default, contains "Edit" (opens the edit dialog) and "Delete" (deletes the item).
+- `mapClass`: Tailwind CSS class for the map.
+- `class`: Extra Tailwind CSS classes to add to the table.
+-->
 <script lang="ts">
   import { EditDialog } from "$lib/components/edit-dialog";
   import { Map as MapComponent } from "$lib/components/map";
@@ -27,30 +41,23 @@
   let className = "";
   let mapClass = "h-[300px] w-full";
 
+  // Currently selected location
   let selected: Location | undefined = undefined;
+  // Dialog controls
   let alertOpen = false;
   let dialogOpen = false;
   let dialogTitle = "Edit Location";
+
+  // Column definitions
   let columnInitializers: ColumnInitializer<Location>[] = [
     {
       accessor: (row) => row as Display,
       cell: (cell) => createRender(ProfilePicture, { item: cell.value }),
       header: "Picture",
       id: "picture",
-      plugins: {
-        sort: {
-          disable: true,
-        },
-        tableFilter: {
-          disable: true,
-        },
-      },
+      plugins: { sort: { disable: true }, tableFilter: { disable: true } },
     },
-    {
-      accessor: (row: Location) => row.name,
-      header: "Name",
-      id: "name",
-    },
+    { accessor: (row: Location) => row.name, header: "Name", id: "name" },
     {
       accessor: (row: Location) =>
         row.point?.address.format(["street", "settlement", "country", "postcode"]) || "No Address",
@@ -69,6 +76,7 @@
     },
   ];
 
+  // Add extra columns for user-defined properties
   for (const prop of _get(state.templates).location.keys) {
     columnInitializers.push({
       accessor: (row: Location) => row.properties.get(prop),
@@ -112,9 +120,11 @@
 
 <div class="flex flex-col items-start justify-start {className}">
   {#if header}
+    <!-- Interactive map to show locations as points-->
     <MapComponent locations={$data} class="aspect-auto {mapClass}" onMarkerClick={markerClick} />
   {/if}
   <div class="mt-4 flex h-max w-full flex-col items-start justify-start overflow-y-scroll">
+    <!-- Table header with controls -->
     {#if header}
       <TableHeader sticky={true}>
         <svelte:fragment slot="start">
@@ -139,6 +149,7 @@
         </svelte:fragment>
       </TableHeader>
     {/if}
+    <!-- Data table -->
     <DataTableCore
       bind:filterValue
       bind:flatColumns
@@ -153,5 +164,6 @@
     />
   </div>
 </div>
+<!-- Edit and Delete pop-ups (initially closed) -->
 <EditDialog {selected} bind:open={dialogOpen} title={dialogTitle} />
 <DeleteDialog {selected} bind:open={alertOpen} />

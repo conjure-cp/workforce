@@ -1,3 +1,18 @@
+<!--
+# TimeGridItem
+
+Wrapper for an event on the time addGridLayout. 
+Positioned automatically according to the `start` and `end` props.
+Has a slot that you can fill with anything you want.
+
+## Props
+- `key`: Unique key for the item. Default: `uuid()`. Can be any string/number as long as it is unique and consistent.
+- `start`: The start time of the item. Default: `0:00`.
+- `end`: The end time of the item. Default: `23:59`.
+- `tgContext`: The context of the time grid. This is passed in from the parent component. It contains the props and stores needed to position the item correctly.
+- `class`: Additional Tailwind classes to apply to the item.
+- `style`: Additional CSS styles to apply directly to the container.
+-->
 <script lang="ts">
   import { dtMax, dtMin, minutesBetween } from "$lib/model/temporal/utils";
   import { Time } from "@internationalized/date";

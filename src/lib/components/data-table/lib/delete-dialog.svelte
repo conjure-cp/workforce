@@ -1,3 +1,18 @@
+<!--
+# Delete Dialog Component
+
+Invoked when the user clicks "delete" in a row's actions menu.
+Displays a dialog asking the user to confirm deletion.
+Disabling `settings.askDeleteConfirmation` will skip it and delete the item immediately.
+
+Props:
+- `selected`: The item to delete. Must be a `Base` object. (See $lib/model/core for details.)
+- `open`: Whether the dialog is open or closed. Bindable; Defaults to `false` (closed).
+- `extraDescription`: A string to show under the main description. Defaults to an empty string.
+- `state`: The state containing the item. (See $lib/model for details.)
+- `onDelete`: A callback that fires when the user clicks "delete". Takes no arguments. Defaults to a no-op.
+-->
+
 <script lang="ts">
   import { Base } from "$lib/model/core";
   import { state as GLOBAL_STATE } from "$lib/model";

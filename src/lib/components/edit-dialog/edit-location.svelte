@@ -1,3 +1,7 @@
+<!--
+Edit form for Location objects, with an interactive map and basic typeahead search.
+The search uses OSM nominatim for geocoding. See $lib/model/geocoding for more details.
+-->
 <script lang="ts">
   import { Label } from "$lib/components/ui/label";
   import { Map, MapMarker } from "$lib/components/map";
@@ -12,6 +16,7 @@
 
   let address: string = item.address;
 
+  // Location updates reactively when the marker is dragged, but we need to manually update the address field
   function onDrag(item: Geopoint) {
     console.log(item);
     address = item.address.format();

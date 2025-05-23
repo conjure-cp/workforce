@@ -1,3 +1,8 @@
+<!--
+Edit form for the basic fields of a `Display` object.
+Used inside edit dialogs for `Person`, `Location`, etc.
+See also: $lib/ui/Display.
+-->
 <script lang="ts">
   import { type Display } from "$lib/ui";
   import { ImagePicker } from "$lib/components/image-picker";

@@ -1,3 +1,31 @@
+<!--
+# Generic Combobox Component
+
+This is a generic combobox (i.e. Select with a built-in search) that is used to pick ONE item from a list.
+The items can be any type, but to make it work you must supply your own functions to:
+- Provide a human-friendly name (and, optionally, a picture, icon, and/or description tooltip) for each item. (`display`)
+- Generate a unique ID for each item (can be any string, as long as it is unique and consistent). (`getId`)
+
+By default, the item ID is used to compare items (needed to mark the currently selected item with a checkmark).
+You can override `eq` with your own implementation. Idk why you would want to do that, but the option is there.
+
+## Props:
+- `options` (required): The list of items to choose from. Can be any type T.
+- `display` (required): A function that takes an option (`T` or `undefined`) and returns a `Display` object.
+- `getId` (required): A function that takes an option (`T`) and returns a string ID for that option.
+- `eq`: A function that takes two options (`T` or `undefined`) and returns true if they are equal. Default: calls `getId` on both and compares the results.
+- `value`: The currently selected item. Must be type `T` or `undefined` (meaning no item is selected). Bindable; Defaults to `undefined` (no item selected).
+- `open`: Whether the combobox is open or closed. Bindable; Defaults to `false` (closed).
+- `onChange`: A callback that fires when the selected item changes. Takes the old and new values as arguments. Defaults to a no-op.
+- `onSelect`: A callback that fires when the user selects an item. Takes the new value as an argument. Defaults to a no-op.
+- `allowUnselect`: If true, the user can unselect the currently selected item (i.e. set it to `undefined`). Defaults to true.
+- `closeOnSelect`: If true, the combobox will close when the user selects an item. Defaults to true.
+- `placeholder`: A string to show when no item is selected. Defaults to "Select an item".
+- `class`: A string of additional Tailwind CSS classes to add to the top-level div.
+
+See also:
+- $lib/ui/Display - the Display interface definition
+-->
 <!--suppress ES6UnusedImports -->
 <script lang="ts" generics="T">
   import { Button } from "$lib/components/ui/button";
@@ -23,7 +51,7 @@
   export let allowUnselect = true;
   export let closeOnSelect = true;
   export let value: T | undefined = undefined;
-  export let placeholder: string | undefined = undefined;
+  export let placeholder = "Select an item";
   export let options: T[] = [];
   let className = "";
 

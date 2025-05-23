@@ -80,11 +80,7 @@ export function varyColor(
 
 export function randVaryColor(
   col: Color,
-  options: {
-    lightnessSpread?: number;
-    saturationSpread?: number;
-    hueSpread?: number;
-  },
+  options: { lightnessSpread?: number; saturationSpread?: number; hueSpread?: number },
 ): Color {
   const { lightnessSpread = 0, saturationSpread = 0, hueSpread = 0 } = options;
   const { h, s, l } = col.hsl().object();

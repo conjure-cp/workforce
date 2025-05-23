@@ -1,3 +1,7 @@
+<!--
+Tooltip that displays when hovering over a profile picture / icon.
+TODO: add docs
+-->
 <script lang="ts" generics="T extends Display">
   import { ProfilePicture } from ".";
 

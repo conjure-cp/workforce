@@ -43,7 +43,7 @@
         </Chip>
       {:else}
         <Chip {size} color={icon.color} variant="outline" class="h-fit w-fit p-1">
-          <Icon {icon} slot="icon" class="{PFP_HEIGHT[size]} {PFP_WIDTH[size]}" />
+          <Icon {icon} slot="icon" class="{PFP_HEIGHT[size]} {PFP_WIDTH[size]}" color={null} />
         </Chip>
       {/if}
     </Button>

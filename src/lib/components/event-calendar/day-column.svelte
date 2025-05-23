@@ -1,3 +1,6 @@
+<!--
+Columns of the calendar, each representing a day
+-->
 <script lang="ts">
   import type { CalendarDate } from "@internationalized/date";
   import DayHeader from "./day-header.svelte";

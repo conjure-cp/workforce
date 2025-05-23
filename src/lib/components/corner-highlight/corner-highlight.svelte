@@ -1,3 +1,18 @@
+<!--
+# Color Highlight Component
+
+Helper component that wraps the given content in a rectangular div with one corner highlighted by a colored triangle.
+Designed for use inside of tables, cards, or similar.
+
+## Props:
+- `highlightColor`: The color of the highlight. Can be a string or a Color object. Defaults to "#ff3e00" (orange).
+- `cornerSize`: Size of the corner highlight. Can be a CSS string (e.g. "30px", "2rem") or a number (e.g. 30 - equivalent to "30px"). Defaults to "30px".
+- `cornerOpacity`: Opacity of the corner highlight. Defaults to 1 (fully opaque).
+- `position`: Which corner to highlight. Defaults to `top-left`.
+- `contentClass`: Additional Tailwind classes to apply to the content area.
+- `class`: Additional Tailwind classes to apply to the container.
+-->
+
 <script lang="ts">
   import Color from "color";
 
@@ -40,26 +55,11 @@
 
     switch (position) {
       case "top-left":
-        return {
-          ...baseStyles,
-          top: 0,
-          left: 0,
-          clipPath: "polygon(0 0, 100% 0, 0 100%)",
-        };
+        return { ...baseStyles, top: 0, left: 0, clipPath: "polygon(0 0, 100% 0, 0 100%)" };
       case "top-right":
-        return {
-          ...baseStyles,
-          top: 0,
-          right: 0,
-          clipPath: "polygon(100% 0, 0 0, 100% 100%)",
-        };
+        return { ...baseStyles, top: 0, right: 0, clipPath: "polygon(100% 0, 0 0, 100% 100%)" };
       case "bottom-left":
-        return {
-          ...baseStyles,
-          bottom: 0,
-          left: 0,
-          clipPath: "polygon(0 100%, 100% 100%, 0 0)",
-        };
+        return { ...baseStyles, bottom: 0, left: 0, clipPath: "polygon(0 100%, 100% 100%, 0 0)" };
       case "bottom-right":
         return {
           ...baseStyles,
@@ -68,12 +68,7 @@
           clipPath: "polygon(100% 100%, 100% 0, 0 100%)",
         };
       default:
-        return {
-          ...baseStyles,
-          top: 0,
-          left: 0,
-          clipPath: "polygon(0 0, 100% 0, 0 100%)",
-        };
+        return { ...baseStyles, top: 0, left: 0, clipPath: "polygon(0 0, 100% 0, 0 100%)" };
     }
   }
 

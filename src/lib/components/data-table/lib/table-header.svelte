@@ -1,3 +1,7 @@
+<!--
+Helper component containing controls, displayed above a table.
+-->
+
 <script lang="ts">
   let sticky = true;
   export { sticky };

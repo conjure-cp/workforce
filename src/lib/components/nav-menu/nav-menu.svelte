@@ -1,3 +1,7 @@
+<!--
+Sidebar component for  navigation.
+TODO: add docs
+-->
 <script lang="ts">
   import { base } from "$app/paths";
   import { page } from "$app/stores";

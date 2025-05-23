@@ -1,3 +1,21 @@
+<!--
+# Color Picker component
+
+Provides input for the Color type.
+The user can either choose from a pre-defined palette or use the system color picker.
+The latter only works in browser that support the HTML5 color input type.
+
+Props:
+- `color` (required): The currently selected color. Can be used with `bind`.
+- `options`: An array of [Color, string] pairs, where the string is a human-readable name for the color (e.g. "Cyan").
+             This is the pre-defined palette. Defaults to a list of 8 colors based on Tailwind CSS defaults.
+- `onSelect`: A callback function that is called when a color is selected.
+- `class`: String of additional Tailwind CSS classes to add to the top-level div.
+
+See also: 
+- https://www.npmjs.com/package/color
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color
+-->
 <!--suppress ES6UnusedImports -->
 <script lang="ts">
   import { Button } from "$lib/components/ui/button";

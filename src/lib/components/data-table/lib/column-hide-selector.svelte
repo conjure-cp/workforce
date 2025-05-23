@@ -1,3 +1,10 @@
+<!--
+Dropdown that allows the user to hide/show certain columns in a table.
+Props:
+- `flatColumns`: The table columns (see svelte-headless-table and the `data-table` component). 
+- `hideForId`: An object mapping column IDs to booleans (true = hidden). A column is hidden iff it is explicitly mapped to `true`.
+-->
+
 <script lang="ts">
   // We need to allow explicit any here because of the way the svelte-headless-table library is written
   /* eslint-disable  @typescript-eslint/no-explicit-any */

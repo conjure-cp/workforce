@@ -1,3 +1,8 @@
+<!--
+# TimeGrid Component
+
+A grid that positions TimeGridItems on a calendar grid automatically.
+-->
 <script lang="ts">
   import { fmtTime, minutesBetween, toMinutes } from "$lib/model/temporal/utils";
   import { Time } from "@internationalized/date";
@@ -17,12 +22,14 @@
   export let style = "";
   let className = "";
 
+  // Set up the content
   const props = writable<TimeGridProps>({ start, end, step, precision, columnGap, showTime });
   const intervals = writable(new Map<string, { start: Time; end: Time }>());
   const startCols = writable(new Map<string, number>());
   const endCols = writable(new Map<string, number>());
   export const tgContext: TimeGridContext = { props, intervals, startCols, endCols };
 
+  // Reactive variables
   $: tgContext.props.set({ start, end, step, precision, columnGap, showTime });
   $: rows = Math.ceil(minutesBetween(start, end) / precision);
   $: visibleRows = Math.ceil(minutesBetween(start, end) / step);
@@ -30,6 +37,7 @@
   $: colVals = Array.from($startCols.values());
   $: cols = Math.max(...colVals, 0);
 
+  // Fires every time the intervals change (i.e. any event is added, rescheduled, or removed)
   tgContext.intervals.subscribe((val) => {
     interface Event {
       key: string;
@@ -37,23 +45,25 @@
       end: number;
     }
 
+    // New start and end columns for each event ID. Children will use these to re-position themselves.
     const startCols = new Map<string, number>();
     const endCols = new Map<string, number>();
+
+    // Events with their start and end times in minutes
     const events: Event[] = [];
 
     val.forEach((interval, key) => {
-      events.push({
-        key,
-        start: toMinutes(interval.start),
-        end: toMinutes(interval.end),
-      });
+      events.push({ key, start: toMinutes(interval.start), end: toMinutes(interval.end) });
     });
 
+    // Sort events by start time (ascending), then end time as tie-breaker (descending)
+    // Results in the minimum necessary number of lanes, with longer events to the left (which looks more natural)
     events.sort((a, b) => a.start - b.start || b.end - a.end);
 
     const columns: number[] = [];
     let ongoing: [Event, number][] = [];
 
+    // A basic greedy algorithm to find the columns
     events.forEach((event) => {
       const { key, start, end } = event;
       let thisStartCol = -1; // Starting column for the new event
@@ -116,16 +126,32 @@
 </script>
 
 <div class={className} {style}>
+  <!--
+  Layout is as follows:
+  - Fixed top row for headers
+  - Remaining rows are the time grid
+  - Leftmost column is the time labels, the rest are the grid columns, a final column is added for padding
+
+  Variable meanings:
+  - rows: number of rows in the grid
+  - cols: number of columns in the grid
+  - colGap: gap between columns (currenly not used)
+  - hLineWidth: thickness of the horizontal lines
+  - vLineWidth: thickness of the vertical lines
+  - padRight: padding on the right side of the grid
+  -->
   <div
     class="time-grid"
     style="--rows: {rows}; --cols: {cols}; --colGap: {colGap}; --hLineWidth: {hLineWidth}; --vLineWidth: {vLineWidth ??
       hLineWidth}; --padRight: {padRight}"
   >
     {#each Array.from({ length: visibleRows }) as _, i}
+      <!-- Render the time labels and row lines. Depends on the grid step. -->
       {@const rw = Math.ceil((i * $props.step) / $props.precision) + 2}
       <div class="hline-container" style="grid-row: {rw}; grid-column: 1 / span all">
         <div class="hline"></div>
       </div>
+      <!-- Container for the time label, positioned in column 1 -->
       <div
         class="time-container"
         style="grid-row: {rw}; grid-column: 1; width: {showTime ? 'fit-content' : padLeft}"
@@ -135,11 +161,13 @@
         </span>
       </div>
     {/each}
+    <!-- If the time column isn't hidden, render a vertical line after it -->
     {#if showTime}
       <div class="vline-container" style="grid-row: 1 / span all; grid-column: 1">
         <div class="vline"></div>
       </div>
     {/if}
+    <!-- The rest is our TimeGridItems -->
     <slot {tgContext} />
   </div>
 </div>

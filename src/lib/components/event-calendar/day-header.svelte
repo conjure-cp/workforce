@@ -1,3 +1,6 @@
+<!--
+Basic header for the columns - just formats the date
+-->
 <script lang="ts">
   import { getLocalTimeZone, type CalendarDate } from "@internationalized/date";
 
@@ -8,11 +11,7 @@
   export let style = "";
   let className = "";
 
-  $: formatter = new Intl.DateTimeFormat(locale, {
-    weekday: "long",
-    day: "numeric",
-    ...options,
-  });
+  $: formatter = new Intl.DateTimeFormat(locale, { weekday: "long", day: "numeric", ...options });
   $: formatted = formatter.format(day.toDate(tzid));
 
   export { className as class };
